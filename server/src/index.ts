@@ -1,3 +1,6 @@
+import { job } from './scheduledTasks/subscriptionChecker';
+
+
 require('./scheduledTasks/subscriptionChecker')
 
 const express = require('express');
@@ -15,7 +18,9 @@ app.use('/', subscriptionRoutes);
 //MongoDB connection 
 mongoose.connect(process.env.MONGODB_URI)
 .then(()=> console.log('MongoDB connected'))
-.catch(err => console.error('Could not connect to MongoDB...', err));
+.catch((err: Error) => console.error('Could not connect to MongoDB...', err));
+
+job.start();
 
 const port = process.env.port || 3000;
 app.listen(port, ()=>{
