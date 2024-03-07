@@ -1,17 +1,21 @@
-import SubscriptionItem from "./SubscriptionItem";
+import { Subscription } from '../utils/types';
+import SubscriptionItem from './SubscriptionItem';
 import { Flex, Box } from '@chakra-ui/react';
-const SubscriptionList = ({onEdit, subscriptions}) => {
-
-
-
+const SubscriptionList = ({
+  onEdit,
+  subscriptions,
+}: {
+  onEdit: (subscription: Subscription) => void;
+  subscriptions: Subscription[];
+}) => {
   return (
     <Flex direction="column" align="center" w="full" py={2}>
       <Box
         w="50%"
         maxW="lg"
-        maxHeight="calc(100vh - 223px)" 
+        maxHeight="calc(100vh - 223px)"
         overflowY="hidden"
-        _hover={{ overflowY: "auto" }} 
+        _hover={{ overflowY: 'auto' }}
         sx={{
           '&::-webkit-scrollbar': {
             width: '8px',
@@ -30,14 +34,18 @@ const SubscriptionList = ({onEdit, subscriptions}) => {
             background: '#555',
           },
           scrollbarWidth: 'thin',
-          scrollbarColor: 'transparent transparent', 
+          scrollbarColor: 'transparent transparent',
           '&:hover': {
-            scrollbarColor: '#888 #f0f0f0', 
+            scrollbarColor: '#888 #f0f0f0',
           },
         }}
       >
-        {subscriptions.map(subscription => (
-          <SubscriptionItem key={subscription._id} subscription={subscription} onEdit={() => onEdit(subscription)} />
+        {subscriptions.map((subscription) => (
+          <SubscriptionItem
+            key={subscription._id}
+            subscription={subscription}
+            onEdit={() => onEdit(subscription)}
+          />
         ))}
       </Box>
     </Flex>

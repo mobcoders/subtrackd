@@ -1,12 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { BellIcon } from '@chakra-ui/icons';
-import { Box, Button, List, ListItem, Popover, PopoverTrigger, PopoverContent, PopoverBody, useOutsideClick, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  List,
+  ListItem,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverBody,
+  useOutsideClick,
+  Text,
+} from '@chakra-ui/react';
 import apiService from '../services/apiService';
+import { Notification } from '../utils/types';
 
-const Notification = () => {
+const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-  const popoverRef = React.useRef();
+  const popoverRef = React.useRef<HTMLElement>(null);
 
   useOutsideClick({
     ref: popoverRef,
@@ -26,7 +38,7 @@ const Notification = () => {
     loadNotifications();
   }, []);
 
-  const renderMessage = (message) => {
+  const renderMessage = (message: string) => {
     const parts = message.split('for ')[1].split(' is due');
     const subscriptionName = parts[0];
     return (
@@ -34,8 +46,8 @@ const Notification = () => {
         Your subscription for{' '}
         <Text as="span" fontWeight="bold" fontSize="lg">
           {subscriptionName}
-        </Text>
-        {' '}is due tomorrow.
+        </Text>{' '}
+        is due tomorrow.
       </>
     );
   };
@@ -58,7 +70,7 @@ const Notification = () => {
             <Box>No new notifications</Box>
           ) : (
             <List>
-              {notifications.map((notification) => (
+              {notifications.map((notification: Notification) => (
                 <ListItem key={notification._id}>
                   {renderMessage(notification.message)}
                 </ListItem>
@@ -71,4 +83,4 @@ const Notification = () => {
   );
 };
 
-export default Notification;
+export default Notifications;
