@@ -16,7 +16,7 @@ const Dashboard = ({ sortCriteria, filterCriteria }) => {
 
     // Filter
     if (filterCriteria !== 'all') {
-      result = result.filter(sub => 
+      result = result.filter(sub =>
         filterCriteria === 'active' ? sub.status === 'Active' : sub.status === 'Suspended'
       );
     }
@@ -68,7 +68,7 @@ const Dashboard = ({ sortCriteria, filterCriteria }) => {
   const totalCost = subscriptions
     .filter(sub => sub.status === 'Active')
     .reduce((acc, curr) => acc + curr.cost, 0);
-  const averageExpenses = (totalCost).toFixed(2); 
+  const averageExpenses = (totalCost).toFixed(2);
 
   return (
     <Flex direction="column" bg="#ADC4CE" width="795px" minHeight="90vh" borderRadius="md" p={4}>
@@ -81,11 +81,11 @@ const Dashboard = ({ sortCriteria, filterCriteria }) => {
         <SubscriptionList subscriptions={subscriptions} onEdit={handleEdit} />
       </Box>
       {isFormOpen && (
-        <AddEditSubscriptionForm 
-          isOpen={isFormOpen} 
-          onClose={handleClose} 
+        <AddEditSubscriptionForm
+          isOpen={isFormOpen}
+          onClose={handleClose}
           subscription={currentSubscription}
-          refreshSubscriptions={refreshSubscriptions} 
+          refreshSubscriptions={refreshSubscriptions}
         />
       )}
       <Flex justifyContent="space-between" alignItems="center" p={2} bg="gray.200" borderRadius="xl">
