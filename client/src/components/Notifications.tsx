@@ -15,7 +15,7 @@ import {
 import apiService from '../services/apiService';
 import { Notification } from '../utils/types';
 
-const Notification = () => {
+const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const popoverRef = React.useRef<HTMLElement>(null);
@@ -83,4 +83,4 @@ const Notification = () => {
   );
 };
 
-export default Notification;
+export default Notifications;

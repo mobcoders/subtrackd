@@ -3,7 +3,7 @@ import { Box, Flex, Button, Text } from '@chakra-ui/react';
 import SubscriptionList from './SubscriptionList';
 import AddEditSubscriptionForm from './AddEditSubscriptionForm';
 import apiService from '../services/apiService';
-import Notification from './Notification';
+import Notifications from './Notifications';
 import { Subscription } from '../utils/types';
 
 const Dashboard = ({
@@ -28,8 +28,8 @@ const Dashboard = ({
       if (filterCriteria !== 'all') {
         result = result.filter((sub: Subscription) =>
           filterCriteria === 'active'
-            ? sub.status === 'Active'
-            : sub.status === 'Suspended'
+            ? sub.isActive === true
+            : sub.isActive === false
         );
       }
 
@@ -80,7 +80,7 @@ const Dashboard = ({
   };
 
   const totalCost = subscriptions
-    .filter((sub) => sub.status === 'Active')
+    .filter((sub) => sub.isActive === true)
     .reduce((acc, curr) => acc + curr.cost, 0);
   const averageExpenses = totalCost.toFixed(2);
 
@@ -97,7 +97,7 @@ const Dashboard = ({
         <Text fontSize="2xl" fontWeight="bold">
           Subscriptions
         </Text>
-        <Notification />
+        <Notifications />
         <Button colorScheme="teal" onClick={() => setIsFormOpen(true)}>
           Add Subscription
         </Button>
