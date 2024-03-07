@@ -4,7 +4,7 @@ import {Request, Response} from "express";
 
 
 
-const getSubs = async (req: Request, res: Response): Promise<void> =>{
+export const getSubs = async (req: Request, res: Response): Promise<void> =>{
  try {
   const subscriptions: ISubscription[] = await Subscription.find();
   res.send(subscriptions);
@@ -15,7 +15,7 @@ const getSubs = async (req: Request, res: Response): Promise<void> =>{
 
 }
 
-const addSub = async (req: Request, res: Response): Promise<void> => {
+export const addSub = async (req: Request, res: Response): Promise<void> => {
  try {
   const subscription = new Subscription(req.body);
   await subscription.save();
@@ -27,7 +27,7 @@ const addSub = async (req: Request, res: Response): Promise<void> => {
  }
 }
 
-const editSub = async (req: Request, res: Response): Promise<void> => {
+export const editSub = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
   console.log(`Updating subscription with ID: ${id}`); // Debugging log
   try {
@@ -43,7 +43,7 @@ const editSub = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-const deleteSub = async (req: Request, res: Response): Promise<void> => {
+export const deleteSub = async (req: Request, res: Response): Promise<void> => {
   try {
     const deletedSubscription = await Subscription.findByIdAndDelete(req.params.id);
     if (!deletedSubscription) {
@@ -56,7 +56,7 @@ const deleteSub = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-const getNotification = async (req: Request, res: Response): Promise<void> => {
+export const getNotification = async (req: Request, res: Response): Promise<void> => {
   try {
     const notifications = await Notification.find({ read: false }).sort({ date: -1 });
     res.json(notifications);
@@ -65,10 +65,3 @@ const getNotification = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export default {
-  getSubs,
-  addSub,
-  editSub,
-  deleteSub,
-  getNotification
-}
