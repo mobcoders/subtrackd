@@ -7,3 +7,10 @@ export interface Subscription {
   endDate: string;
   isActive: boolean;
 }
+
+export interface Notification {
+  _id: string;
+  message: string;
+  date: Date;
+  read: boolean;
+}
