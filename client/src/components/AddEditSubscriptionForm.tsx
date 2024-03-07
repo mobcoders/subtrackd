@@ -13,8 +13,10 @@ import {
   useToast,
   Switch,
 } from "@chakra-ui/react";
-import { generateToastConfig } from "../utils/toastUtils"; 
+import { generateToastConfig } from '../utils/toastUtils' 
 import apiService from "../services/apiService";
+
+import { Subscription } from "../utils/types";
 
 // Initial form 
 const initialFormState = {
@@ -25,12 +27,7 @@ const initialFormState = {
   isActive: true, 
 };
 
-const AddEditSubscriptionForm = ({
-  isOpen,
-  onClose,
-  subscription,
-  refreshSubscriptions,
-} : any) => {
+const AddEditSubscriptionForm = ({isOpen,onClose,subscription,refreshSubscriptions,}: {isOpen : boolean, onClose: void, subscription: Subscription | undefined, refreshSubscriptions: void}) => {
   const [formData, setFormData] = useState(initialFormState);
   const toast = useToast();
 
@@ -61,11 +58,12 @@ const AddEditSubscriptionForm = ({
       cost: Number(formData.cost),
     };
     
-    const data = subscription ? 
-      await apiService.updateSubscription(subscription._id, subscriptionData) : 
+    const data : Subscription = subscription ? await apiService.updateSubscription(subscription._id as string, subscriptionData) : 
       await apiService.addSubscription(subscriptionData);
     
-    toast(generateToastConfig(subscription ? 'updateSuccess' : 'addSuccess', data));
+   
+    const options = generateToastConfig(subscription ? 'updateSuccess' : 'addSuccess', data);
+    toast(options);
     onClose(); 
     refreshSubscriptions(); 
   } catch (error) {
