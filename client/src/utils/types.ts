@@ -3,7 +3,7 @@ export interface Subscription {
   status: string;
   cost: number;
   name: string;
-  billingDate: string;
+  billingDate: Date;
   endDate: string;
   isActive: boolean;
 }
