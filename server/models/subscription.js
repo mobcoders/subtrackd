@@ -5,6 +5,7 @@ const subscriptionSchema = new mongoose.Schema({
  cost: Number,
  billingDate: Date,
  status: String,
+ billingCycle: String
 });
 
 const Subscription = mongoose.model('subscription', subscriptionSchema);
