@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000'; 
+const BASE_URL = 'https://keepa.fly.dev' ||'http://localhost:3000';
 
 const apiService = {
   fetchSubscriptions: async () => {
