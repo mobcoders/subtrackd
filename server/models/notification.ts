@@ -1,9 +1,9 @@
 import {Schema, model} from 'mongoose';
 
-interface INotification  {
+export interface INotification  {
   message: string;
   date: Date;
-  read: Boolean;
+  read: boolean;
 }
 
 const notificationSchema = new Schema<INotification>({
@@ -12,6 +12,5 @@ const notificationSchema = new Schema<INotification>({
   read: { type: Boolean, default: false, required: true },
 });
 
-const Notification = model<INotification>('Notification', notificationSchema);
+export const Notification = model<INotification>('Notification', notificationSchema);
 
-module.exports = Notification;

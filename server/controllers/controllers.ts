@@ -1,9 +1,12 @@
-const Subscription = require("../models/subscription")
-const Notification = require('../models/notification');
+import {ISubscription, Subscription} from "../models/subscription";
+import {Notification} from '../models/notification';
+import {Request, Response} from "express";
 
-const getSubs = async (req,res)=>{
+
+
+const getSubs = async (req: Request, res: Response): Promise<void> =>{
  try {
-  const subscriptions = await Subscription.find();
+  const subscriptions: ISubscription[] = await Subscription.find();
   res.send(subscriptions);
  } catch (error) {
   res.status(500).send("An error occurred while fetching the subscriptions.");
@@ -12,7 +15,7 @@ const getSubs = async (req,res)=>{
 
 }
 
-const addSub = async (req,res) => {
+const addSub = async (req: Request, res: Response): Promise<void> => {
  try {
   const subscription = new Subscription(req.body);
   await subscription.save();
@@ -24,34 +27,36 @@ const addSub = async (req,res) => {
  }
 }
 
-const editSub = async (req, res) => {
+const editSub = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
   console.log(`Updating subscription with ID: ${id}`); // Debugging log
   try {
     const subscription = await Subscription.findByIdAndUpdate(id, req.body, { new: true });
     if (!subscription) {
-      return res.status(404).send('Subscription not found');
+      res.status(404).send('Subscription not found');
+    } else {
+      res.send(subscription);
     }
-    res.send(subscription);
   } catch (error) {
     console.error('Error updating subscription:', error);
     res.status(500).send('Error updating subscription');
   }
 };
 
-const deleteSub = async (req, res) => {
+const deleteSub = async (req: Request, res: Response): Promise<void> => {
   try {
     const deletedSubscription = await Subscription.findByIdAndDelete(req.params.id);
     if (!deletedSubscription) {
-      return res.status(404).send('Subscription not found');
+      res.status(404).send('Subscription not found');
+    } else {
+      res.send(deletedSubscription);
     }
-    res.send(deletedSubscription);
   } catch (error) {
     res.status(500).send('Error deleting subscription');
   }
 };
 
-const getNotification = async (req, res) => {
+const getNotification = async (req: Request, res: Response): Promise<void> => {
   try {
     const notifications = await Notification.find({ read: false }).sort({ date: -1 });
     res.json(notifications);
@@ -60,7 +65,7 @@ const getNotification = async (req, res) => {
   }
 };
 
-module.exports = {
+export default {
   getSubs,
   addSub,
   editSub,
