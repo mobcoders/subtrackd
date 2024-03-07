@@ -13,21 +13,21 @@ import {
   useToast,
   Switch,
 } from "@chakra-ui/react";
-import { generateToastConfig } from '../utils/toastUtils' 
+import { generateToastConfig } from '../utils/toastUtils'
 import apiService from "../services/apiService";
 
 import { Subscription } from "../utils/types";
 
-// Initial form 
+// Initial form
 const initialFormState = {
   name: "",
-  cost: 0, 
-  billingDate: "", 
+  cost: 0,
+  billingDate: "",
   endDate: "",
-  isActive: true, 
+  isActive: true,
 };
 
-const AddEditSubscriptionForm = ({isOpen,onClose,subscription,refreshSubscriptions,}: {isOpen : boolean, onClose: void, subscription: Subscription | undefined, refreshSubscriptions: void}) => {
+const AddEditSubscriptionForm = ({isOpen, onClose, subscription, refreshSubscriptions}: {isOpen : boolean, onClose: () => void, subscription: Subscription | undefined, refreshSubscriptions: () => void}) => {
   const [formData, setFormData] = useState(initialFormState);
   const toast = useToast();
 
@@ -41,15 +41,15 @@ const AddEditSubscriptionForm = ({isOpen,onClose,subscription,refreshSubscriptio
     } : initialFormState);
   }, [subscription, isOpen]);
 
-  const handleChange = (e) => {
-    const { name, value, checked, type } = e.target;
+  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const { name, value, checked, type } = e.currentTarget;
     setFormData(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
   try {
     const subscriptionData = {
@@ -57,35 +57,34 @@ const AddEditSubscriptionForm = ({isOpen,onClose,subscription,refreshSubscriptio
       status: formData.isActive ? 'Active' : 'Suspended',
       cost: Number(formData.cost),
     };
-    
-    const data : Subscription = subscription ? await apiService.updateSubscription(subscription._id as string, subscriptionData) : 
+
+    const data : Subscription = subscription ? await apiService.updateSubscription(subscription._id as string, subscriptionData) :
       await apiService.addSubscription(subscriptionData);
-    
-   
+
     const options = generateToastConfig(subscription ? 'updateSuccess' : 'addSuccess', data);
     toast(options);
-    onClose(); 
-    refreshSubscriptions(); 
+    onClose();
+    refreshSubscriptions();
   } catch (error) {
     console.error('Error:', error);
-    toast(generateToastConfig("error", error.toString()));
+    toast(generateToastConfig("error", error as Subscription));
   }
 };
 
 const handleDelete = async () => {
   if (!subscription || !subscription._id) return;
-  
+
   try {
     await apiService.deleteSubscription(subscription._id);
-    toast(generateToastConfig('deleteSuccess'));
+    toast(generateToastConfig('deleteSuccess', subscription));
     onClose();
     refreshSubscriptions();
   } catch (error) {
     console.error('Error:', error);
-    toast(generateToastConfig("error", error.toString()));
+    toast(generateToastConfig("error", error as Subscription));
   }
 };
-  
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
