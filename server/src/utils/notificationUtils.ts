@@ -1,6 +1,6 @@
-const Notification = require('../models/notification');
+import {Notification} from '../models/notification';
 
-const addNotification = async (message) => {
+export const addNotification = async (message: string) => {
   try {
     const notification = new Notification({ message });
     await notification.save();
@@ -9,4 +9,3 @@ const addNotification = async (message) => {
   }
 };
 
-module.exports = { addNotification };

@@ -1,3 +1,5 @@
+import { Subscription } from "../utils/types";
+
 const BASE_URL = 'https://keepa.fly.dev' ||'http://localhost:3000';
 
 const apiService = {
@@ -7,7 +9,7 @@ const apiService = {
     return await response.json();
   },
 
-  addSubscription: async (subscriptionData) => {
+  addSubscription: async (subscriptionData : Subscription) => {
     const response = await fetch(`${BASE_URL}/subscriptions`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -17,7 +19,7 @@ const apiService = {
     return await response.json();
   },
 
-  updateSubscription: async (id, subscriptionData) => {
+  updateSubscription: async (id:string, subscriptionData: Subscription) => {
     const response = await fetch(`${BASE_URL}/subscriptions/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -27,7 +29,7 @@ const apiService = {
     return await response.json();
   },
 
-  deleteSubscription: async (id) => {
+  deleteSubscription: async (id:string) => {
     const response = await fetch(`${BASE_URL}/subscriptions/${id}`, {
       method: 'DELETE',
     });
