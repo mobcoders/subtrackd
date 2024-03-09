@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { BellIcon } from "@chakra-ui/icons";
+import React, { useState, useEffect } from 'react';
+import { BellIcon } from '@chakra-ui/icons';
 import {
   Box,
   Button,
@@ -11,9 +11,9 @@ import {
   PopoverBody,
   useOutsideClick,
   Text,
-} from "@chakra-ui/react";
-import apiService from "../services/apiService";
-import { Notification } from "../utils/types";
+} from '@chakra-ui/react';
+import apiService from '../services/apiService';
+import { Notification } from '../utils/types';
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
@@ -31,7 +31,7 @@ const Notifications = () => {
         const notifications = await apiService.fetchNotifications();
         setNotifications(notifications);
       } catch (error) {
-        console.error("Error loading notifications:", error);
+        console.error('Error loading notifications:', error);
       }
     };
 
@@ -39,15 +39,15 @@ const Notifications = () => {
   }, []);
 
   const renderMessage = (message: string) => {
-    const parts = message.split("for ")[1].split(" is due");
+    const parts = message.split('for ')[1].split(' is due');
     const subscriptionName = parts[0];
 
     return (
       <>
-        Your subscription for{" "}
+        Your subscription for{' '}
         <Text as="span" fontWeight="bold" fontSize="lg">
           {subscriptionName}
-        </Text>{" "}
+        </Text>{' '}
         is due tomorrow.
       </>
     );

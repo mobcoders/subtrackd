@@ -1,10 +1,10 @@
-import { useEffect, useState, useCallback } from "react";
-import { Box, Flex, Button, Text } from "@chakra-ui/react";
-import SubscriptionList from "./SubscriptionList";
-import AddEditSubscriptionForm from "./AddEditSubscriptionForm";
-import apiService from "../services/apiService";
-import Notifications from "./Notifications";
-import { Subscription } from "../utils/types";
+import { useEffect, useState, useCallback } from 'react';
+import { Box, Flex, Button, Text } from '@chakra-ui/react';
+import SubscriptionList from './SubscriptionList';
+import AddEditSubscriptionForm from './AddEditSubscriptionForm';
+import apiService from '../services/apiService';
+import Notifications from './Notifications';
+import { Subscription } from '../utils/types';
 
 const Dashboard = ({
   sortCriteria,
@@ -25,9 +25,9 @@ const Dashboard = ({
       let result = data;
 
       // Filter
-      if (filterCriteria !== "all") {
+      if (filterCriteria !== 'all') {
         result = result.filter((sub: Subscription) =>
-          filterCriteria === "active"
+          filterCriteria === 'active'
             ? sub.isActive === true
             : sub.isActive === false,
         );
@@ -36,13 +36,13 @@ const Dashboard = ({
       // Sort
       result.sort((a: Subscription, b: Subscription) => {
         switch (sortCriteria) {
-          case "alphabetical":
+          case 'alphabetical':
             return a.name.localeCompare(b.name);
-          case "billDate":
+          case 'billDate':
             return a.billingDate.getTime() - b.billingDate.getTime();
-          case "mostExpensive":
+          case 'mostExpensive':
             return b.cost - a.cost;
-          case "cheapest":
+          case 'cheapest':
             return a.cost - b.cost;
           default:
             return 0;
@@ -60,7 +60,7 @@ const Dashboard = ({
       const data = await apiService.fetchSubscriptions();
       applySortAndFilter(data);
     } catch (error) {
-      console.error("Error fetching subscriptions:", error);
+      console.error('Error fetching subscriptions:', error);
     }
   }, [applySortAndFilter]);
 

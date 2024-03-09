@@ -7,8 +7,8 @@ import {
   MenuList,
   MenuItem,
   Text,
-} from "@chakra-ui/react";
-import { HamburgerIcon, TriangleDownIcon } from "@chakra-ui/icons";
+} from '@chakra-ui/react';
+import { HamburgerIcon, TriangleDownIcon } from '@chakra-ui/icons';
 
 const Navbar = ({
   setSortCriteria,
@@ -42,25 +42,25 @@ const Navbar = ({
           </MenuButton>
           <MenuList>
             <MenuItem
-              onClick={() => handleSortSelection("alphabetical")}
+              onClick={() => handleSortSelection('alphabetical')}
               role="menuitem"
             >
               Alphabetic
             </MenuItem>
             <MenuItem
-              onClick={() => handleSortSelection("billDate")}
+              onClick={() => handleSortSelection('billDate')}
               role="menuitem"
             >
               Bill Date
             </MenuItem>
             <MenuItem
-              onClick={() => handleSortSelection("mostExpensive")}
+              onClick={() => handleSortSelection('mostExpensive')}
               role="menuitem"
             >
               Most Expensive
             </MenuItem>
             <MenuItem
-              onClick={() => handleSortSelection("cheapest")}
+              onClick={() => handleSortSelection('cheapest')}
               role="menuitem"
             >
               Cheapest
@@ -93,13 +93,13 @@ const Navbar = ({
             Filter
           </MenuButton>
           <MenuList>
-            <MenuItem onClick={() => handleFilterSelection("all")}>
+            <MenuItem onClick={() => handleFilterSelection('all')}>
               All Subscriptions
             </MenuItem>
-            <MenuItem onClick={() => handleFilterSelection("active")}>
+            <MenuItem onClick={() => handleFilterSelection('active')}>
               Active Subscriptions
             </MenuItem>
-            <MenuItem onClick={() => handleFilterSelection("suspended")}>
+            <MenuItem onClick={() => handleFilterSelection('suspended')}>
               Suspended Subscriptions
             </MenuItem>
           </MenuList>
