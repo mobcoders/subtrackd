@@ -1,10 +1,10 @@
-import { useEffect, useState, useCallback } from 'react';
-import { Box, Flex, Button, Text } from '@chakra-ui/react';
-import SubscriptionList from './SubscriptionList';
-import AddEditSubscriptionForm from './AddEditSubscriptionForm';
-import apiService from '../services/apiService';
-import Notifications from './Notifications';
-import { Subscription } from '../utils/types';
+import { useEffect, useState, useCallback } from "react";
+import { Box, Flex, Button, Text } from "@chakra-ui/react";
+import SubscriptionList from "./SubscriptionList";
+import AddEditSubscriptionForm from "./AddEditSubscriptionForm";
+import apiService from "../services/apiService";
+import Notifications from "./Notifications";
+import { Subscription } from "../utils/types";
 
 const Dashboard = ({
   sortCriteria,
@@ -25,24 +25,24 @@ const Dashboard = ({
       let result = data;
 
       // Filter
-      if (filterCriteria !== 'all') {
+      if (filterCriteria !== "all") {
         result = result.filter((sub: Subscription) =>
-          filterCriteria === 'active'
+          filterCriteria === "active"
             ? sub.isActive === true
-            : sub.isActive === false
+            : sub.isActive === false,
         );
       }
 
       // Sort
       result.sort((a: Subscription, b: Subscription) => {
         switch (sortCriteria) {
-          case 'alphabetical':
+          case "alphabetical":
             return a.name.localeCompare(b.name);
-          case 'billDate':
+          case "billDate":
             return a.billingDate.getTime() - b.billingDate.getTime();
-          case 'mostExpensive':
+          case "mostExpensive":
             return b.cost - a.cost;
-          case 'cheapest':
+          case "cheapest":
             return a.cost - b.cost;
           default:
             return 0;
@@ -51,7 +51,7 @@ const Dashboard = ({
 
       setSubscriptions(result);
     },
-    [filterCriteria, sortCriteria]
+    [filterCriteria, sortCriteria],
   );
 
   // Fetch and refresh subscriptions
@@ -60,7 +60,7 @@ const Dashboard = ({
       const data = await apiService.fetchSubscriptions();
       applySortAndFilter(data);
     } catch (error) {
-      console.error('Error fetching subscriptions:', error);
+      console.error("Error fetching subscriptions:", error);
     }
   }, [applySortAndFilter]);
 
@@ -84,52 +84,54 @@ const Dashboard = ({
     .reduce((acc, curr) => acc + curr.cost, 0);
   const averageExpenses = totalCost.toFixed(2);
 
-  return (
-    <Flex
-      direction="column"
-      bg="#ADC4CE"
-      width="795px"
-      minHeight="90vh"
-      borderRadius="md"
-      p={4}
-    >
-      <Flex justifyContent="space-between" alignItems="center">
-        <Text fontSize="2xl" fontWeight="bold">
-          Subscriptions
-        </Text>
-        <Notifications />
-        <Button colorScheme="teal" onClick={() => setIsFormOpen(true)}>
-          Add Subscription
-        </Button>
-      </Flex>
-      <Box flex="1" overflowY="auto">
-        <SubscriptionList subscriptions={subscriptions} onEdit={handleEdit} />
-      </Box>
-      {isFormOpen && (
-        <AddEditSubscriptionForm
-          isOpen={isFormOpen}
-          onClose={handleClose}
-          subscription={currentSubscription}
-          refreshSubscriptions={refreshSubscriptions}
-        />
-      )}
+  if (subscriptions) {
+    return (
       <Flex
-        justifyContent="space-between"
-        alignItems="center"
-        p={2}
-        bg="gray.200"
-        borderRadius="xl"
+        direction="column"
+        bg="#ADC4CE"
+        width="795px"
+        minHeight="90vh"
+        borderRadius="md"
+        p={4}
       >
-        <Box borderRadius="lg">
-          <Text fontSize="xl">Average Expenses</Text>
-          <Text fontSize="sm" as="i" fontStyle="italic">
-            per month
+        <Flex justifyContent="space-between" alignItems="center">
+          <Text fontSize="2xl" fontWeight="bold">
+            Subscriptions
           </Text>
+          <Notifications />
+          <Button colorScheme="teal" onClick={() => setIsFormOpen(true)}>
+            Add Subscription
+          </Button>
+        </Flex>
+        <Box flex="1" overflowY="auto">
+          <SubscriptionList subscriptions={subscriptions} onEdit={handleEdit} />
         </Box>
-        <Text fontSize="xl">${averageExpenses}</Text>
+        {isFormOpen && (
+          <AddEditSubscriptionForm
+            isOpen={isFormOpen}
+            onClose={handleClose}
+            subscription={currentSubscription}
+            refreshSubscriptions={refreshSubscriptions}
+          />
+        )}
+        <Flex
+          justifyContent="space-between"
+          alignItems="center"
+          p={2}
+          bg="gray.200"
+          borderRadius="xl"
+        >
+          <Box borderRadius="lg">
+            <Text fontSize="xl">Average Expenses</Text>
+            <Text fontSize="sm" as="i" fontStyle="italic">
+              per month
+            </Text>
+          </Box>
+          <Text fontSize="xl">${averageExpenses}</Text>
+        </Flex>
       </Flex>
-    </Flex>
-  );
+    );
+  }
 };
 
 export default Dashboard;

@@ -7,8 +7,8 @@ import {
   MenuList,
   MenuItem,
   Text,
-} from '@chakra-ui/react';
-import { HamburgerIcon, TriangleDownIcon } from '@chakra-ui/icons';
+} from "@chakra-ui/react";
+import { HamburgerIcon, TriangleDownIcon } from "@chakra-ui/icons";
 
 const Navbar = ({
   setSortCriteria,
@@ -41,16 +41,28 @@ const Navbar = ({
             Sort
           </MenuButton>
           <MenuList>
-            <MenuItem onClick={() => handleSortSelection('alphabetical')}>
+            <MenuItem
+              onClick={() => handleSortSelection("alphabetical")}
+              role="menuitem"
+            >
               Alphabetic
             </MenuItem>
-            <MenuItem onClick={() => handleSortSelection('billDate')}>
+            <MenuItem
+              onClick={() => handleSortSelection("billDate")}
+              role="menuitem"
+            >
               Bill Date
             </MenuItem>
-            <MenuItem onClick={() => handleSortSelection('mostExpensive')}>
+            <MenuItem
+              onClick={() => handleSortSelection("mostExpensive")}
+              role="menuitem"
+            >
               Most Expensive
             </MenuItem>
-            <MenuItem onClick={() => handleSortSelection('cheapest')}>
+            <MenuItem
+              onClick={() => handleSortSelection("cheapest")}
+              role="menuitem"
+            >
               Cheapest
             </MenuItem>
           </MenuList>
@@ -81,13 +93,13 @@ const Navbar = ({
             Filter
           </MenuButton>
           <MenuList>
-            <MenuItem onClick={() => handleFilterSelection('all')}>
+            <MenuItem onClick={() => handleFilterSelection("all")}>
               All Subscriptions
             </MenuItem>
-            <MenuItem onClick={() => handleFilterSelection('active')}>
+            <MenuItem onClick={() => handleFilterSelection("active")}>
               Active Subscriptions
             </MenuItem>
-            <MenuItem onClick={() => handleFilterSelection('suspended')}>
+            <MenuItem onClick={() => handleFilterSelection("suspended")}>
               Suspended Subscriptions
             </MenuItem>
           </MenuList>

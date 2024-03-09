@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -12,15 +12,15 @@ import {
   Input,
   useToast,
   Switch,
-} from '@chakra-ui/react';
-import { generateToastConfig } from '../utils/toastUtils';
-import apiService from '../services/apiService';
+} from "@chakra-ui/react";
+import { generateToastConfig } from "../utils/toastUtils";
+import apiService from "../services/apiService";
 
-import { Subscription } from '../utils/types';
+import { Subscription } from "../utils/types";
 
 // Initial form
 const initialFormState: Subscription = {
-  name: '',
+  name: "",
   cost: 0,
   billingDate: new Date(Date.now()),
   endDate: new Date(Date.now()),
@@ -45,13 +45,13 @@ const AddEditSubscriptionForm = ({
     setFormData(
       subscription && isOpen
         ? {
-            name: subscription!.name || '',
+            name: subscription!.name || "",
             cost: subscription!.cost || 0,
-            billingDate: subscription!.billingDate || '',
-            endDate: subscription!.endDate || '',
+            billingDate: subscription!.billingDate || "",
+            endDate: subscription!.endDate || "",
             isActive: subscription!.isActive,
           }
-        : initialFormState
+        : initialFormState,
     );
   }, [subscription, isOpen]);
 
@@ -59,7 +59,7 @@ const AddEditSubscriptionForm = ({
     const { name, value, checked, type } = e.currentTarget;
     setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
@@ -74,20 +74,20 @@ const AddEditSubscriptionForm = ({
       const data: Subscription = subscription
         ? await apiService.updateSubscription(
             subscription._id as string,
-            subscriptionData
+            subscriptionData,
           )
         : await apiService.addSubscription(subscriptionData);
 
       const options = generateToastConfig(
-        subscription ? 'updateSuccess' : 'addSuccess',
-        data
+        subscription ? "updateSuccess" : "addSuccess",
+        data,
       );
       toast(options);
       onClose();
       refreshSubscriptions();
     } catch (error) {
-      console.error('Error:', error);
-      toast(generateToastConfig('error', error as Subscription));
+      console.error("Error:", error);
+      toast(generateToastConfig("error", error as Subscription));
     }
   };
 
@@ -96,12 +96,12 @@ const AddEditSubscriptionForm = ({
 
     try {
       await apiService.deleteSubscription(subscription._id);
-      toast(generateToastConfig('deleteSuccess', subscription));
+      toast(generateToastConfig("deleteSuccess", subscription));
       onClose();
       refreshSubscriptions();
     } catch (error) {
-      console.error('Error:', error);
-      toast(generateToastConfig('error', error as Subscription));
+      console.error("Error:", error);
+      toast(generateToastConfig("error", error as Subscription));
     }
   };
 
@@ -110,13 +110,13 @@ const AddEditSubscriptionForm = ({
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
-          {subscription ? 'Edit Subscription' : 'Add Subscription'}
+          {subscription ? "Edit Subscription" : "Add Subscription"}
         </ModalHeader>
         <form onSubmit={handleSubmit}>
           <ModalBody pb={6}>
             {/* Form fields */}
             <FormControl isRequired>
-              <FormLabel>Name</FormLabel>
+              <FormLabel htmlFor="name">Name</FormLabel>
               <Input
                 name="name"
                 value={formData.name}
@@ -124,7 +124,7 @@ const AddEditSubscriptionForm = ({
               />
             </FormControl>
             <FormControl mt={4} isRequired>
-              <FormLabel>Cost</FormLabel>
+              <FormLabel htmlFor="cost">Cost</FormLabel>
               <Input
                 name="cost"
                 type="number"
