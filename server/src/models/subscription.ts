@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema } from 'mongoose';
 
 export interface ISubscription {
   name: string;
@@ -17,6 +17,6 @@ const subscriptionSchema = new Schema<ISubscription>({
 });
 
 export const Subscription = mongoose.model<ISubscription>(
-  "Subscription",
+  'Subscription',
   subscriptionSchema,
 );

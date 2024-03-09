@@ -1,13 +1,16 @@
-import { Subscription } from "./types";
-import { UseToastOptions } from "@chakra-ui/react";
+import { Subscription } from './types';
+import { UseToastOptions } from '@chakra-ui/react';
 
-export const generateToastConfig = (type: string, data: Subscription) : UseToastOptions => {
+export const generateToastConfig = (
+  type: string,
+  data: Subscription,
+): UseToastOptions => {
   switch (type) {
     case 'deleteSuccess':
       return {
         title: 'Subscription deleted.',
-        description: "The subscription has been successfully deleted.",
-        status: "info",
+        description: 'The subscription has been successfully deleted.',
+        status: 'info',
         duration: 3000,
         isClosable: true,
       };
@@ -15,7 +18,7 @@ export const generateToastConfig = (type: string, data: Subscription) : UseToast
       return {
         title: 'Subscription added.',
         description: `The subscription "${data.name}" has been successfully added.`,
-        status: "success",
+        status: 'success',
         duration: 3000,
         isClosable: true,
       };
@@ -23,21 +26,19 @@ export const generateToastConfig = (type: string, data: Subscription) : UseToast
       return {
         title: 'Subscription updated.',
         description: `The subscription "${data.name}" has been successfully updated.`,
-        status: "success",
+        status: 'success',
         duration: 3000,
         isClosable: true,
       };
     case 'error':
       return {
         title: 'An error occurred.',
-        description: data ? data.toString() : "Unable to process the request.",
-        status: "error",
+        description: data ? data.toString() : 'Unable to process the request.',
+        status: 'error',
         duration: 3000,
         isClosable: true,
       };
     default:
-      return {
-
-      } ;
+      return {};
   }
 };

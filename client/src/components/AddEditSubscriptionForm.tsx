@@ -51,7 +51,7 @@ const AddEditSubscriptionForm = ({
             endDate: subscription!.endDate || '',
             isActive: subscription!.isActive,
           }
-        : initialFormState
+        : initialFormState,
     );
   }, [subscription, isOpen]);
 
@@ -74,13 +74,13 @@ const AddEditSubscriptionForm = ({
       const data: Subscription = subscription
         ? await apiService.updateSubscription(
             subscription._id as string,
-            subscriptionData
+            subscriptionData,
           )
         : await apiService.addSubscription(subscriptionData);
 
       const options = generateToastConfig(
         subscription ? 'updateSuccess' : 'addSuccess',
-        data
+        data,
       );
       toast(options);
       onClose();
@@ -116,7 +116,7 @@ const AddEditSubscriptionForm = ({
           <ModalBody pb={6}>
             {/* Form fields */}
             <FormControl isRequired>
-              <FormLabel>Name</FormLabel>
+              <FormLabel htmlFor="name">Name</FormLabel>
               <Input
                 name="name"
                 value={formData.name}
@@ -124,7 +124,7 @@ const AddEditSubscriptionForm = ({
               />
             </FormControl>
             <FormControl mt={4} isRequired>
-              <FormLabel>Cost</FormLabel>
+              <FormLabel htmlFor="cost">Cost</FormLabel>
               <Input
                 name="cost"
                 type="number"

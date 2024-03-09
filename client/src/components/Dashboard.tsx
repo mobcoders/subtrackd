@@ -29,7 +29,7 @@ const Dashboard = ({
         result = result.filter((sub: Subscription) =>
           filterCriteria === 'active'
             ? sub.isActive === true
-            : sub.isActive === false
+            : sub.isActive === false,
         );
       }
 
@@ -51,7 +51,7 @@ const Dashboard = ({
 
       setSubscriptions(result);
     },
-    [filterCriteria, sortCriteria]
+    [filterCriteria, sortCriteria],
   );
 
   // Fetch and refresh subscriptions
@@ -84,52 +84,54 @@ const Dashboard = ({
     .reduce((acc, curr) => acc + curr.cost, 0);
   const averageExpenses = totalCost.toFixed(2);
 
-  return (
-    <Flex
-      direction="column"
-      bg="#ADC4CE"
-      width="795px"
-      minHeight="90vh"
-      borderRadius="md"
-      p={4}
-    >
-      <Flex justifyContent="space-between" alignItems="center">
-        <Text fontSize="2xl" fontWeight="bold">
-          Subscriptions
-        </Text>
-        <Notifications />
-        <Button colorScheme="teal" onClick={() => setIsFormOpen(true)}>
-          Add Subscription
-        </Button>
-      </Flex>
-      <Box flex="1" overflowY="auto">
-        <SubscriptionList subscriptions={subscriptions} onEdit={handleEdit} />
-      </Box>
-      {isFormOpen && (
-        <AddEditSubscriptionForm
-          isOpen={isFormOpen}
-          onClose={handleClose}
-          subscription={currentSubscription}
-          refreshSubscriptions={refreshSubscriptions}
-        />
-      )}
+  if (subscriptions) {
+    return (
       <Flex
-        justifyContent="space-between"
-        alignItems="center"
-        p={2}
-        bg="gray.200"
-        borderRadius="xl"
+        direction="column"
+        bg="#ADC4CE"
+        width="795px"
+        minHeight="90vh"
+        borderRadius="md"
+        p={4}
       >
-        <Box borderRadius="lg">
-          <Text fontSize="xl">Average Expenses</Text>
-          <Text fontSize="sm" as="i" fontStyle="italic">
-            per month
+        <Flex justifyContent="space-between" alignItems="center">
+          <Text fontSize="2xl" fontWeight="bold">
+            Subscriptions
           </Text>
+          <Notifications />
+          <Button colorScheme="teal" onClick={() => setIsFormOpen(true)}>
+            Add Subscription
+          </Button>
+        </Flex>
+        <Box flex="1" overflowY="auto">
+          <SubscriptionList subscriptions={subscriptions} onEdit={handleEdit} />
         </Box>
-        <Text fontSize="xl">${averageExpenses}</Text>
+        {isFormOpen && (
+          <AddEditSubscriptionForm
+            isOpen={isFormOpen}
+            onClose={handleClose}
+            subscription={currentSubscription}
+            refreshSubscriptions={refreshSubscriptions}
+          />
+        )}
+        <Flex
+          justifyContent="space-between"
+          alignItems="center"
+          p={2}
+          bg="gray.200"
+          borderRadius="xl"
+        >
+          <Box borderRadius="lg">
+            <Text fontSize="xl">Average Expenses</Text>
+            <Text fontSize="sm" as="i" fontStyle="italic">
+              per month
+            </Text>
+          </Box>
+          <Text fontSize="xl">${averageExpenses}</Text>
+        </Flex>
       </Flex>
-    </Flex>
-  );
+    );
+  }
 };
 
 export default Dashboard;

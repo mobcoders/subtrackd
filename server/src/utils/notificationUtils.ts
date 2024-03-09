@@ -1,4 +1,4 @@
-import {Notification} from '../models/notification';
+import { Notification } from '../models/notification';
 
 export const addNotification = async (message: string) => {
   try {
@@ -8,4 +8,3 @@ export const addNotification = async (message: string) => {
     console.error('Failed to add notification:', error);
   }
 };
-

@@ -1,6 +1,6 @@
-import { Subscription } from "../utils/types";
+import { Subscription } from '../utils/types';
 
-const BASE_URL = 'https://keepa.fly.dev' ||'http://localhost:3000';
+const BASE_URL = 'https://keepa.fly.dev' || 'http://localhost:3000';
 
 const apiService = {
   fetchSubscriptions: async () => {
@@ -9,7 +9,7 @@ const apiService = {
     return await response.json();
   },
 
-  addSubscription: async (subscriptionData : Subscription) => {
+  addSubscription: async (subscriptionData: Subscription) => {
     const response = await fetch(`${BASE_URL}/subscriptions`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -19,7 +19,7 @@ const apiService = {
     return await response.json();
   },
 
-  updateSubscription: async (id:string, subscriptionData: Subscription) => {
+  updateSubscription: async (id: string, subscriptionData: Subscription) => {
     const response = await fetch(`${BASE_URL}/subscriptions/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -29,7 +29,7 @@ const apiService = {
     return await response.json();
   },
 
-  deleteSubscription: async (id:string) => {
+  deleteSubscription: async (id: string) => {
     const response = await fetch(`${BASE_URL}/subscriptions/${id}`, {
       method: 'DELETE',
     });
@@ -38,7 +38,7 @@ const apiService = {
   },
 
   fetchNotifications: async () => {
-    const response = await fetch(`${BASE_URL}/notifications`); 
+    const response = await fetch(`${BASE_URL}/notifications`);
     if (!response.ok) throw new Error('Failed to fetch notifications');
     return await response.json();
   },

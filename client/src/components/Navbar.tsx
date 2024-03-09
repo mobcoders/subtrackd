@@ -41,16 +41,28 @@ const Navbar = ({
             Sort
           </MenuButton>
           <MenuList>
-            <MenuItem onClick={() => handleSortSelection('alphabetical')}>
+            <MenuItem
+              onClick={() => handleSortSelection('alphabetical')}
+              role="menuitem"
+            >
               Alphabetic
             </MenuItem>
-            <MenuItem onClick={() => handleSortSelection('billDate')}>
+            <MenuItem
+              onClick={() => handleSortSelection('billDate')}
+              role="menuitem"
+            >
               Bill Date
             </MenuItem>
-            <MenuItem onClick={() => handleSortSelection('mostExpensive')}>
+            <MenuItem
+              onClick={() => handleSortSelection('mostExpensive')}
+              role="menuitem"
+            >
               Most Expensive
             </MenuItem>
-            <MenuItem onClick={() => handleSortSelection('cheapest')}>
+            <MenuItem
+              onClick={() => handleSortSelection('cheapest')}
+              role="menuitem"
+            >
               Cheapest
             </MenuItem>
           </MenuList>

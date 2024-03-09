@@ -16,7 +16,7 @@ import apiService from '../services/apiService';
 import { Notification } from '../utils/types';
 
 const Notifications = () => {
-  const [notifications, setNotifications] = useState([]);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const popoverRef = React.useRef<HTMLElement>(null);
 
@@ -41,6 +41,7 @@ const Notifications = () => {
   const renderMessage = (message: string) => {
     const parts = message.split('for ')[1].split(' is due');
     const subscriptionName = parts[0];
+
     return (
       <>
         Your subscription for{' '}
@@ -57,7 +58,7 @@ const Notifications = () => {
       <PopoverTrigger>
         <Button onClick={() => setIsOpen(!isOpen)} variant="ghost">
           <BellIcon w={6} h={6} />
-          {notifications.length > 0 && (
+          {notifications && notifications.length > 0 && (
             <Box as="span" ml={1} fontSize="sm" color="red.500">
               {notifications.length}
             </Box>
@@ -66,15 +67,16 @@ const Notifications = () => {
       </PopoverTrigger>
       <PopoverContent ref={popoverRef}>
         <PopoverBody>
-          {notifications.length === 0 ? (
+          {notifications && notifications.length === 0 ? (
             <Box>No new notifications</Box>
           ) : (
             <List>
-              {notifications.map((notification: Notification) => (
-                <ListItem key={notification._id}>
-                  {renderMessage(notification.message)}
-                </ListItem>
-              ))}
+              {notifications &&
+                notifications.map((notification: Notification) => (
+                  <ListItem key={notification._id}>
+                    {renderMessage(notification.message)}
+                  </ListItem>
+                ))}
             </List>
           )}
         </PopoverBody>
