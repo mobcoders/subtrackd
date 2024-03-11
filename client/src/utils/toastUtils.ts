@@ -1,10 +1,10 @@
 import { Subscription } from './types';
 import { UseToastOptions } from '@chakra-ui/react';
 
-export const generateToastConfig = (
+function generateToastConfig(
   type: string,
   data: Subscription,
-): UseToastOptions => {
+): UseToastOptions {
   switch (type) {
     case 'deleteSuccess':
       return {
@@ -41,4 +41,6 @@ export const generateToastConfig = (
     default:
       return {};
   }
-};
+}
+
+export { generateToastConfig };

@@ -1,27 +1,17 @@
-import { useEffect, useState, useCallback } from 'react';
-import SortButton from './sort-button';
-
-import {
-  Box,
-  Flex,
-  Button,
-  Text,
-  Menu,
-  MenuItem,
-  MenuButton,
-  MenuList,
-} from '@chakra-ui/react';
-import SubscriptionList from './subscriptions-list';
-import AddEditSubscriptionForm from './AddEditSubscriptionForm';
-import { fetchSubscriptions } from '../services/apiService';
-import Notifications from './Notifications';
-import { Subscription } from '../utils/types';
-import { HamburgerIcon, TriangleDownIcon } from '@chakra-ui/icons';
-import { Card, CardBody } from '@nextui-org/react';
+import { useState, useEffect, useCallback } from 'react';
+import { Subscription } from '../../utils/types';
+import { fetchSubscriptions } from '../../services/apiService';
 import FilterButton from './filter-button';
-import { PencilSquareIcon } from '@heroicons/react/24/outline';
+import SortButton from './sort-button';
+import SubscriptionList from './subscriptions-list';
+// import AddEditSubscriptionForm from '../../components/AddEditSubscriptionForm';
+// import Notifications from '../../components/Notifications';
+// import { HamburgerIcon, TriangleDownIcon } from '@chakra-ui/icons';
+// import { Card, CardBody } from '@nextui-org/react';
+// import { PencilSquareIcon } from '@heroicons/react/24/outline';
 
 export default function SubscriptionsContainer() {
+  // STATES:
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [currentSubscription, setCurrentSubscription] = useState<
     Subscription | undefined
@@ -30,12 +20,13 @@ export default function SubscriptionsContainer() {
   const [sortCriteria, setSortCriteria] = useState('');
   const [filterCriteria, setFilterCriteria] = useState('all');
 
+  // FUNCTIONS:
   // Define applySortAndFilter inside useCallback to memoize it
   const applySortAndFilter = useCallback(
     (data: Subscription[]) => {
       let result = data;
 
-      // Filter
+      // Filter:
       if (filterCriteria !== 'all') {
         result = result.filter((sub: Subscription) =>
           filterCriteria === 'active'
@@ -44,7 +35,7 @@ export default function SubscriptionsContainer() {
         );
       }
 
-      // Sort
+      // Sort:
       result.sort((a: Subscription, b: Subscription) => {
         switch (sortCriteria) {
           case 'alphabetical':
@@ -78,34 +69,37 @@ export default function SubscriptionsContainer() {
     }
   }, [applySortAndFilter]);
 
-  useEffect(() => {
-    refreshSubscriptions();
-  }, [refreshSubscriptions]);
-
+  // Handle subscription edits:
   function handleEdit(subscription: Subscription) {
     setCurrentSubscription(subscription);
     setIsFormOpen(true);
   }
 
-  function handleClose() {
-    setIsFormOpen(false);
-    setCurrentSubscription(undefined);
+  // function handleClose() {
+  //   setIsFormOpen(false);
+  //   setCurrentSubscription(undefined);
+  //   refreshSubscriptions();
+  // }
+
+  // const totalCost = subscriptions
+  //   .filter((sub) => sub.active === true)
+  //   .reduce((acc, curr) => acc + curr.cost, 0);
+  // const averageExpenses = totalCost.toFixed(2);
+
+  // const handleSortSelection = (criteria: string) => {
+  //   setSortCriteria(criteria);
+  // };
+
+  // const handleFilterSelection = (criteria: string) => {
+  //   setFilterCriteria(criteria);
+  // };
+
+  // EFFECTS:
+  useEffect(() => {
     refreshSubscriptions();
-  }
+  }, [refreshSubscriptions]);
 
-  const totalCost = subscriptions
-    .filter((sub) => sub.active === true)
-    .reduce((acc, curr) => acc + curr.cost, 0);
-  const averageExpenses = totalCost.toFixed(2);
-
-  const handleSortSelection = (criteria: string) => {
-    setSortCriteria(criteria);
-  };
-
-  const handleFilterSelection = (criteria: string) => {
-    setFilterCriteria(criteria);
-  };
-
+  // RENDER:
   if (subscriptions) {
     return (
       <div className="col-span-8">
@@ -115,7 +109,7 @@ export default function SubscriptionsContainer() {
               <FilterButton setFilterCriteria={setFilterCriteria} />
               <SortButton setSortCriteria={setSortCriteria} />
             </div>
-            <p>Payment due:</p>
+            <p className="font-semibold">Payment due:</p>
           </div>
 
           <div className="w-[30px]"></div>

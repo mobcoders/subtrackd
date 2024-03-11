@@ -1,8 +1,8 @@
+import { useStore } from './zustand/store.ts';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
-import { useStore } from './zustand/store.ts';
-import Login from './pages/login.tsx';
-import Dashboard from './pages/dashboard.tsx';
+import Login from './pages/login/index.tsx';
+import Dashboard from './pages/dashboard/index.tsx';
 
 export default function App() {
   // ZUSTAND:
@@ -10,7 +10,7 @@ export default function App() {
 
   // RENDER:
   return (
-    <div className="bg-dark-purple h-screen md:px-36 text-white">
+    <div className="bg-dark-purple h-screen md:px-36 text-white font-poppins text-lg">
       <Router>
         <Routes>
           <Route path="/" element={<Login />} />

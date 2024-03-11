@@ -17,6 +17,11 @@ export default {
       blush: '#F8B68E',
       white: '#ffffff',
     },
+    extend: {
+      fontFamily: {
+        poppins: ['Poppins', 'sans-serif'],
+      },
+    },
   },
   darkMode: 'class',
   plugins: [nextui()],

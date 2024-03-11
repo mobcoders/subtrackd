@@ -1,5 +1,6 @@
 import { http, HttpResponse } from 'msw';
 
+// Mock testing data for the mock server:
 const mockSubscriptions = [
   {
     _id: '65eb1db8887f8d91fc701711',

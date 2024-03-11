@@ -1,4 +1,7 @@
 import { setupServer } from 'msw/node';
 import { handlers } from './handlers.js';
 
-export const server = setupServer(...handlers);
+// Mock server to intercept API requests:
+const server = setupServer(...handlers);
+
+export { server };

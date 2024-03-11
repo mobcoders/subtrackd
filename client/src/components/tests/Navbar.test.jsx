@@ -1,8 +1,8 @@
-// Navbar.test.jsx
+/* eslint-disable no-undef */
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { ChakraProvider } from '@chakra-ui/react';
-import Navbar from './Navbar';
+import Navbar from '../Navbar';
 
 const mockSetSortCriteria = vi.fn();
 const mockSetFilterCriteria = vi.fn();

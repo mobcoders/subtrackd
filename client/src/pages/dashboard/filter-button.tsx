@@ -3,15 +3,19 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
-  Button,
 } from '@nextui-org/react';
 import { FunnelIcon } from '@heroicons/react/24/outline';
 
-export default function FilterButton({ setFilterCriteria }) {
+export default function FilterButton({
+  setFilterCriteria,
+}: {
+  setFilterCriteria: (criteria: string) => void;
+}) {
   return (
+    // RENDER:
     <Dropdown>
       <DropdownTrigger>
-        <FunnelIcon width={40} />
+        <FunnelIcon width={40} className="cursor-pointer hover:scale-[1.1]" />
       </DropdownTrigger>
       <DropdownMenu
         aria-label="Static Actions"

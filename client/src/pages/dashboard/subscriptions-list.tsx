@@ -1,6 +1,5 @@
-import { Subscription } from '../utils/types';
+import { Subscription } from '../../utils/types';
 import SubscriptionItem from './subscription-item';
-import { Flex, Box } from '@chakra-ui/react';
 
 export default function SubscriptionList({
   onEdit,
@@ -10,6 +9,7 @@ export default function SubscriptionList({
   subscriptions: Subscription[];
 }) {
   return (
+    // RENDER:
     <div className="flex flex-col gap-3">
       {subscriptions.map((subscription) => (
         <SubscriptionItem

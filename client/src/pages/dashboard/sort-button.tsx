@@ -3,15 +3,22 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
-  Button,
 } from '@nextui-org/react';
 import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
 
-export default function SortButton({ setSortCriteria }) {
+export default function SortButton({
+  setSortCriteria,
+}: {
+  setSortCriteria: (criteria: string) => void;
+}) {
   return (
+    // RENDER:
     <Dropdown>
       <DropdownTrigger>
-        <AdjustmentsHorizontalIcon width={40} />
+        <AdjustmentsHorizontalIcon
+          width={40}
+          className="cursor-pointer hover:scale-[1.1]"
+        />
       </DropdownTrigger>
       <DropdownMenu
         aria-label="Static Actions"

@@ -1,8 +1,8 @@
+/* eslint-disable no-undef */
 import React from 'react';
-import { render, fireEvent, waitFor, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { ChakraProvider } from '@chakra-ui/react';
-import AddEditSubscriptionForm from './AddEditSubscriptionForm';
-import apiService from '../services/apiService';
+import AddEditSubscriptionForm from '../AddEditSubscriptionForm';
 
 vi.mock('../services/apiService');
 
