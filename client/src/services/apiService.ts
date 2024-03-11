@@ -1,6 +1,6 @@
 import { Subscription } from '../utils/types';
 
-const BASE_URL = 'https://keepa.fly.dev' || 'http://localhost:3000';
+const BASE_URL = 'http://localhost:3000';
 
 async function fetchSubscriptions() {
   const response = await fetch(`${BASE_URL}/subscriptions`);

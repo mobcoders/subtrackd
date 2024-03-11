@@ -28,8 +28,8 @@ export default function DashboardComponent ({
       if (filterCriteria !== 'all') {
         result = result.filter((sub: Subscription) =>
           filterCriteria === 'active'
-            ? sub.isActive === true
-            : sub.isActive === false
+            ? sub.active === true
+            : sub.active === false
         );
       }
 
@@ -39,7 +39,7 @@ export default function DashboardComponent ({
           case 'alphabetical':
             return a.name.localeCompare(b.name);
           case 'billDate':
-            return a.billingDate.getTime() - b.billingDate.getTime();
+            return new Date(a.billingDate).getTime() - new Date(b.billingDate).getTime();
           case 'mostExpensive':
             return b.cost - a.cost;
           case 'cheapest':
@@ -80,7 +80,7 @@ export default function DashboardComponent ({
   }
 
   const totalCost = subscriptions
-    .filter((sub) => sub.isActive === true)
+    .filter((sub) => sub.active === true)
     .reduce((acc, curr) => acc + curr.cost, 0);
   const averageExpenses = totalCost.toFixed(2);
 
