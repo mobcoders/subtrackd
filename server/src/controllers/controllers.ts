@@ -4,11 +4,11 @@ import { INotification, Notification } from '../models/notification';
 
 async function getSubs(req: Request, res: Response): Promise<void> {
   try {
-    const subscriptions: ISubscription[] = await Subscription.find();
+    const subscriptions = await Subscription.find({});
     res.send(subscriptions);
   } catch (error) {
-    res.status(500).send('An error occurred while fetching the subscriptions.');
     console.error('Error fetching subscriptions:', error);
+    res.status(500).send('An error occurred while fetching the subscriptions.');
   }
 }
 
@@ -18,8 +18,8 @@ async function addSub(req: Request, res: Response): Promise<void> {
     await subscription.save();
     res.send(subscription);
   } catch (error) {
-    res.status(500).send('An error occurred while adding the subscription.');
     console.error('Error adding subscription:', error);
+    res.status(500).send('An error occurred while adding the subscription.');
   }
 }
 

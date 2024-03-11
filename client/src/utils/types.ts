@@ -2,9 +2,9 @@ export interface Subscription {
   _id?: string;
   cost: number;
   name: string;
-  billingDate: Date;
-  endDate: Date;
-  isActive: boolean;
+  billingDate: string | Date;
+  monthly: boolean;
+  active: boolean;
 }
 
 export interface Notification {

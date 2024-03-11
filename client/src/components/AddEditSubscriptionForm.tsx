@@ -18,14 +18,16 @@ import {updateSubscription, addSubscription, deleteSubscription} from '../servic
 
 import { Subscription } from '../utils/types';
 
+
 // Initial form
 const initialFormState: Subscription = {
   name: '',
   cost: 0,
-  billingDate: new Date(Date.now()),
-  endDate: new Date(Date.now()),
-  isActive: true,
+  billingDate: new Date(Date.now()).toISOString().slice(0, 10),
+  monthly: true,
+  active: true,
 };
+
 
 function AddEditSubscriptionForm({
   isOpen,
@@ -48,8 +50,8 @@ function AddEditSubscriptionForm({
             name: subscription!.name || '',
             cost: subscription!.cost || 0,
             billingDate: subscription!.billingDate || '',
-            endDate: subscription!.endDate || '',
-            isActive: subscription!.isActive,
+            active: subscription!.active,
+            monthly: subscription!.monthly,
           }
         : initialFormState
     );
@@ -60,6 +62,8 @@ function AddEditSubscriptionForm({
     setFormData((prev) => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
+
+
     }));
   }
 
@@ -69,6 +73,7 @@ function AddEditSubscriptionForm({
       const subscriptionData: Subscription = {
         ...formData,
         cost: Number(formData.cost),
+        billingDate: formData.billingDate.toString().slice(0, 10)
       };
 
       const data: Subscription = subscription
@@ -141,14 +146,29 @@ function AddEditSubscriptionForm({
                 onChange={handleChange}
               />
             </FormControl>
+            <FormControl mt={4} isRequired></FormControl>
+            <FormControl mt={4} display="flex" alignItems="center">
+              <FormLabel htmlFor="monthly" mb="0">
+                Yearly
+              </FormLabel>
+              <Switch
+                id="monthly"
+                name="monthly"
+                isChecked={formData.monthly}
+                onChange={handleChange}
+                mx={2}
+              />
+              <FormLabel mb="0">Monthly</FormLabel>
+            </FormControl>
+            <FormControl mt={4} isRequired></FormControl>
             <FormControl mt={4} display="flex" alignItems="center">
               <FormLabel htmlFor="isActive" mb="0">
                 Suspend
               </FormLabel>
               <Switch
-                id="isActive"
-                name="isActive"
-                isChecked={formData.isActive}
+                id="active"
+                name="active"
+                isChecked={formData.active}
                 onChange={handleChange}
                 mx={2}
               />

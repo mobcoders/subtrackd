@@ -9,7 +9,7 @@ export default function SubscriptionItem({
   subscription: Subscription;
   onEdit: () => void;
 }) {
-  const renewalText = calculateRenewalText(subscription.billingDate);
+  const renewalText = calculateRenewalText(new Date(subscription.billingDate), subscription.monthly);
 
   return (
     <Box
@@ -34,7 +34,7 @@ export default function SubscriptionItem({
       {/* Cost and Billig date info */}
       <Flex direction="column" align="end">
         <Text fontSize="sm">
-          ${subscription.cost} / {'Add billing cycle here'}
+          ${subscription.cost} / {subscription.monthly? "Month" : "Year"}
         </Text>
         <Text fontSize="sm" as="i">
           {renewalText}

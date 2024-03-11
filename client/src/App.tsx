@@ -1,36 +1,25 @@
-import { ChakraProvider, CSSReset, GlobalStyle } from '@chakra-ui/react';
-import theme from './theme/theme';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import { useStore } from './zustand/store.ts';
-import Auth from './pages/auth.tsx';
+import Login from './pages/login.tsx';
 import Dashboard from './pages/dashboard.tsx';
 
-function App() {
+export default function App() {
   // ZUSTAND:
-  const userID = useStore((state: { userId: 'string'; }) => state.userId);
+  const userID = useStore((state) => state.userId);
 
   // RENDER:
   return (
-    <ChakraProvider theme={theme}>
-      <CSSReset />
-      <GlobalStyle />
-      <Router>
-        <Routes>
-          <Route path="/" element={<Auth />} />
-          {!userID ? (
-            <>
-              <Route path="*" element={<Navigate to="/" />} />
-            </>
-          ) : (
-            <>
-              <Route path="/dashboard" element={<Dashboard />} />
-            </>
-          )}
-        </Routes>
-      </Router>
-    </ChakraProvider>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        {!userID ? (
+          <Route path="*" element={<Navigate to="/" />} />
+        ) : (
+          <Route path="/dashboard" element={<Dashboard />} />
+        )}
+      </Routes>
+    </Router>
   );
 }
 
-export default App;

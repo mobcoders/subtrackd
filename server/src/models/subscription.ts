@@ -3,17 +3,17 @@ import mongoose, { Schema } from 'mongoose';
 interface ISubscription {
   name: string;
   cost: number;
-  billingDate: Date;
-  status: boolean;
-  billingCycle: string;
+  billingDate: string;
+  active: boolean;
+  monthly: boolean;
 }
 
 const subscriptionSchema = new Schema<ISubscription>({
   name: { type: String, required: true },
   cost: { type: Number, required: true },
-  billingDate: { type: Date, required: true },
-  status: { type: Boolean, required: true },
-  billingCycle: { type: String, required: true },
+  billingDate: { type: String, required: true },
+  active: { type: Boolean, required: true },
+  monthly: { type: Boolean, required: true },
 });
 
 const Subscription = mongoose.model<ISubscription>(

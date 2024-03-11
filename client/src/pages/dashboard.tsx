@@ -3,7 +3,7 @@ import { Box } from '@chakra-ui/react';
 import Navbar from '../components/Navbar';
 import DashboardComponent from '../components/DashboardComponent';
 
-function Dashboard() {
+export default function Dashboard() {
   // STATES:
   const [sortCriteria, setSortCriteria] = useState('');
   const [filterCriteria, setFilterCriteria] = useState('all');
@@ -29,5 +29,3 @@ function Dashboard() {
     </Box>
   );
 }
-
-export default Dashboard;
