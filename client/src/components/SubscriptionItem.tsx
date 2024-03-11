@@ -2,13 +2,13 @@ import { Box, Flex, Text, Button, Spacer } from '@chakra-ui/react';
 import { calculateRenewalText } from '../utils/dateUtils';
 import { Subscription } from '../utils/types';
 
-const SubscriptionItem = ({
+export default function SubscriptionItem({
   subscription,
   onEdit,
 }: {
   subscription: Subscription;
   onEdit: () => void;
-}) => {
+}) {
   const renewalText = calculateRenewalText(subscription.billingDate);
 
   return (
@@ -47,6 +47,4 @@ const SubscriptionItem = ({
       </Button>
     </Box>
   );
-};
-
-export default SubscriptionItem;
+}

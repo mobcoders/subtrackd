@@ -2,17 +2,17 @@ import { useEffect, useState, useCallback } from 'react';
 import { Box, Flex, Button, Text } from '@chakra-ui/react';
 import SubscriptionList from './SubscriptionList';
 import AddEditSubscriptionForm from './AddEditSubscriptionForm';
-import apiService from '../services/apiService';
+import {fetchSubscriptions} from '../services/apiService';
 import Notifications from './Notifications';
 import { Subscription } from '../utils/types';
 
-const DashboardComponent = ({
+export default function DashboardComponent ({
   sortCriteria,
   filterCriteria,
 }: {
   sortCriteria: string;
   filterCriteria: string;
-}) => {
+}) {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [currentSubscription, setCurrentSubscription] = useState<
     Subscription | undefined
@@ -57,7 +57,7 @@ const DashboardComponent = ({
   // Fetch and refresh subscriptions
   const refreshSubscriptions = useCallback(async () => {
     try {
-      const data = await apiService.fetchSubscriptions();
+      const data = await fetchSubscriptions();
       applySortAndFilter(data);
     } catch (error) {
       console.error('Error fetching subscriptions:', error);
@@ -68,16 +68,16 @@ const DashboardComponent = ({
     refreshSubscriptions();
   }, [refreshSubscriptions]);
 
-  const handleEdit = (subscription: Subscription) => {
+  function handleEdit (subscription: Subscription) {
     setCurrentSubscription(subscription);
     setIsFormOpen(true);
-  };
+  }
 
-  const handleClose = () => {
+  function handleClose() {
     setIsFormOpen(false);
     setCurrentSubscription(undefined);
     refreshSubscriptions();
-  };
+  }
 
   const totalCost = subscriptions
     .filter((sub) => sub.isActive === true)
@@ -132,6 +132,5 @@ const DashboardComponent = ({
       </Flex>
     );
   }
-};
+}
 
-export default DashboardComponent;

@@ -12,10 +12,10 @@ import {
   useOutsideClick,
   Text,
 } from '@chakra-ui/react';
-import apiService from '../services/apiService';
+import { fetchNotifications } from '../services/apiService';
 import { Notification } from '../utils/types';
 
-const Notifications = () => {
+export default function Notifications() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const popoverRef = React.useRef<HTMLElement>(null);
@@ -28,7 +28,7 @@ const Notifications = () => {
   useEffect(() => {
     const loadNotifications = async () => {
       try {
-        const notifications = await apiService.fetchNotifications();
+        const notifications = await fetchNotifications();
         setNotifications(notifications);
       } catch (error) {
         console.error('Error loading notifications:', error);
@@ -83,6 +83,4 @@ const Notifications = () => {
       </PopoverContent>
     </Popover>
   );
-};
-
-export default Notifications;
+}
