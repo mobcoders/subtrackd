@@ -14,7 +14,7 @@ import {
   Switch,
 } from '@chakra-ui/react';
 import { generateToastConfig } from '../utils/toastUtils';
-import apiService from '../services/apiService';
+import {updateSubscription, addSubscription, deleteSubscription} from '../services/apiService'
 
 import { Subscription } from '../utils/types';
 
@@ -27,7 +27,7 @@ const initialFormState: Subscription = {
   isActive: true,
 };
 
-const AddEditSubscriptionForm = ({
+function AddEditSubscriptionForm({
   isOpen,
   onClose,
   subscription,
@@ -37,7 +37,7 @@ const AddEditSubscriptionForm = ({
   onClose: () => void;
   subscription: Subscription | undefined;
   refreshSubscriptions: () => void;
-}) => {
+}) {
   const [formData, setFormData] = useState<Subscription>(initialFormState);
   const toast = useToast();
 
@@ -51,19 +51,19 @@ const AddEditSubscriptionForm = ({
             endDate: subscription!.endDate || '',
             isActive: subscription!.isActive,
           }
-        : initialFormState,
+        : initialFormState
     );
   }, [subscription, isOpen]);
 
-  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+  function handleChange(e: React.FormEvent<HTMLInputElement>) {
     const { name, value, checked, type } = e.currentTarget;
     setFormData((prev) => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
     }));
-  };
+  }
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try {
       const subscriptionData: Subscription = {
@@ -72,15 +72,15 @@ const AddEditSubscriptionForm = ({
       };
 
       const data: Subscription = subscription
-        ? await apiService.updateSubscription(
+        ? await updateSubscription(
             subscription._id as string,
-            subscriptionData,
+            subscriptionData
           )
-        : await apiService.addSubscription(subscriptionData);
+        : await addSubscription(subscriptionData);
 
       const options = generateToastConfig(
         subscription ? 'updateSuccess' : 'addSuccess',
-        data,
+        data
       );
       toast(options);
       onClose();
@@ -89,13 +89,13 @@ const AddEditSubscriptionForm = ({
       console.error('Error:', error);
       toast(generateToastConfig('error', error as Subscription));
     }
-  };
+  }
 
-  const handleDelete = async () => {
+  async function handleDelete() {
     if (!subscription || !subscription._id) return;
 
     try {
-      await apiService.deleteSubscription(subscription._id);
+      await deleteSubscription(subscription._id);
       toast(generateToastConfig('deleteSuccess', subscription));
       onClose();
       refreshSubscriptions();
@@ -103,7 +103,7 @@ const AddEditSubscriptionForm = ({
       console.error('Error:', error);
       toast(generateToastConfig('error', error as Subscription));
     }
-  };
+  }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -172,6 +172,6 @@ const AddEditSubscriptionForm = ({
       </ModalContent>
     </Modal>
   );
-};
+}
 
 export default AddEditSubscriptionForm;
