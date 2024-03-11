@@ -8,7 +8,7 @@ import Dashboard from './pages/dashboard.tsx';
 
 function App() {
   // ZUSTAND:
-  const userID = useStore((state) => state.userId);
+  const userID = useStore((state: { userId: 'string'; }) => state.userId);
 
   // RENDER:
   return (
