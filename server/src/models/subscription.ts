@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-export interface ISubscription {
+interface ISubscription {
   name: string;
   cost: number;
   billingDate: Date;
@@ -16,7 +16,9 @@ const subscriptionSchema = new Schema<ISubscription>({
   billingCycle: { type: String, required: true },
 });
 
-export const Subscription = mongoose.model<ISubscription>(
+const Subscription = mongoose.model<ISubscription>(
   'Subscription',
-  subscriptionSchema,
+  subscriptionSchema
 );
+
+export { ISubscription, Subscription };

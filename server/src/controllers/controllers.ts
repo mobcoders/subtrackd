@@ -1,8 +1,8 @@
-import { ISubscription, Subscription } from '../models/subscription';
-import { Notification } from '../models/notification';
 import { Request, Response } from 'express';
+import { ISubscription, Subscription } from '../models/subscription';
+import { INotification, Notification } from '../models/notification';
 
-export const getSubs = async (req: Request, res: Response): Promise<void> => {
+async function getSubs(req: Request, res: Response): Promise<void> {
   try {
     const subscriptions: ISubscription[] = await Subscription.find();
     res.send(subscriptions);
@@ -10,9 +10,9 @@ export const getSubs = async (req: Request, res: Response): Promise<void> => {
     res.status(500).send('An error occurred while fetching the subscriptions.');
     console.error('Error fetching subscriptions:', error);
   }
-};
+}
 
-export const addSub = async (req: Request, res: Response): Promise<void> => {
+async function addSub(req: Request, res: Response): Promise<void> {
   try {
     const subscription = new Subscription(req.body);
     await subscription.save();
@@ -21,9 +21,9 @@ export const addSub = async (req: Request, res: Response): Promise<void> => {
     res.status(500).send('An error occurred while adding the subscription.');
     console.error('Error adding subscription:', error);
   }
-};
+}
 
-export const editSub = async (req: Request, res: Response): Promise<void> => {
+async function editSub(req: Request, res: Response): Promise<void> {
   const { id } = req.params;
   console.log(`Updating subscription with ID: ${id}`); // Debugging log
   try {
@@ -39,12 +39,12 @@ export const editSub = async (req: Request, res: Response): Promise<void> => {
     console.error('Error updating subscription:', error);
     res.status(500).send('Error updating subscription');
   }
-};
+}
 
-export const deleteSub = async (req: Request, res: Response): Promise<void> => {
+async function deleteSub(req: Request, res: Response): Promise<void> {
   try {
     const deletedSubscription = await Subscription.findByIdAndDelete(
-      req.params.id,
+      req.params.id
     );
     if (!deletedSubscription) {
       res.status(404).send('Subscription not found');
@@ -54,18 +54,19 @@ export const deleteSub = async (req: Request, res: Response): Promise<void> => {
   } catch (error) {
     res.status(500).send('Error deleting subscription');
   }
-};
+}
 
-export const getNotification = async (
-  req: Request,
-  res: Response,
-): Promise<void> => {
+async function getNotification(req: Request, res: Response): Promise<void> {
   try {
-    const notifications = await Notification.find({ read: false }).sort({
+    const notifications: INotification[] = await Notification.find({
+      read: false,
+    }).sort({
       date: -1,
     });
     res.json(notifications);
   } catch (error) {
     res.status(500).send('Error fetching notifications.');
   }
-};
+}
+
+export { getSubs, addSub, editSub, deleteSub, getNotification };
