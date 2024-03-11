@@ -1,15 +1,15 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import { server } from '../mocks/server';
 import { afterAll, afterEach, beforeAll, describe, it } from 'vitest';
-import Dashboard from './Dashboard';
+import DashboardComponent from './DashboardComponent';
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 const renderComponent = () => {
   return render(
     <ChakraProvider>
-      <Dashboard sortCriteria="alphabetical" filterCriteria="all" />
-    </ChakraProvider>,
+      <DashboardComponent sortCriteria="alphabetical" filterCriteria="all" />
+    </ChakraProvider>
   );
 };
 
