@@ -10,13 +10,13 @@ import {
 } from '@chakra-ui/react';
 import { HamburgerIcon, TriangleDownIcon } from '@chakra-ui/icons';
 
-const Navbar = ({
+export default function Navbar({
   setSortCriteria,
   setFilterCriteria,
 }: {
   setSortCriteria: (criteria: string) => void;
   setFilterCriteria: (criteria: string) => void;
-}) => {
+}) {
   const handleSortSelection = (criteria: string) => {
     setSortCriteria(criteria);
   };
@@ -107,6 +107,4 @@ const Navbar = ({
       </Flex>
     </Box>
   );
-};
-
-export default Navbar;
+}

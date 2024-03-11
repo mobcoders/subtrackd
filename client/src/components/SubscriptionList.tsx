@@ -1,13 +1,14 @@
 import { Subscription } from '../utils/types';
 import SubscriptionItem from './SubscriptionItem';
 import { Flex, Box } from '@chakra-ui/react';
-const SubscriptionList = ({
+
+export default function SubscriptionList({
   onEdit,
   subscriptions,
 }: {
   onEdit: (subscription: Subscription) => void;
   subscriptions: Subscription[];
-}) => {
+}) {
   return (
     <Flex direction="column" align="center" w="full" py={2}>
       <Box
@@ -50,6 +51,4 @@ const SubscriptionList = ({
       </Box>
     </Flex>
   );
-};
-
-export default SubscriptionList;
+}
