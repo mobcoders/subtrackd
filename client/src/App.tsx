@@ -1,28 +1,34 @@
-import { ChakraProvider, CSSReset, GlobalStyle, Box } from '@chakra-ui/react';
-import Dashboard from './components/Dashboard';
-import Navbar from './components/Navbar';
-import { useState } from 'react';
-import theme from './theme/theme'; 
-
+import { ChakraProvider, CSSReset, GlobalStyle } from '@chakra-ui/react';
+import theme from './theme/theme';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import { useStore } from './zustand/store.ts';
+import Auth from './pages/auth.tsx';
+import Dashboard from './pages/dashboard.tsx';
 
 function App() {
-  const [sortCriteria, setSortCriteria] = useState('');
-  const [filterCriteria, setFilterCriteria] = useState('all');
+  // ZUSTAND:
+  const userID = useStore((state) => state.userId);
 
+  // RENDER:
   return (
     <ChakraProvider theme={theme}>
       <CSSReset />
       <GlobalStyle />
-      <Box
-        minH="100vh"
-        width="800px"
-        marginX="auto"
-        border="2px solid"
-        borderColor="blue.300"
-        borderRadius="xl">
-        <Navbar setSortCriteria={setSortCriteria} setFilterCriteria={setFilterCriteria}/>
-        <Dashboard sortCriteria={sortCriteria} filterCriteria={filterCriteria} />
-      </Box>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Auth />} />
+          {!userID ? (
+            <>
+              <Route path="*" element={<Navigate to="/" />} />
+            </>
+          ) : (
+            <>
+              <Route path="/dashboard" element={<Dashboard />} />
+            </>
+          )}
+        </Routes>
+      </Router>
     </ChakraProvider>
   );
 }

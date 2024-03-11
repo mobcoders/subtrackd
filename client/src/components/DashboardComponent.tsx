@@ -6,7 +6,7 @@ import apiService from '../services/apiService';
 import Notifications from './Notifications';
 import { Subscription } from '../utils/types';
 
-const Dashboard = ({
+const DashboardComponent = ({
   sortCriteria,
   filterCriteria,
 }: {
@@ -29,7 +29,7 @@ const Dashboard = ({
         result = result.filter((sub: Subscription) =>
           filterCriteria === 'active'
             ? sub.isActive === true
-            : sub.isActive === false,
+            : sub.isActive === false
         );
       }
 
@@ -51,7 +51,7 @@ const Dashboard = ({
 
       setSubscriptions(result);
     },
-    [filterCriteria, sortCriteria],
+    [filterCriteria, sortCriteria]
   );
 
   // Fetch and refresh subscriptions
@@ -134,4 +134,4 @@ const Dashboard = ({
   }
 };
 
-export default Dashboard;
+export default DashboardComponent;
