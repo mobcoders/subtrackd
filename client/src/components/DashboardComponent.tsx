@@ -2,11 +2,11 @@ import { useEffect, useState, useCallback } from 'react';
 import { Box, Flex, Button, Text } from '@chakra-ui/react';
 import SubscriptionList from './SubscriptionList';
 import AddEditSubscriptionForm from './AddEditSubscriptionForm';
-import {fetchSubscriptions} from '../services/apiService';
+import { fetchSubscriptions } from '../services/apiService';
 import Notifications from './Notifications';
 import { Subscription } from '../utils/types';
 
-export default function DashboardComponent ({
+export default function DashboardComponent({
   sortCriteria,
   filterCriteria,
 }: {
@@ -29,7 +29,7 @@ export default function DashboardComponent ({
         result = result.filter((sub: Subscription) =>
           filterCriteria === 'active'
             ? sub.active === true
-            : sub.active === false
+            : sub.active === false,
         );
       }
 
@@ -39,7 +39,10 @@ export default function DashboardComponent ({
           case 'alphabetical':
             return a.name.localeCompare(b.name);
           case 'billDate':
-            return new Date(a.billingDate).getTime() - new Date(b.billingDate).getTime();
+            return (
+              new Date(a.billingDate).getTime() -
+              new Date(b.billingDate).getTime()
+            );
           case 'mostExpensive':
             return b.cost - a.cost;
           case 'cheapest':
@@ -51,7 +54,7 @@ export default function DashboardComponent ({
 
       setSubscriptions(result);
     },
-    [filterCriteria, sortCriteria]
+    [filterCriteria, sortCriteria],
   );
 
   // Fetch and refresh subscriptions
@@ -68,7 +71,7 @@ export default function DashboardComponent ({
     refreshSubscriptions();
   }, [refreshSubscriptions]);
 
-  function handleEdit (subscription: Subscription) {
+  function handleEdit(subscription: Subscription) {
     setCurrentSubscription(subscription);
     setIsFormOpen(true);
   }
@@ -86,14 +89,7 @@ export default function DashboardComponent ({
 
   if (subscriptions) {
     return (
-      <Flex
-        direction="column"
-        bg="#ADC4CE"
-        width="795px"
-        minHeight="90vh"
-        borderRadius="md"
-        p={4}
-      >
+      <>
         <Flex justifyContent="space-between" alignItems="center">
           <Text fontSize="2xl" fontWeight="bold">
             Subscriptions
@@ -129,8 +125,7 @@ export default function DashboardComponent ({
           </Box>
           <Text fontSize="xl">${averageExpenses}</Text>
         </Flex>
-      </Flex>
+      </>
     );
   }
 }
-

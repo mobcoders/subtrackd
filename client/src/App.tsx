@@ -10,16 +10,17 @@ export default function App() {
 
   // RENDER:
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        {!userID ? (
-          <Route path="*" element={<Navigate to="/" />} />
-        ) : (
-          <Route path="/dashboard" element={<Dashboard />} />
-        )}
-      </Routes>
-    </Router>
+    <div className="grid grid-cols-12 px-0 mx-auto bg-dark-purple h-screen md:px-36">
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          {!userID ? (
+            <Route path="*" element={<Navigate to="/" />} />
+          ) : (
+            <Route path="/dashboard" element={<Dashboard />} />
+          )}
+        </Routes>
+      </Router>
+    </div>
   );
 }
-

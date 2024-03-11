@@ -9,6 +9,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { HamburgerIcon, TriangleDownIcon } from '@chakra-ui/icons';
+import { Image } from '@nextui-org/react';
 
 export default function Navbar({
   setSortCriteria,
@@ -25,16 +26,13 @@ export default function Navbar({
     setFilterCriteria(criteria);
   };
   return (
-    <Box
-      bg="#ADC4CE"
-      px={{ base: 2, sm: 2, md: 4 }}
-      color="black"
-      w="795px"
-      borderRadius="lg"
-      mb={1}
-      position="relative"
-      textAlign="center"
-    >
+    <>
+      <Image
+        width={150}
+        alt="Subtrackd Logo"
+        src="/subtrackd-logo.svg"
+        className="rounded-none"
+      />
       <Flex justifyContent="space-between" alignItems="center" w="full">
         <Menu>
           <MenuButton as={Button} leftIcon={<HamburgerIcon />} mr={4}>
@@ -105,6 +103,6 @@ export default function Navbar({
           </MenuList>
         </Menu>
       </Flex>
-    </Box>
+    </>
   );
 }

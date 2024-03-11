@@ -10,14 +10,7 @@ export default function Dashboard() {
 
   // RENDER:
   return (
-    <Box
-      minH="100vh"
-      width="800px"
-      marginX="auto"
-      border="2px solid"
-      borderColor="blue.300"
-      borderRadius="xl"
-    >
+    <div className="col-span-12">
       <Navbar
         setSortCriteria={setSortCriteria}
         setFilterCriteria={setFilterCriteria}
@@ -26,6 +19,6 @@ export default function Dashboard() {
         sortCriteria={sortCriteria}
         filterCriteria={filterCriteria}
       />
-    </Box>
+    </div>
   );
 }
