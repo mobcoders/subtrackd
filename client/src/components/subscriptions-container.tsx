@@ -1,23 +1,34 @@
 import { useEffect, useState, useCallback } from 'react';
-import { Box, Flex, Button, Text } from '@chakra-ui/react';
-import SubscriptionList from './SubscriptionList';
+import SortButton from './sort-button';
+
+import {
+  Box,
+  Flex,
+  Button,
+  Text,
+  Menu,
+  MenuItem,
+  MenuButton,
+  MenuList,
+} from '@chakra-ui/react';
+import SubscriptionList from './subscriptions-list';
 import AddEditSubscriptionForm from './AddEditSubscriptionForm';
 import { fetchSubscriptions } from '../services/apiService';
 import Notifications from './Notifications';
 import { Subscription } from '../utils/types';
+import { HamburgerIcon, TriangleDownIcon } from '@chakra-ui/icons';
+import { Card, CardBody } from '@nextui-org/react';
+import FilterButton from './filter-button';
+import { PencilSquareIcon } from '@heroicons/react/24/outline';
 
-export default function DashboardComponent({
-  sortCriteria,
-  filterCriteria,
-}: {
-  sortCriteria: string;
-  filterCriteria: string;
-}) {
+export default function SubscriptionsContainer() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [currentSubscription, setCurrentSubscription] = useState<
     Subscription | undefined
   >(undefined);
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
+  const [sortCriteria, setSortCriteria] = useState('');
+  const [filterCriteria, setFilterCriteria] = useState('all');
 
   // Define applySortAndFilter inside useCallback to memoize it
   const applySortAndFilter = useCallback(
@@ -43,9 +54,9 @@ export default function DashboardComponent({
               new Date(a.billingDate).getTime() -
               new Date(b.billingDate).getTime()
             );
-          case 'mostExpensive':
+          case 'costDesc':
             return b.cost - a.cost;
-          case 'cheapest':
+          case 'costAsc':
             return a.cost - b.cost;
           default:
             return 0;
@@ -87,9 +98,82 @@ export default function DashboardComponent({
     .reduce((acc, curr) => acc + curr.cost, 0);
   const averageExpenses = totalCost.toFixed(2);
 
+  const handleSortSelection = (criteria: string) => {
+    setSortCriteria(criteria);
+  };
+
+  const handleFilterSelection = (criteria: string) => {
+    setFilterCriteria(criteria);
+  };
+
   if (subscriptions) {
     return (
-      <>
+      <div className="col-span-8">
+        <div className="flex flex-row gap-3 w-full">
+          <div className="flex flex-row justify-between w-full px-3 mb-3 items-end">
+            <div className="flex flex-row justify-start gap-3">
+              <FilterButton setFilterCriteria={setFilterCriteria} />
+              <SortButton setSortCriteria={setSortCriteria} />
+            </div>
+            <p>Payment due:</p>
+          </div>
+
+          <div className="w-[30px]"></div>
+        </div>
+        <SubscriptionList onEdit={handleEdit} subscriptions={subscriptions} />
+        {/* filter buttons, sort, and payment due text */}
+
+        {/* <Flex justifyContent="space-between" alignItems="center" w="full">
+          <Menu>
+            <MenuButton as={Button} leftIcon={<HamburgerIcon />} mr={4}>
+              Sort
+            </MenuButton>
+            <MenuList>
+              <MenuItem
+                onClick={() => handleSortSelection('alphabetical')}
+                role="menuitem"
+              >
+                Alphabetic
+              </MenuItem>
+              <MenuItem
+                onClick={() => handleSortSelection('billDate')}
+                role="menuitem"
+              >
+                Bill Date
+              </MenuItem>
+              <MenuItem
+                onClick={() => handleSortSelection('mostExpensive')}
+                role="menuitem"
+              >
+                Most Expensive
+              </MenuItem>
+              <MenuItem
+                onClick={() => handleSortSelection('cheapest')}
+                role="menuitem"
+              >
+                Cheapest
+              </MenuItem>
+            </MenuList>
+          </Menu>
+
+          <Menu>
+            <MenuButton as={Button} rightIcon={<TriangleDownIcon />}>
+              Filter
+            </MenuButton>
+            <MenuList>
+              <MenuItem onClick={() => handleFilterSelection('all')}>
+                All Subscriptions
+              </MenuItem>
+              <MenuItem onClick={() => handleFilterSelection('active')}>
+                Active Subscriptions
+              </MenuItem>
+              <MenuItem onClick={() => handleFilterSelection('suspended')}>
+                Suspended Subscriptions
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        </Flex>
+
         <Flex justifyContent="space-between" alignItems="center">
           <Text fontSize="2xl" fontWeight="bold">
             Subscriptions
@@ -124,8 +208,8 @@ export default function DashboardComponent({
             </Text>
           </Box>
           <Text fontSize="xl">${averageExpenses}</Text>
-        </Flex>
-      </>
+        </Flex> */}
+      </div>
     );
   }
 }

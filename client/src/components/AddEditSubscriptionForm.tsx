@@ -14,10 +14,13 @@ import {
   Switch,
 } from '@chakra-ui/react';
 import { generateToastConfig } from '../utils/toastUtils';
-import {updateSubscription, addSubscription, deleteSubscription} from '../services/apiService'
+import {
+  updateSubscription,
+  addSubscription,
+  deleteSubscription,
+} from '../services/apiService';
 
 import { Subscription } from '../utils/types';
-
 
 // Initial form
 const initialFormState: Subscription = {
@@ -27,7 +30,6 @@ const initialFormState: Subscription = {
   monthly: true,
   active: true,
 };
-
 
 function AddEditSubscriptionForm({
   isOpen,
@@ -53,7 +55,7 @@ function AddEditSubscriptionForm({
             active: subscription!.active,
             monthly: subscription!.monthly,
           }
-        : initialFormState
+        : initialFormState,
     );
   }, [subscription, isOpen]);
 
@@ -62,8 +64,6 @@ function AddEditSubscriptionForm({
     setFormData((prev) => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
-
-
     }));
   }
 
@@ -72,20 +72,17 @@ function AddEditSubscriptionForm({
     try {
       const subscriptionData: Subscription = {
         ...formData,
-        cost: Number(formData.cost),
-        billingDate: formData.billingDate.toString().slice(0, 10)
+        cost: Number(formData.cost.toFixed(2)),
+        billingDate: formData.billingDate.toString().slice(0, 10),
       };
 
       const data: Subscription = subscription
-        ? await updateSubscription(
-            subscription._id as string,
-            subscriptionData
-          )
+        ? await updateSubscription(subscription._id as string, subscriptionData)
         : await addSubscription(subscriptionData);
 
       const options = generateToastConfig(
         subscription ? 'updateSuccess' : 'addSuccess',
-        data
+        data,
       );
       toast(options);
       onClose();
@@ -133,7 +130,7 @@ function AddEditSubscriptionForm({
               <Input
                 name="cost"
                 type="number"
-                value={formData.cost.toString()}
+                value={formData.cost}
                 onChange={handleChange}
               />
             </FormControl>

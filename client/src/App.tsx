@@ -10,7 +10,7 @@ export default function App() {
 
   // RENDER:
   return (
-    <div className="grid grid-cols-12 px-0 mx-auto bg-dark-purple h-screen md:px-36">
+    <div className="bg-dark-purple h-screen md:px-36 text-white">
       <Router>
         <Routes>
           <Route path="/" element={<Login />} />
