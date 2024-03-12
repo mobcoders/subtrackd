@@ -42,7 +42,7 @@ export default function SortButton() {
       <DropdownTrigger>
         <AdjustmentsHorizontalIcon
           width={40}
-          className="cursor-pointer hover:scale-[1.1]"
+          className="cursor-pointer hover:scale-[1.1] stroke-1"
         />
       </DropdownTrigger>
       <DropdownMenu

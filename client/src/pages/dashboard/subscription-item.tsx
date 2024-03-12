@@ -32,7 +32,7 @@ export default function SubscriptionItem({
       {/* Edit button: */}
       <PencilSquareIcon
         width={30}
-        className="cursor-pointer stroke-pink hover:scale-[1.1]"
+        className="cursor-pointer stroke-pink hover:scale-[1.1] stroke-1"
       />
     </div>
   );

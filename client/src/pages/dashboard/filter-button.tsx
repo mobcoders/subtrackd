@@ -32,7 +32,10 @@ export default function FilterButton() {
   return (
     <Dropdown>
       <DropdownTrigger>
-        <FunnelIcon width={40} className="cursor-pointer hover:scale-[1.1]" />
+        <FunnelIcon
+          width={40}
+          className="cursor-pointer hover:scale-[1.1] stroke-1"
+        />
       </DropdownTrigger>
       <DropdownMenu
         aria-label="Static Actions"
