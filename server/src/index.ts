@@ -3,7 +3,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import { router } from './router';
-import { job } from './scheduledTasks/subscriptionChecker';
+import { job,checkSubscriptionsAndNotify } from './scheduledTasks/subscriptionChecker';
 const app = express();
 
 // Middleware set-up:
@@ -11,12 +11,15 @@ app.use(cors());
 app.use(express.json());
 app.use('/', router);
 
-console.log(process.env.MONGODB_URI);
 //MongoDB connection:
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => console.log('MongoDB connected'))
   .catch((err: Error) => console.error('Could not connect to MongoDB...', err));
+
+console.log('Checking subscriptions and notifying...');
+//check for notification on server start
+checkSubscriptionsAndNotify();
 
 // Cron job start:
 job.start();

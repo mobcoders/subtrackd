@@ -3,6 +3,7 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
+  Button,
 } from '@nextui-org/react';
 import { FunnelIcon } from '@heroicons/react/24/outline';
 import { useStore } from '../../zustand/store';
@@ -32,10 +33,12 @@ export default function FilterButton() {
   return (
     <Dropdown>
       <DropdownTrigger>
+        <Button>
         <FunnelIcon
           width={40}
           className="cursor-pointer hover:scale-[1.1] stroke-1"
         />
+        </Button>
       </DropdownTrigger>
       <DropdownMenu
         aria-label="Static Actions"

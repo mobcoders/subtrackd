@@ -12,12 +12,12 @@ import {
   Radio,
 } from '@nextui-org/react';
 import { PencilSquareIcon } from '@heroicons/react/24/outline';
-import { updateSubscription } from '../services/apiService';
+import { updateSubscription, deleteSubscription } from '../services/apiService';
 import { useStore } from '../zustand/store';
 import { Subscription } from '../utils/types';
 
 export default function ModifySubscriptionModal({
-  subscription,
+  subscription, notify
 }: {
   subscription: Subscription;
 }) {
@@ -41,10 +41,20 @@ export default function ModifySubscriptionModal({
     const res = await updateSubscription(subscription._id as string, modalData);
     setAllSubscriptions(res);
     setDisplaySubscriptions(res);
+    notify('modify');
   }
 
   function handleClose() {
     onClose();
+  }
+        
+  async function handleDelete() {
+    onClose();
+    const res = await deleteSubscription(modalData._id);
+    console.log('res delete: ', res);
+    setAllSubscriptions(res);
+    setDisplaySubscriptions(res);
+    notify('delete');
   }
 
   // RENDER:
@@ -131,8 +141,8 @@ export default function ModifySubscriptionModal({
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button color="danger" variant="light" onPress={onClose}>
-              Close
+            <Button color="danger" variant="light" onPress={handleDelete}>
+                  Delete
             </Button>
             <Button color="primary" onPress={handleSubmit}>
               Update

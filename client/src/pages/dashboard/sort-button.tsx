@@ -3,6 +3,7 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
+  Button,
 } from '@nextui-org/react';
 import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
 import { useStore } from '../../zustand/store';
@@ -11,11 +12,15 @@ import { Subscription } from '../../utils/types';
 export default function SortButton() {
   // ZUSTAND:
   const allSubscriptions = useStore((state) => state.allSubscriptions);
-  const { setDisplaySubscriptions } = useStore();
+  const setDisplaySubscriptions = useStore(
+    (state) => state.setDisplaySubscriptions,
+  );
+
+  // const { setDisplaySubscriptions } = useStore();
 
   // FUNCTIONS:
-  function handleSort(key: string) {
-    const sortSubs = allSubscriptions;
+  async function handleSort(key: string) {
+    const sortSubs = await allSubscriptions;
     sortSubs.sort((a: Subscription, b: Subscription) => {
       switch (key) {
         case 'alphabetical':
@@ -40,10 +45,12 @@ export default function SortButton() {
   return (
     <Dropdown>
       <DropdownTrigger>
+        <Button>
         <AdjustmentsHorizontalIcon
           width={40}
           className="cursor-pointer hover:scale-[1.1] stroke-1"
         />
+        </Button>
       </DropdownTrigger>
       <DropdownMenu
         aria-label="Static Actions"

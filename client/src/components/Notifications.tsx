@@ -1,29 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { BellIcon } from '@chakra-ui/icons';
-import {
-  Box,
-  Button,
-  List,
-  ListItem,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverBody,
-  useOutsideClick,
-  Text,
-} from '@chakra-ui/react';
 import { fetchNotifications } from '../services/apiService';
 import { Notification } from '../utils/types';
+import { BellAlertIcon } from '@heroicons/react/24/outline';
+import {
+  Button,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@nextui-org/react';
 
 export default function Notifications() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
-  const [isOpen, setIsOpen] = useState(false);
-  const popoverRef = React.useRef<HTMLElement>(null);
-
-  useOutsideClick({
-    ref: popoverRef,
-    handler: () => setIsOpen(false),
-  });
 
   useEffect(() => {
     const loadNotifications = async () => {
@@ -38,48 +25,26 @@ export default function Notifications() {
     loadNotifications();
   }, []);
 
-  const renderMessage = (message: string) => {
-    const parts = message.split('for ')[1].split(' is due');
-    const subscriptionName = parts[0];
-
-    return (
-      <>
-        Your subscription for{' '}
-        <Text as="span" fontWeight="bold" fontSize="lg">
-          {subscriptionName}
-        </Text>{' '}
-        is due tomorrow.
-      </>
-    );
-  };
-
   return (
-    <Popover isOpen={isOpen} onClose={() => setIsOpen(false)}>
+    <Popover placement="bottom" showArrow={true}>
       <PopoverTrigger>
-        <Button onClick={() => setIsOpen(!isOpen)} variant="ghost">
-          <BellIcon w={6} h={6} />
-          {notifications && notifications.length > 0 && (
-            <Box as="span" ml={1} fontSize="sm" color="red.500">
-              {notifications.length}
-            </Box>
-          )}
+        <Button>
+          <BellAlertIcon className="cursor-pointer" width={40} />
         </Button>
       </PopoverTrigger>
-      <PopoverContent ref={popoverRef}>
-        <PopoverBody>
-          {notifications && notifications.length === 0 ? (
-            <Box>No new notifications</Box>
-          ) : (
-            <List>
-              {notifications &&
-                notifications.map((notification: Notification) => (
-                  <ListItem key={notification._id}>
-                    {renderMessage(notification.message)}
-                  </ListItem>
-                ))}
-            </List>
-          )}
-        </PopoverBody>
+      <PopoverContent>
+        {notifications.length > 0 ? (
+          notifications.map((notification, index) => (
+            <div key={index} className="px-1 py-2">
+              <div className="text-small font-bold">{notification.message}</div>
+              <div className="text-tiny">is due tomorrow</div>
+            </div>
+          ))
+        ) : (
+          <div className="px-1 py-2">
+            <div className="text-small font-bold">No notifications</div>
+          </div>
+        )}
       </PopoverContent>
     </Popover>
   );

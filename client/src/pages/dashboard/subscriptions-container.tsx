@@ -6,7 +6,7 @@ import SubscriptionList from './subscriptions-list';
 import { useStore } from '../../zustand/store';
 import AddSubscriptionModal from '../../components/AddSubscriptionModal';
 
-export default function SubscriptionsContainer() {
+export default function SubscriptionsContainer({ notify }) {
   // ZUSTAND:
   const { setAllSubscriptions, setDisplaySubscriptions } = useStore();
   const allSubscriptions = useStore((state) => state.allSubscriptions);
@@ -33,7 +33,7 @@ export default function SubscriptionsContainer() {
         </div>
         <AddSubscriptionModal />
       </div>
-      {allSubscriptions && <SubscriptionList />}
+      {allSubscriptions && <SubscriptionList notify={notify} />}
     </div>
   );
 }
