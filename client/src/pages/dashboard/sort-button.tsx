@@ -5,16 +5,41 @@ import {
   DropdownItem,
 } from '@nextui-org/react';
 import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
+import { useStore } from '../../zustand/store';
+import { Subscription } from '../../utils/types';
 
-export default function SortButton({
-  setSortCriteria,
-}: {
-  setSortCriteria: (criteria: string) => void;
-}) {
+export default function SortButton() {
 
+  //ZUSTAND:
+  const allSubscriptions = useStore((state) => state.allSubscriptions);
+  const { setDisplaySubscriptions } = useStore();
+
+
+  function handleSort(key: string) {
+    const sortSubs = allSubscriptions;
+    sortSubs.sort((a: Subscription, b: Subscription) => {
+      switch (key) {
+        case 'alphabetical':
+          return a.name.localeCompare(b.name);
+        case 'billDate':
+          return (
+            new Date(a.billingDate).getTime() -
+            new Date(b.billingDate).getTime()
+          );
+        case 'costDesc':
+          return b.cost - a.cost;
+        case 'costAsc':
+          return a.cost - b.cost;
+        default:
+          return 0;
+      }
+    });
+    setDisplaySubscriptions(sortSubs);
+  }
 
   return (
     // RENDER:
+    <>
     <Dropdown>
       <DropdownTrigger>
         <AdjustmentsHorizontalIcon
@@ -24,7 +49,7 @@ export default function SortButton({
       </DropdownTrigger>
       <DropdownMenu
         aria-label="Static Actions"
-        onAction={(key) => setSortCriteria(key as string)}
+        onAction={(key) => handleSort(key as string)}
       >
         <DropdownItem key="alphabetical">A - Z</DropdownItem>
         <DropdownItem key="billDate">Billing Date</DropdownItem>
@@ -32,19 +57,6 @@ export default function SortButton({
         <DropdownItem key="costDesc">Cost Descending</DropdownItem>
       </DropdownMenu>
     </Dropdown>
+    </>
   );
 }
-
-// case 'alphabetical':
-//             return a.name.localeCompare(b.name);
-//           case 'billDate':
-//             return (
-//               new Date(a.billingDate).getTime() -
-//               new Date(b.billingDate).getTime()
-//             );
-//           case 'mostExpensive':
-//             return b.cost - a.cost;
-//           case 'cheapest':
-//             return a.cost - b.cost;
-//           default:
-//             return 0;
