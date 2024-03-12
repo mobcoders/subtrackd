@@ -10,61 +10,47 @@ import {
   Input,
   RadioGroup,
   Radio,
-  modal,
 } from '@nextui-org/react';
 import { PencilSquareIcon } from '@heroicons/react/24/outline';
 import { updateSubscription } from '../services/apiService';
 import { useStore } from '../zustand/store';
 
 export default function ModifySubscriptionModal({ subscription }) {
+  // ZUSTAND:
   const setDisplaySubscriptions = useStore(
     (state) => state.setDisplaySubscriptions,
   );
   const setAllSubscriptions = useStore((state) => state.setAllSubscriptions);
-  const allSubscriptions = useStore((state) => state.allSubscriptions);
+  // const allSubscriptions = useStore((state) => state.allSubscriptions);
 
+  // STATES:
   const [modalData, setModalData] = useState(subscription);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = useState<
     'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | 'full'
   >('md');
 
+  // FUNCTIONS:
   const handleOpen = (size: '3xl') => {
     setSize('3xl');
     onOpen();
   };
 
-  function handleClose() {
+  async function handleClose() {
     onClose();
-    // findOneAndUpdate(modalData);
-
-    const indexOfSub = allSubscriptions
-      .map((obj) => obj._id)
-      .indexOf(subscription._id);
-
-    setAllSubscriptions((allSubscriptions) => {
-      const updatedSubscriptions = [...allSubscriptions];
-      updatedSubscriptions.splice(indexOfSub, 1, modalData);
-      return updatedSubscriptions;
-    });
-
-    setDisplaySubscriptions((allSubscriptions) => {
-      const updatedSubscriptions = [...allSubscriptions];
-      updatedSubscriptions.splice(indexOfSub, 1, modalData);
-      return updatedSubscriptions;
-    });
-
-    // setDisplaySubscriptions(allSubscriptions);
+    const res = await updateSubscription(subscription._id, modalData);
+    setAllSubscriptions(res);
+    setDisplaySubscriptions(res);
   }
 
-  function findOneAndUpdate(modifiedSub) {
-    try {
-      updateSubscription(modifiedSub._id, modifiedSub);
-    } catch (error) {
-      console.error('Error modifying subscription: \n', error);
-    }
-  }
+  // function findOneAndUpdate(modifiedSub) {
+  //   try {
+  //     updateSubscription(modifiedSub._id, modifiedSub);
+  //   } catch (error) {
+  //     console.error('Error modifying subscription: \n', error);
+  //   }
 
+  // RENDER:
   return (
     <>
       <div className="flex flex-wrap gap-3">

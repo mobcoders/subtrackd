@@ -33,7 +33,7 @@ async function editSub(req: Request, res: Response): Promise<void> {
     if (!subscription) {
       res.status(404).send('Subscription not found');
     } else {
-      res.send(subscription);
+      res.send(await Subscription.find({}));
     }
   } catch (error) {
     console.error('Error updating subscription:', error);
