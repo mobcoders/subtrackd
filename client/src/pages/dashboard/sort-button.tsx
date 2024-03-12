@@ -13,7 +13,6 @@ export default function SortButton() {
   //ZUSTAND:
   const allSubscriptions = useStore((state) => state.allSubscriptions);
   const { setDisplaySubscriptions } = useStore();
-  const displaySubscriptions = useStore((state) => state.displaySubscriptions);
 
 
   function handleSort(key: string) {
@@ -41,7 +40,6 @@ export default function SortButton() {
   return (
     // RENDER:
     <>
-    {console.log(displaySubscriptions)}
     <Dropdown>
       <DropdownTrigger>
         <AdjustmentsHorizontalIcon

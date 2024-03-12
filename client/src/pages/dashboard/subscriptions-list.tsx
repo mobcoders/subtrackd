@@ -1,21 +1,18 @@
-import { Subscription } from '../../utils/types';
 import SubscriptionItem from './subscription-item';
+import { useStore } from '../../zustand/store';
 
-export default function SubscriptionList({
-  onEdit,
-  subscriptions,
-}: {
-  onEdit: (subscription: Subscription) => void;
-  subscriptions: Subscription[];
-}) {
+
+export default function SubscriptionList(){
+  //ZUSTAND
+  const displaySubscriptions = useStore((state) => state.displaySubscriptions);
+
   return (
     // RENDER:
     <div className="flex flex-col gap-3">
-      {subscriptions.map((subscription) => (
+      {displaySubscriptions.map((subscription) => (
         <SubscriptionItem
           key={subscription._id}
           subscription={subscription}
-          onEdit={() => onEdit(subscription)}
         />
       ))}
     </div>
