@@ -4,6 +4,7 @@ import { fetchSubscriptions } from '../../services/apiService';
 import FilterButton from './filter-button';
 import SortButton from './sort-button';
 import SubscriptionList from './subscriptions-list';
+import { useStore } from '../../zustand/store';
 // import AddEditSubscriptionForm from '../../components/AddEditSubscriptionForm';
 // import Notifications from '../../components/Notifications';
 // import { HamburgerIcon, TriangleDownIcon } from '@chakra-ui/icons';
@@ -20,9 +21,21 @@ export default function SubscriptionsContainer() {
   const [sortCriteria, setSortCriteria] = useState('');
   const [filterCriteria, setFilterCriteria] = useState('all');
 
+  // ZUSTAND:
+  const { setAllSubscriptions } = useStore();
+  const allSubscriptions = useStore((state) => state.allSubscriptions);
+
+  useEffect(() => {
+    async function fetchAllSubscriptions() {
+      const res = await fetchSubscriptions();
+      setAllSubscriptions(res);
+    }
+    fetchAllSubscriptions();
+  }, []);
+
   // FUNCTIONS:
-  // Define applySortAndFilter inside useCallback to memoize it 
-  
+  // Define applySortAndFilter inside useCallback to memoize it
+
   const applySortAndFilter = useCallback(
     (data: Subscription[]) => {
       let result = data;
@@ -59,9 +72,6 @@ export default function SubscriptionsContainer() {
     },
     [filterCriteria, sortCriteria],
   );
-
-
-  
 
   // Fetch and refresh subscriptions
   const refreshSubscriptions = useCallback(async () => {
