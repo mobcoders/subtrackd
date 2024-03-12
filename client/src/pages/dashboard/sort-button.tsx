@@ -3,6 +3,7 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
+  Button,
 } from '@nextui-org/react';
 import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
 import { useStore } from '../../zustand/store';
@@ -40,10 +41,12 @@ export default function SortButton() {
   return (
     <Dropdown>
       <DropdownTrigger>
+        <Button>
         <AdjustmentsHorizontalIcon
           width={40}
           className="cursor-pointer hover:scale-[1.1] stroke-1"
         />
+        </Button>
       </DropdownTrigger>
       <DropdownMenu
         aria-label="Static Actions"
