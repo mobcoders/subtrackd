@@ -14,44 +14,48 @@ import {
 import { PencilSquareIcon } from '@heroicons/react/24/outline';
 import { updateSubscription } from '../services/apiService';
 import { useStore } from '../zustand/store';
+import { Subscription } from '../utils/types';
 
-export default function ModifySubscriptionModal({ subscription }) {
+export default function ModifySubscriptionModal({
+  subscription,
+}: {
+  subscription: Subscription;
+}) {
   // ZUSTAND:
   const setDisplaySubscriptions = useStore(
     (state) => state.setDisplaySubscriptions,
   );
   const setAllSubscriptions = useStore((state) => state.setAllSubscriptions);
-  // const allSubscriptions = useStore((state) => state.allSubscriptions);
 
   // STATES:
   const [modalData, setModalData] = useState(subscription);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [size, setSize] = useState<
-    'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | 'full'
-  >('md');
 
   // FUNCTIONS:
-  const handleOpen = (size: '3xl') => {
-    setSize('3xl');
+  const handleOpen = () => {
     onOpen();
   };
 
-  async function handleClose() {
+  async function handleSubmit() {
     onClose();
-    const res = await updateSubscription(subscription._id, modalData);
+    const res = await updateSubscription(subscription._id as string, modalData);
     setAllSubscriptions(res);
     setDisplaySubscriptions(res);
+  }
+
+  function handleClose() {
+    onClose();
   }
 
   // RENDER:
   return (
     <>
       <div className="flex flex-wrap gap-3">
-        <Button key={size} onPress={() => handleOpen(size)}>
+        <Button onPress={() => handleOpen()}>
           <PencilSquareIcon />
         </Button>
       </div>
-      <Modal size={size} isOpen={isOpen} onClose={handleClose}>
+      <Modal size={'3xl'} isOpen={isOpen} onClose={handleClose}>
         <ModalContent>
           {(handleClose: () => void) => (
             <>
@@ -67,7 +71,7 @@ export default function ModifySubscriptionModal({ subscription }) {
                     variant="bordered"
                     value={modalData.name}
                     onChange={(e) =>
-                      setModalData((prevData) => ({
+                      setModalData((prevData: Subscription) => ({
                         ...prevData,
                         name: e.target.value,
                       }))
@@ -79,7 +83,7 @@ export default function ModifySubscriptionModal({ subscription }) {
                     variant="bordered"
                     value={modalData.cost}
                     onChange={(e) =>
-                      setModalData((prevData) => ({
+                      setModalData((prevData: Subscription) => ({
                         ...prevData,
                         cost: e.target.value,
                       }))
@@ -90,9 +94,9 @@ export default function ModifySubscriptionModal({ subscription }) {
                     type="date"
                     label="First payment"
                     variant="bordered"
-                    value={modalData.billingDate}
+                    value={modalData.billingDate as string}
                     onChange={(e) =>
-                      setModalData((prevData) => ({
+                      setModalData((prevData: Subscription) => ({
                         ...prevData,
                         billingDate: e.target.value,
                       }))
@@ -104,7 +108,7 @@ export default function ModifySubscriptionModal({ subscription }) {
                     label="Select a billing cycle:"
                     defaultValue={subscription.monthly.toString()}
                     onChange={(e) =>
-                      setModalData((prevData) => ({
+                      setModalData((prevData: Subscription) => ({
                         ...prevData,
                         monthly: e.target.value,
                       }))
@@ -117,7 +121,7 @@ export default function ModifySubscriptionModal({ subscription }) {
                     label="Active status:"
                     defaultValue={subscription.active.toString()}
                     onChange={(e) =>
-                      setModalData((prevData) => ({
+                      setModalData((prevData: Subscription) => ({
                         ...prevData,
                         active: e.target.value,
                       }))
@@ -132,8 +136,8 @@ export default function ModifySubscriptionModal({ subscription }) {
                 <Button color="danger" variant="light" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" onPress={handleClose}>
-                  Action
+                <Button color="primary" onPress={handleSubmit}>
+                  Update
                 </Button>
               </ModalFooter>
             </>
