@@ -1,4 +1,4 @@
-import { useEffect} from 'react';
+import { useEffect } from 'react';
 import { fetchSubscriptions } from '../../services/apiService';
 import FilterButton from './filter-button';
 import SortButton from './sort-button';

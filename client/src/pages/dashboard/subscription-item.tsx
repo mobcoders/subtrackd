@@ -2,6 +2,7 @@ import { calculateRenewalText } from '../../utils/dateUtils';
 import { Subscription } from '../../utils/types';
 import { Card, CardBody } from '@nextui-org/react';
 import { PencilSquareIcon } from '@heroicons/react/24/outline';
+import ModifySubscriptionModal from '../../components/ModifySubscriptionModal';
 
 export default function SubscriptionItem({
   subscription,
@@ -30,10 +31,7 @@ export default function SubscriptionItem({
       </Card>
 
       {/* Edit button: */}
-      <PencilSquareIcon
-        width={30}
-        className="cursor-pointer stroke-pink hover:scale-[1.1] stroke-1"
-      />
+      <ModifySubscriptionModal subscription={subscription} />
     </div>
   );
 }
