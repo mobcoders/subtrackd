@@ -14,12 +14,15 @@ import {
 } from '@nextui-org/react';
 import { PencilSquareIcon } from '@heroicons/react/24/outline';
 import { updateSubscription } from '../services/apiService';
+import { useStore } from '../zustand/store';
 
-export default function ModifySubscriptionModal({
-  subscription,
-  setSubscriptions,
-  applySortAndFilter,
-}) {
+export default function ModifySubscriptionModal({ subscription }) {
+  const setDisplaySubscriptions = useStore(
+    (state) => state.setDisplaySubscriptions,
+  );
+  const setAllSubscriptions = useStore((state) => state.setAllSubscriptions);
+  const allSubscriptions = useStore((state) => state.allSubscriptions);
+
   const [modalData, setModalData] = useState(subscription);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = useState<
@@ -31,21 +34,28 @@ export default function ModifySubscriptionModal({
     onOpen();
   };
 
-  const handleClose = () => {
+  function handleClose() {
     onClose();
-    findOneAndUpdate(modalData);
+    // findOneAndUpdate(modalData);
 
-    setSubscriptions((prevData) => {
-      const indexOfSub = prevData
-        .map((obj) => obj._id)
-        .indexOf(subscription._id);
+    const indexOfSub = allSubscriptions
+      .map((obj) => obj._id)
+      .indexOf(subscription._id);
 
-      console.log('indexOfSub', indexOfSub);
-      return [...prevData].splice(indexOfSub, 1, modalData);
+    setAllSubscriptions((allSubscriptions) => {
+      const updatedSubscriptions = [...allSubscriptions];
+      updatedSubscriptions.splice(indexOfSub, 1, modalData);
+      return updatedSubscriptions;
     });
 
-    console.log('modalData: \n', modalData);
-  };
+    setDisplaySubscriptions((allSubscriptions) => {
+      const updatedSubscriptions = [...allSubscriptions];
+      updatedSubscriptions.splice(indexOfSub, 1, modalData);
+      return updatedSubscriptions;
+    });
+
+    // setDisplaySubscriptions(allSubscriptions);
+  }
 
   function findOneAndUpdate(modifiedSub) {
     try {

@@ -31,11 +31,7 @@ export default function SubscriptionItem({
       </Card>
 
       {/* Edit button: */}
-      <ModifySubscriptionModal
-        subscription={subscription}
-        setSubscriptions={setSubscriptions}
-        applySortAndFilter={applySortAndFilter}
-      />
+      <ModifySubscriptionModal subscription={subscription} />
     </div>
   );
 }

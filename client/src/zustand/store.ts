@@ -17,10 +17,14 @@ export const useStore = create<State>((set) => ({
   updateUserId: (userID) => set((state) => ({ ...state, userID })),
 
   allSubscriptions: [],
-  setAllSubscriptions: (subscriptions) =>
-    set((state) => ({ ...state, allSubscriptions: subscriptions })),
+  setAllSubscriptions: (newSubscriptions) =>
+    set(() => ({
+      allSubscriptions: newSubscriptions,
+    })),
 
   displaySubscriptions: [],
   setDisplaySubscriptions: (subscriptions) =>
-    set((state) => ({ ...state, displaySubscriptions: subscriptions })),
+    set(() => ({
+      displaySubscriptions: subscriptions,
+    })),
 }));
