@@ -8,7 +8,7 @@ interface State {
   allSubscriptions: Subscription[];
   setAllSubscriptions: (subscriptions: Subscription[]) => void;
   displaySubscriptions: Subscription[];
-  setdisplaySubscriptions: (subscriptions: Subscription[]) => void;
+  setDisplaySubscriptions: (subscriptions: Subscription[]) => void;
 }
 
 // STORE:
@@ -21,6 +21,6 @@ export const useStore = create<State>((set) => ({
     set((state) => ({ ...state, allSubscriptions: subscriptions })),
 
   displaySubscriptions: [],
-  setdisplaySubscriptions: (subscriptions) =>
+  setDisplaySubscriptions: (subscriptions) =>
     set((state) => ({ ...state, displaySubscriptions: subscriptions })),
 }));
