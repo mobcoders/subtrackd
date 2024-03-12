@@ -16,7 +16,7 @@ async function addSub(req: Request, res: Response): Promise<void> {
   try {
     const subscription = new Subscription(req.body);
     await subscription.save();
-    res.send(subscription);
+    res.send(await Subscription.find({}));
   } catch (error) {
     console.error('Error adding subscription:', error);
     res.status(500).send('An error occurred while adding the subscription.');

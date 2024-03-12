@@ -4,6 +4,7 @@ import FilterButton from './filter-button';
 import SortButton from './sort-button';
 import SubscriptionList from './subscriptions-list';
 import { useStore } from '../../zustand/store';
+import AddSubscriptionModal from '../../components/AddSubscriptionModal';
 
 export default function SubscriptionsContainer({ notify }) {
   // ZUSTAND:
@@ -30,7 +31,7 @@ export default function SubscriptionsContainer({ notify }) {
           </div>
           <p className="font-semibold">Payment due:</p>
         </div>
-        <div className="w-[30px]"></div>
+        <AddSubscriptionModal />
       </div>
       {allSubscriptions && <SubscriptionList notify={notify} />}
     </div>
