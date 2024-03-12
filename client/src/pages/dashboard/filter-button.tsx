@@ -19,7 +19,7 @@ export default function FilterButton({
       </DropdownTrigger>
       <DropdownMenu
         aria-label="Static Actions"
-        onAction={(key) => setFilterCriteria(key)}
+        onAction={(key) => setFilterCriteria(key as string)}
       >
         <DropdownItem key="active">Active</DropdownItem>
         <DropdownItem key="suspended">Suspended</DropdownItem>

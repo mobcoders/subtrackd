@@ -21,7 +21,8 @@ export default function SubscriptionsContainer() {
   const [filterCriteria, setFilterCriteria] = useState('all');
 
   // FUNCTIONS:
-  // Define applySortAndFilter inside useCallback to memoize it
+  // Define applySortAndFilter inside useCallback to memoize it 
+  
   const applySortAndFilter = useCallback(
     (data: Subscription[]) => {
       let result = data;
@@ -58,6 +59,9 @@ export default function SubscriptionsContainer() {
     },
     [filterCriteria, sortCriteria],
   );
+
+
+  
 
   // Fetch and refresh subscriptions
   const refreshSubscriptions = useCallback(async () => {

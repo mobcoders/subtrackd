@@ -11,6 +11,8 @@ export default function SortButton({
 }: {
   setSortCriteria: (criteria: string) => void;
 }) {
+
+
   return (
     // RENDER:
     <Dropdown>
@@ -22,7 +24,7 @@ export default function SortButton({
       </DropdownTrigger>
       <DropdownMenu
         aria-label="Static Actions"
-        onAction={(key) => setSortCriteria(key)}
+        onAction={(key) => setSortCriteria(key as string)}
       >
         <DropdownItem key="alphabetical">A - Z</DropdownItem>
         <DropdownItem key="billDate">Billing Date</DropdownItem>
