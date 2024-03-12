@@ -28,8 +28,8 @@ export default function Notifications() {
   return (
     <Popover placement="bottom" showArrow={true}>
       <PopoverTrigger>
-        <Button>
-          <BellAlertIcon className="cursor-pointer" width={40} />
+        <Button isIconOnly className="bg-transparent">
+          <BellAlertIcon className="cursor-pointer stroke-1 stroke-white" />
         </Button>
       </PopoverTrigger>
       <PopoverContent>

@@ -17,7 +17,8 @@ import { useStore } from '../zustand/store';
 import { Subscription } from '../utils/types';
 
 export default function ModifySubscriptionModal({
-  subscription, notify
+  subscription,
+  notify,
 }: {
   subscription: Subscription;
 }) {
@@ -47,7 +48,7 @@ export default function ModifySubscriptionModal({
   function handleClose() {
     onClose();
   }
-        
+
   async function handleDelete() {
     onClose();
     const res = await deleteSubscription(modalData._id);
@@ -60,9 +61,13 @@ export default function ModifySubscriptionModal({
   // RENDER:
   return (
     <>
-      <div className="flex flex-wrap gap-3">
-        <Button onPress={() => handleOpen()}>
-          <PencilSquareIcon />
+      <div>
+        <Button
+          isIconOnly
+          className="bg-transparent"
+          onPress={() => handleOpen()}
+        >
+          <PencilSquareIcon className="stroke-1 stroke-white" />
         </Button>
       </div>
       <Modal size={'3xl'} isOpen={isOpen} onClose={handleClose}>
@@ -142,7 +147,7 @@ export default function ModifySubscriptionModal({
           </ModalBody>
           <ModalFooter>
             <Button color="danger" variant="light" onPress={handleDelete}>
-                  Delete
+              Delete
             </Button>
             <Button color="primary" onPress={handleSubmit}>
               Update

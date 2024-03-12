@@ -59,8 +59,12 @@ export default function AddSubscriptionModal({ notify }) {
   return (
     <>
       <div className="flex flex-wrap gap-3">
-        <Button onPress={() => handleOpen()}>
-          <PlusCircleIcon />
+        <Button
+          isIconOnly
+          className="bg-transparent"
+          onPress={() => handleOpen()}
+        >
+          <PlusCircleIcon className="stroke-1 stroke-white" />
         </Button>
       </div>
       <Modal size={'3xl'} isOpen={isOpen} onClose={handleClose}>

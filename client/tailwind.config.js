@@ -21,6 +21,9 @@ export default {
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
       },
+      backgroundImage: {
+        'main-pattern': "url('../public/subtrackd-background.svg')",
+      },
     },
   },
   darkMode: 'class',

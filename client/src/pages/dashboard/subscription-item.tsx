@@ -17,8 +17,8 @@ export default function SubscriptionItem({
 
   // RENDER:
   return (
-    <div className="flex flex-row gap-3">
-      <Card className="flex-1 py-3 bg-transparent border-solid border-2 border-pink text-white hover:scale-[1.015]">
+    <div className="flex flex-row">
+      <Card className="flex-1 py-3 bg-transparent border-solid border-2 border-pink text-white hover:scale-[1.015] my-1 mx-3">
         <CardBody className="flex flex-row justify-between">
           {/* Subscription name: */}
           <div className="w-2/5">{subscription.name}</div>

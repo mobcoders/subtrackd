@@ -33,11 +33,11 @@ export default function FilterButton() {
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Button>
-        <FunnelIcon
-          width={40}
-          className="cursor-pointer hover:scale-[1.1] stroke-1"
-        />
+        <Button isIconOnly className="bg-transparent">
+          <FunnelIcon
+            width={40}
+            className="cursor-pointer hover:scale-[1.1] stroke-1 stroke-white"
+          />
         </Button>
       </DropdownTrigger>
       <DropdownMenu

@@ -10,7 +10,7 @@ export default function App() {
 
   // RENDER:
   return (
-    <div className="bg-dark-purple h-screen md:px-36 text-white font-poppins text-lg background-effect">
+    <div className="bg-main-pattern bg-no-repeat bg-cover bg-center h-screen md:px-36 text-white font-poppins text-lg background-effect">
       <Router>
         <Routes>
           <Route path="/" element={<Login />} />
