@@ -2,8 +2,9 @@ import { Subscription } from '../../utils/types';
 import SubscriptionItem from './subscription-item';
 
 export default function SubscriptionList({
-  onEdit,
+  setSubscriptions,
   subscriptions,
+  applySortAndFilter,
 }: {
   onEdit: (subscription: Subscription) => void;
   subscriptions: Subscription[];
@@ -15,7 +16,8 @@ export default function SubscriptionList({
         <SubscriptionItem
           key={subscription._id}
           subscription={subscription}
-          onEdit={() => onEdit(subscription)}
+          setSubscriptions={setSubscriptions}
+          applySortAndFilter={applySortAndFilter}
         />
       ))}
     </div>

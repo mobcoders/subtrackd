@@ -21,8 +21,8 @@ export default function SubscriptionsContainer() {
   const [filterCriteria, setFilterCriteria] = useState('all');
 
   // FUNCTIONS:
-  // Define applySortAndFilter inside useCallback to memoize it 
-  
+  // Define applySortAndFilter inside useCallback to memoize it
+
   const applySortAndFilter = useCallback(
     (data: Subscription[]) => {
       let result = data;
@@ -59,9 +59,6 @@ export default function SubscriptionsContainer() {
     },
     [filterCriteria, sortCriteria],
   );
-
-
-  
 
   // Fetch and refresh subscriptions
   const refreshSubscriptions = useCallback(async () => {
@@ -118,7 +115,11 @@ export default function SubscriptionsContainer() {
 
           <div className="w-[30px]"></div>
         </div>
-        <SubscriptionList onEdit={handleEdit} subscriptions={subscriptions} />
+        <SubscriptionList
+          setSubscriptions={setSubscriptions}
+          subscriptions={subscriptions}
+          applySortAndFilter={applySortAndFilter}
+        />
         {/* filter buttons, sort, and payment due text */}
 
         {/* <Flex justifyContent="space-between" alignItems="center" w="full">
