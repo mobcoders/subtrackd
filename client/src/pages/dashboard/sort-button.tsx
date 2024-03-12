@@ -12,11 +12,15 @@ import { Subscription } from '../../utils/types';
 export default function SortButton() {
   // ZUSTAND:
   const allSubscriptions = useStore((state) => state.allSubscriptions);
-  const { setDisplaySubscriptions } = useStore();
+  const setDisplaySubscriptions = useStore(
+    (state) => state.setDisplaySubscriptions,
+  );
+
+  // const { setDisplaySubscriptions } = useStore();
 
   // FUNCTIONS:
-  function handleSort(key: string) {
-    const sortSubs = allSubscriptions;
+  async function handleSort(key: string) {
+    const sortSubs = await allSubscriptions;
     sortSubs.sort((a: Subscription, b: Subscription) => {
       switch (key) {
         case 'alphabetical':

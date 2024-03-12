@@ -49,7 +49,8 @@ async function deleteSub(req: Request, res: Response): Promise<void> {
     if (!deletedSubscription) {
       res.status(404).send('Subscription not found');
     } else {
-      res.send(deletedSubscription);
+      // const remainingSubscriptions = await Subscription.find({});
+      res.send(await Subscription.find({}));
     }
   } catch (error) {
     res.status(500).send('Error deleting subscription');
