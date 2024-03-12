@@ -15,7 +15,7 @@ import { PencilSquareIcon } from '@heroicons/react/24/outline';
 import { updateSubscription } from '../services/apiService';
 import { useStore } from '../zustand/store';
 
-export default function ModifySubscriptionModal({ subscription }) {
+export default function ModifySubscriptionModal({ subscription, notify }) {
   // ZUSTAND:
   const setDisplaySubscriptions = useStore(
     (state) => state.setDisplaySubscriptions,
@@ -41,6 +41,7 @@ export default function ModifySubscriptionModal({ subscription }) {
     const res = await updateSubscription(subscription._id, modalData);
     setAllSubscriptions(res);
     setDisplaySubscriptions(res);
+    notify('modify');
   }
 
   // function findOneAndUpdate(modifiedSub) {

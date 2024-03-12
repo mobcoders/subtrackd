@@ -6,6 +6,7 @@ import ModifySubscriptionModal from '../../components/ModifySubscriptionModal';
 
 export default function SubscriptionItem({
   subscription,
+  notify,
 }: {
   subscription: Subscription;
 }) {
@@ -31,7 +32,7 @@ export default function SubscriptionItem({
       </Card>
 
       {/* Edit button: */}
-      <ModifySubscriptionModal subscription={subscription} />
+      <ModifySubscriptionModal subscription={subscription} notify={notify} />
     </div>
   );
 }
