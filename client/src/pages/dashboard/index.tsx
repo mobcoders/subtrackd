@@ -12,6 +12,9 @@ export default function Dashboard() {
       case 'modify':
         toast('Subscription successfully modified!');
         break;
+      case 'delete':
+        toast('Subscription successfully deleted!');
+        break;
       default:
         console.error('Unexpected toast input');
     }
