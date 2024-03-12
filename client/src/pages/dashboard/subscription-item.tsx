@@ -1,7 +1,6 @@
 import { calculateRenewalText } from '../../utils/dateUtils';
 import { Subscription } from '../../utils/types';
 import { Card, CardBody } from '@nextui-org/react';
-import { PencilSquareIcon } from '@heroicons/react/24/outline';
 import ModifySubscriptionModal from '../../components/ModifySubscriptionModal';
 
 export default function SubscriptionItem({
