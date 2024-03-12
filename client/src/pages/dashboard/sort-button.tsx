@@ -9,12 +9,11 @@ import { useStore } from '../../zustand/store';
 import { Subscription } from '../../utils/types';
 
 export default function SortButton() {
-
-  //ZUSTAND:
+  // ZUSTAND:
   const allSubscriptions = useStore((state) => state.allSubscriptions);
   const { setDisplaySubscriptions } = useStore();
 
-
+  // FUNCTIONS:
   function handleSort(key: string) {
     const sortSubs = allSubscriptions;
     sortSubs.sort((a: Subscription, b: Subscription) => {
@@ -37,9 +36,8 @@ export default function SortButton() {
     setDisplaySubscriptions(sortSubs);
   }
 
+  // RENDER:
   return (
-    // RENDER:
-    <>
     <Dropdown>
       <DropdownTrigger>
         <AdjustmentsHorizontalIcon
@@ -57,6 +55,5 @@ export default function SortButton() {
         <DropdownItem key="costDesc">Cost Descending</DropdownItem>
       </DropdownMenu>
     </Dropdown>
-    </>
   );
 }
