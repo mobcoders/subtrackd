@@ -9,7 +9,7 @@ export default function SubscriptionList({ notify }) {
   return (
     <>
       {displaySubscriptions.length > 0 && (
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 overflow-scroll h-[500px]">
           {displaySubscriptions.map((subscription) => (
             <SubscriptionItem
               key={subscription._id}

@@ -31,7 +31,7 @@ export default function SubscriptionsContainer({ notify }) {
           </div>
           <p className="font-semibold">Payment due:</p>
         </div>
-        <AddSubscriptionModal />
+        <AddSubscriptionModal notify={notify} />
       </div>
       {allSubscriptions && <SubscriptionList notify={notify} />}
     </div>

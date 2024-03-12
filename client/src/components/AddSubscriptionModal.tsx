@@ -24,7 +24,7 @@ const formState = {
   monthly: true,
 };
 
-export default function AddSubscriptionModal() {
+export default function AddSubscriptionModal({ notify }) {
   // ZUSTAND:
   const setDisplaySubscriptions = useStore(
     (state) => state.setDisplaySubscriptions,
@@ -47,6 +47,7 @@ export default function AddSubscriptionModal() {
     setAllSubscriptions(res);
     setDisplaySubscriptions(res);
     setModalData(formState);
+    notify('add');
   }
 
   function handleClose() {
