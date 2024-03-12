@@ -64,91 +64,89 @@ export default function AddSubscriptionModal() {
       </div>
       <Modal size={'3xl'} isOpen={isOpen} onClose={handleClose}>
         <ModalContent>
-          <>
-            <ModalHeader className="flex flex-col gap-1">
+          <ModalHeader className="flex flex-col gap-1">
+            Add Subscription
+          </ModalHeader>
+          <ModalBody>
+            <div className="flex w-full gap-3">
+              <Input
+                isRequired
+                type="name"
+                label="Subscription"
+                variant="bordered"
+                placeholder="Add subscription here"
+                value={modalData.name}
+                onChange={(e) =>
+                  setModalData((prevData) => ({
+                    ...prevData,
+                    name: e.target.value,
+                  }))
+                }
+              />
+              <Input
+                isRequired
+                type="cost"
+                label="Cost"
+                variant="bordered"
+                value={modalData.cost.toString()}
+                onChange={(e) =>
+                  setModalData((prevData: Subscription) => ({
+                    ...prevData,
+                    cost: e.target.value,
+                  }))
+                }
+              />
+              <Input
+                isRequired
+                type="date"
+                label="First payment"
+                variant="bordered"
+                value={modalData.billingDate}
+                onChange={(e) =>
+                  setModalData((prevData) => ({
+                    ...prevData,
+                    billingDate: e.target.value,
+                  }))
+                }
+              />
+            </div>
+            <div className="flex flex-col gap-3">
+              <RadioGroup
+                label="Select a billing cycle:"
+                defaultValue={modalData.monthly.toString()}
+                onChange={(e) =>
+                  setModalData((prevData: Subscription) => ({
+                    ...prevData,
+                    monthly: e.target.value,
+                  }))
+                }
+              >
+                <Radio value="true">Monthly</Radio>
+                <Radio value="false">Annual</Radio>
+              </RadioGroup>
+              <RadioGroup
+                label="Active status:"
+                defaultValue={modalData.active.toString()}
+                onChange={(e) =>
+                  setModalData((prevData: Subscription) => ({
+                    ...prevData,
+                    active: e.target.value,
+                  }))
+                }
+              >
+                <Radio value="true">Active</Radio>
+                <Radio value="false">Suspended</Radio>
+              </RadioGroup>
+            </div>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="danger" variant="light" onPress={onClose}>
+              Close
+            </Button>
+            <Button color="primary" onPress={handleSubmit}>
               Add Subscription
-            </ModalHeader>
-            <ModalBody>
-              <div className="flex w-full gap-3">
-                <Input
-                  isRequired
-                  type="name"
-                  label="Subscription"
-                  variant="bordered"
-                  placeholder="Add subscription here"
-                  value={modalData.name}
-                  onChange={(e) =>
-                    setModalData((prevData) => ({
-                      ...prevData,
-                      name: e.target.value,
-                    }))
-                  }
-                />
-                <Input
-                  isRequired
-                  type="cost"
-                  label="Cost"
-                  variant="bordered"
-                  value={modalData.cost.toString()}
-                  onChange={(e) =>
-                    setModalData((prevData: Subscription) => ({
-                      ...prevData,
-                      cost: e.target.value,
-                    }))
-                  }
-                />
-                <Input
-                  isRequired
-                  type="date"
-                  label="First payment"
-                  variant="bordered"
-                  value={modalData.billingDate}
-                  onChange={(e) =>
-                    setModalData((prevData) => ({
-                      ...prevData,
-                      billingDate: e.target.value,
-                    }))
-                  }
-                />
-              </div>
-              <div className="flex flex-col gap-3">
-                <RadioGroup
-                  label="Select a billing cycle:"
-                  defaultValue={modalData.monthly.toString()}
-                  onChange={(e) =>
-                    setModalData((prevData: Subscription) => ({
-                      ...prevData,
-                      monthly: e.target.value,
-                    }))
-                  }
-                >
-                  <Radio value="true">Monthly</Radio>
-                  <Radio value="false">Annual</Radio>
-                </RadioGroup>
-                <RadioGroup
-                  label="Active status:"
-                  defaultValue={modalData.active.toString()}
-                  onChange={(e) =>
-                    setModalData((prevData: Subscription) => ({
-                      ...prevData,
-                      active: e.target.value,
-                    }))
-                  }
-                >
-                  <Radio value="true">Active</Radio>
-                  <Radio value="false">Suspended</Radio>
-                </RadioGroup>
-              </div>
-            </ModalBody>
-            <ModalFooter>
-              <Button color="danger" variant="light" onPress={onClose}>
-                Close
-              </Button>
-              <Button color="primary" onPress={handleSubmit}>
-                Add Subscription
-              </Button>
-            </ModalFooter>
-          </>
+            </Button>
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </>

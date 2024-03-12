@@ -57,91 +57,87 @@ export default function ModifySubscriptionModal({
       </div>
       <Modal size={'3xl'} isOpen={isOpen} onClose={handleClose}>
         <ModalContent>
-          {(handleClose: () => void) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">
-                Edit Subscription
-              </ModalHeader>
-              <ModalBody>
-                <div className="flex w-full gap-3">
-                  <Input
-                    isRequired
-                    type="name"
-                    label="Subscription"
-                    variant="bordered"
-                    value={modalData.name}
-                    onChange={(e) =>
-                      setModalData((prevData: Subscription) => ({
-                        ...prevData,
-                        name: e.target.value,
-                      }))
-                    }
-                  />
-                  <Input
-                    type="cost"
-                    label="Cost"
-                    variant="bordered"
-                    value={modalData.cost}
-                    onChange={(e) =>
-                      setModalData((prevData: Subscription) => ({
-                        ...prevData,
-                        cost: e.target.value,
-                      }))
-                    }
-                  />
-                  <Input
-                    isRequired
-                    type="date"
-                    label="First payment"
-                    variant="bordered"
-                    value={modalData.billingDate as string}
-                    onChange={(e) =>
-                      setModalData((prevData: Subscription) => ({
-                        ...prevData,
-                        billingDate: e.target.value,
-                      }))
-                    }
-                  />
-                </div>
-                <div className="flex flex-col gap-3">
-                  <RadioGroup
-                    label="Select a billing cycle:"
-                    defaultValue={subscription.monthly.toString()}
-                    onChange={(e) =>
-                      setModalData((prevData: Subscription) => ({
-                        ...prevData,
-                        monthly: e.target.value,
-                      }))
-                    }
-                  >
-                    <Radio value="true">Monthly</Radio>
-                    <Radio value="false">Annual</Radio>
-                  </RadioGroup>
-                  <RadioGroup
-                    label="Active status:"
-                    defaultValue={subscription.active.toString()}
-                    onChange={(e) =>
-                      setModalData((prevData: Subscription) => ({
-                        ...prevData,
-                        active: e.target.value,
-                      }))
-                    }
-                  >
-                    <Radio value="true">Active</Radio>
-                    <Radio value="false">Suspended</Radio>
-                  </RadioGroup>
-                </div>
-              </ModalBody>
-              <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
-                  Close
-                </Button>
-                <Button color="primary" onPress={handleSubmit}>
-                  Update
-                </Button>
-              </ModalFooter>
-            </>
-          )}
+          <ModalHeader className="flex flex-col gap-1">
+            Edit Subscription
+          </ModalHeader>
+          <ModalBody>
+            <div className="flex w-full gap-3">
+              <Input
+                isRequired
+                type="name"
+                label="Subscription"
+                variant="bordered"
+                value={modalData.name}
+                onChange={(e) =>
+                  setModalData((prevData: Subscription) => ({
+                    ...prevData,
+                    name: e.target.value,
+                  }))
+                }
+              />
+              <Input
+                type="cost"
+                label="Cost"
+                variant="bordered"
+                value={modalData.cost}
+                onChange={(e) =>
+                  setModalData((prevData: Subscription) => ({
+                    ...prevData,
+                    cost: e.target.value,
+                  }))
+                }
+              />
+              <Input
+                isRequired
+                type="date"
+                label="First payment"
+                variant="bordered"
+                value={modalData.billingDate as string}
+                onChange={(e) =>
+                  setModalData((prevData: Subscription) => ({
+                    ...prevData,
+                    billingDate: e.target.value,
+                  }))
+                }
+              />
+            </div>
+            <div className="flex flex-col gap-3">
+              <RadioGroup
+                label="Select a billing cycle:"
+                defaultValue={subscription.monthly.toString()}
+                onChange={(e) =>
+                  setModalData((prevData: Subscription) => ({
+                    ...prevData,
+                    monthly: e.target.value,
+                  }))
+                }
+              >
+                <Radio value="true">Monthly</Radio>
+                <Radio value="false">Annual</Radio>
+              </RadioGroup>
+              <RadioGroup
+                label="Active status:"
+                defaultValue={subscription.active.toString()}
+                onChange={(e) =>
+                  setModalData((prevData: Subscription) => ({
+                    ...prevData,
+                    active: e.target.value,
+                  }))
+                }
+              >
+                <Radio value="true">Active</Radio>
+                <Radio value="false">Suspended</Radio>
+              </RadioGroup>
+            </div>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="danger" variant="light" onPress={onClose}>
+              Close
+            </Button>
+            <Button color="primary" onPress={handleSubmit}>
+              Update
+            </Button>
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
