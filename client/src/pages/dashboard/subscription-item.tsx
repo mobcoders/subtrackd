@@ -6,11 +6,8 @@ import ModifySubscriptionModal from '../../components/ModifySubscriptionModal';
 
 export default function SubscriptionItem({
   subscription,
-  setSubscriptions,
-  applySortAndFilter,
 }: {
   subscription: Subscription;
-  onEdit: () => void;
 }) {
   // FUNCTIONS:
   const renewalText = calculateRenewalText(
@@ -42,38 +39,3 @@ export default function SubscriptionItem({
     </div>
   );
 }
-
-// <Box
-//   borderWidth="1px"
-//   borderRadius="lg"
-//   overflow="hidden"
-//   p={4}
-//   m={2}
-//   boxShadow="lg"
-//   maxW="sm"
-//   display="flex"
-//   justifyContent=""
-//   alignItems="center"
-// >
-//   {/* Subscriptions Name */}
-//   <Text fontSize="xl" fontWeight="bold" flexShrink={0}>
-//     {subscription.name}
-//   </Text>
-
-//   <Spacer />
-
-//   {/* Cost and Billig date info */}
-//   <Flex direction="column" align="end">
-//     <Text fontSize="sm">
-//       ${subscription.cost} / {subscription.monthly? "Month" : "Year"}
-//     </Text>
-//     <Text fontSize="sm" as="i">
-//       {renewalText}
-//     </Text>
-//   </Flex>
-
-//   {/* edit button */}
-//   <Button onClick={onEdit} colorScheme="yellow" ml={4}>
-//     Edit
-//   </Button>
-// </Box>
