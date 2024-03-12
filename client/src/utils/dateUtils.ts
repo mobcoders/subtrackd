@@ -6,8 +6,9 @@ function calculateRenewalText(billingDateInput: Date, monthly: boolean) {
 
   // Monthly subscription calculations:
   if (monthly) {
+    let monthsToAdd = 0;
     while (isBefore(billingDate, today)) {
-      billingDate = addMonths(new Date(billingDateInput), 1);
+      billingDate = addMonths(new Date(billingDateInput), monthsToAdd++);
     }
 
     const daysLeft = differenceInDays(billingDate, today);
@@ -19,8 +20,9 @@ function calculateRenewalText(billingDateInput: Date, monthly: boolean) {
     return 'Renewal date passed';
   } else {
     // Yearly subscription calculations:
+    let yearstoAdd = 0;
     while (isBefore(billingDate, today)) {
-      billingDate = addYears(new Date(billingDateInput), 1);
+      billingDate = addYears(new Date(billingDateInput), yearstoAdd++);
     }
 
     const daysLeft = differenceInDays(billingDate, today);
