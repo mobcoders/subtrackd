@@ -27,9 +27,6 @@ export default function ModifySubscriptionModal({
   notify: (type: string) => void;
 }) {
   // ZUSTAND:
-  const setDisplaySubscriptions = useStore(
-    (state) => state.setDisplaySubscriptions,
-  );
   const setAllSubscriptions = useStore((state) => state.setAllSubscriptions);
 
   // STATES:
@@ -45,7 +42,6 @@ export default function ModifySubscriptionModal({
     onClose();
     const res = await updateSubscription(subscription._id as string, modalData);
     setAllSubscriptions(res);
-    setDisplaySubscriptions(res);
     notify('modify');
   }
 
@@ -58,7 +54,6 @@ export default function ModifySubscriptionModal({
     const res = await deleteSubscription(modalData._id as string);
     console.log('res delete: ', res);
     setAllSubscriptions(res);
-    setDisplaySubscriptions(res);
     notify('delete');
   }
 

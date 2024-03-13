@@ -2,6 +2,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar from '../../components/navbar';
 import SubscriptionsContainer from './subscriptions-container';
+import Insights from './insights';
 
 export default function Dashboard() {
   function notify(type: string) {
@@ -25,9 +26,9 @@ export default function Dashboard() {
     <div className="grid grid-cols-12 gap-4 px-0 mx-auto">
       <Navbar />
       <SubscriptionsContainer notify={notify} />
-      <div>
-        <ToastContainer />
-      </div>
+      <Insights/>
+      
+      <ToastContainer />
     </div>
   );
 }
