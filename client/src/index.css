@@ -4,10 +4,8 @@
 @tailwind components;
 @tailwind utilities;
 
-.blurredCircle {
-  height: 15rem;
-  width: 15rem;
-  background-color: #504b9a;
-  border-radius: 7.5rem;
-  filter: blur(5rem);
+:root {
+  --toastify-color-progress-light: #504b9a;
+  --toastify-font-family: 'Poppins', sans-serif;
+  --toastify-text-color-light: #404040;
 }
