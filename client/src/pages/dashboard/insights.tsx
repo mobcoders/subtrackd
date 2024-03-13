@@ -16,35 +16,27 @@ export default function Insights() {
   const dailyTotal = (parseFloat(monthlyTotal) / 30).toFixed(2);
   const yearlyTotal = (parseFloat(monthlyTotal) * 12).toFixed(2);
 
+  const insights = [
+    { title: 'Daily', amount: dailyTotal },
+    { title: 'Monthly', amount: monthlyTotal },
+    { title: 'Yearly', amount: yearlyTotal },
+  ];
+
   //RENDER
   return (
-    <Card
-      shadow="sm"
-      className="col-span-4 text-white border-solid border-2 border-pink bg-transparent"
-    >
+    <Card shadow="none" className="col-span-4 text-white bg-transparent">
       <CardHeader className="flex justify-center">
-        <p>Insights</p>
+        <p className="font-semibold">Insights</p>
       </CardHeader>
-      <Divider />
-      <CardBody className='flex flex-col items-center'>
-        <Tabs aria-label="Options">
-          <Tab key="daily" title="Daily">
-            <Card>
-              <CardBody className='text-center'>£{dailyTotal}</CardBody>
-            </Card>
-          </Tab>
-          <Tab key="monthly" title="Monthly">
-            <Card>
-              <CardBody className='text-center'>£{monthlyTotal} </CardBody>
-            </Card>
-          </Tab>
-          <Tab key="yearly" title="Yearly">
-            <Card>
-              <CardBody className='text-center'>
-              £{yearlyTotal}
-              </CardBody>
-            </Card>
-          </Tab>
+      <CardBody className="flex flex-col items-center">
+        <Tabs aria-label="Options" radius="full" color="secondary">
+          {insights.map((insight, index) => (
+            <Tab key={index} title={insight.title}>
+              <Card className="flex justify-center text-white border-solid border-2 border-pink bg-transparent w-80 h-80">
+                <p className="text-center text-5xl">£{insight.amount}</p>
+              </Card>
+            </Tab>
+          ))}
         </Tabs>
       </CardBody>
       <Divider />
