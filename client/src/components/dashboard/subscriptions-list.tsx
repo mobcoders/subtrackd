@@ -19,7 +19,9 @@ export default function SubscriptionList({ notify }) {
           ))}
         </div>
       )}
-      {displaySubscriptions.length === 0 && <p>No subscriptions yet...</p>}
+      {displaySubscriptions.length === 0 && (
+        <p className="px-3 mt-5">No subscriptions yet...</p>
+      )}
     </>
   );
 }

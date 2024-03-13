@@ -8,14 +8,13 @@ import AddSubscriptionModal from './add-subscription-modal';
 import { useAuth } from '@clerk/clerk-react';
 
 export default function SubscriptionsContainer({ notify }) {
-  const {userId, getToken} = useAuth();
-  
+  const { userId, getToken } = useAuth();
+
   // ZUSTAND:
-  const { setAllSubscriptions} = useStore();
+  const { setAllSubscriptions } = useStore();
   const allSubscriptions = useStore((state) => state.allSubscriptions);
 
   useEffect(() => {
-    
     async function fetchAllSubscriptions() {
       const token = await getToken();
       const res = await fetchSubscriptions(userId, token);

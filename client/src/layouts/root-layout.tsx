@@ -12,10 +12,14 @@ export default function RootLayout() {
   return (
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
       <div className="bg-main-pattern bg-no-repeat bg-cover bg-center h-screen md:px-36 text-white font-poppins text-lg background-effect content-center">
-        <div className='grid grid-cols-12 gap-4 px-0 mx-auto'>
-        <Navbar />
-        <Outlet />
+        <div className="grid grid-cols-12 gap-4 px-0 mx-auto">
+          <Navbar />
+          <Outlet />
         </div>
+        <footer className="text-xs text-pink">
+          <p>A MOBCODERS creation.</p>
+          <p>© 2024 Subtrackd. All rights reserved.</p>
+        </footer>
       </div>
     </ClerkProvider>
   );
