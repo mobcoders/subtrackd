@@ -49,6 +49,21 @@ export default function IndexPage() {
           className="p-0 m-0"
         />
         <div className="flex flex-col gap-5 w-80 justify-center items-center">
+          <div className="flex gap-3">
+            <Link to="/sign-in">
+              <Button className="bg-pink text-white" size="lg">
+                Sign in
+              </Button>
+            </Link>
+            <Link to="/sign-up">
+              <Button
+                className="bg-transparent text-white border-solid border-2 border-pink hover:bg-pink"
+                size="lg"
+              >
+                Join today
+              </Button>
+            </Link>
+          </div>
           {info.map((information, index) => (
             <Card className="bg-transparent text-white border-solid border-2 border-pink">
               <CardBody className="text-center">
@@ -59,11 +74,6 @@ export default function IndexPage() {
               </CardBody>
             </Card>
           ))}
-          <Link to="/sign-up">
-            <Button className="bg-pink text-white" size="lg">
-              Join today
-            </Button>
-          </Link>
         </div>
       </div>
     </div>

@@ -15,21 +15,6 @@ export default function Navbar() {
           className="rounded-none cursor-pointer"
         />
       </Link>
-      <div>
-        <Link to="/sign-in">
-          <Button className="mt-6 mx-3 bg-pink text-white" size="lg">
-            Sign in
-          </Button>
-        </Link>
-        <Link to="/sign-up">
-          <Button
-            className="mt-6 mx-3 bg-transparent border-solid border-2 border-pink text-white hover:bg-pink"
-            size="lg"
-          >
-            Sign up
-          </Button>
-        </Link>
-      </div>
       <SignedIn>
         <div className="flex gap-3">
           <Notifications />
