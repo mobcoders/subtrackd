@@ -1,10 +1,25 @@
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Navbar from '../../components/navbar';
-import SubscriptionsContainer from './subscriptions-container';
-import Insights from './insights';
+import SubscriptionsContainer from '../components/dashboard/subscriptions-container';
+import Insights from '../components/dashboard/insights';
+import * as React from 'react'
+import { useAuth } from "@clerk/clerk-react"
+import { useNavigate } from "react-router-dom"
 
-export default function Dashboard() {
+export default function DashboardPage() {
+  const { userId, isLoaded } = useAuth()
+  const navigate = useNavigate()
+
+  console.log('test', userId)
+
+  React.useEffect(() => {
+    if (!userId) {
+      navigate("/sign-in")
+    }
+  }, [])
+
+  if (!isLoaded) return "Loading..."
+
   function notify(type: string) {
     switch (type) {
       case 'add':
@@ -23,11 +38,10 @@ export default function Dashboard() {
 
   // RENDER:
   return (
-    <div className="grid grid-cols-12 gap-4 px-0 mx-auto">
-      <Navbar />
+    <>
       <SubscriptionsContainer notify={notify} />
-      <Insights />
+      <Insights/>
       <ToastContainer />
-    </div>
+    </>
   );
 }
