@@ -8,14 +8,13 @@ import AddSubscriptionModal from './add-subscription-modal';
 
 export default function SubscriptionsContainer({ notify }) {
   // ZUSTAND:
-  const { setAllSubscriptions, setDisplaySubscriptions } = useStore();
+  const { setAllSubscriptions} = useStore();
   const allSubscriptions = useStore((state) => state.allSubscriptions);
 
   useEffect(() => {
     async function fetchAllSubscriptions() {
       const res = await fetchSubscriptions();
       setAllSubscriptions(res);
-      setDisplaySubscriptions(res);
     }
     fetchAllSubscriptions();
   }, []);

@@ -30,11 +30,7 @@ export default function AddSubscriptionModal({
   notify: (type: string) => void;
 }) {
   // ZUSTAND:
-  const setDisplaySubscriptions = useStore(
-    (state) => state.setDisplaySubscriptions,
-  );
   const setAllSubscriptions = useStore((state) => state.setAllSubscriptions);
-  // const allSubscriptions = useStore((state) => state.allSubscriptions);
 
   // STATES:
   const [modalData, setModalData] = useState(formState);
@@ -49,7 +45,6 @@ export default function AddSubscriptionModal({
     onClose();
     const res = await addSubscription(modalData);
     setAllSubscriptions(res);
-    setDisplaySubscriptions(res);
     setModalData(formState);
     notify('add');
   }

@@ -9,7 +9,10 @@ interface State {
   setAllSubscriptions: (subscriptions: Subscription[]) => void;
   displaySubscriptions: Subscription[];
   setDisplaySubscriptions: (subscriptions: Subscription[]) => void;
+  monthlyTotal: number;
 }
+
+
 
 // STORE:
 export const useStore = create<State>((set) => ({
@@ -20,6 +23,11 @@ export const useStore = create<State>((set) => ({
   setAllSubscriptions: (newSubscriptions) =>
     set(() => ({
       allSubscriptions: newSubscriptions,
+      displaySubscriptions: newSubscriptions,
+      //calculate monthly total: if monthly, add cost to accumulator, else, add cost/12 as its yearly
+      monthlyTotal: newSubscriptions.reduce((acc, cur) => {
+        return cur.monthly ? acc + cur.cost : acc + cur.cost/12
+      },0)
     })),
 
   displaySubscriptions: [],
@@ -27,4 +35,7 @@ export const useStore = create<State>((set) => ({
     set(() => ({
       displaySubscriptions: subscriptions,
     })),
+  
+  monthlyTotal: 0,
+  
 }));
