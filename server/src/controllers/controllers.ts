@@ -27,7 +27,7 @@ async function addSub(req: Request, res: Response): Promise<void> {
 }
 
 async function editSub(req: Request, res: Response): Promise<void> {
-  const { id } = req.params;
+  const { id,userid } = req.params;
   console.log(`Updating subscription with ID: ${id}`); // Debugging log
   try {
     const subscription = await Subscription.findByIdAndUpdate(id, req.body, {
@@ -36,7 +36,7 @@ async function editSub(req: Request, res: Response): Promise<void> {
     if (!subscription) {
       res.status(404).send('Subscription not found');
     } else {
-      res.send(await Subscription.find({}));
+      res.send(await Subscription.find({userid:userid}));
     }
   } catch (error) {
     console.error('Error updating subscription:', error);
@@ -45,15 +45,15 @@ async function editSub(req: Request, res: Response): Promise<void> {
 }
 
 async function deleteSub(req: Request, res: Response): Promise<void> {
+  const { id, userid } = req.params;
+
   try {
-    const deletedSubscription = await Subscription.findByIdAndDelete(
-      req.params.id
-    );
+    const deletedSubscription = await Subscription.findByIdAndDelete({_id:id});
     if (!deletedSubscription) {
       res.status(404).send('Subscription not found');
     } else {
       // const remainingSubscriptions = await Subscription.find({});
-      res.send(await Subscription.find({}));
+      res.send(await Subscription.find({userid:userid}));
     }
   } catch (error) {
     res.status(500).send('Error deleting subscription');

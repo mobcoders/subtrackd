@@ -33,7 +33,7 @@ export default function ModifySubscriptionModal({
   // STATES:
   const [modalData, setModalData] = useState(subscription);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const {getToken} = useAuth();
+  const {getToken, userId} = useAuth();
 
   // FUNCTIONS:
   const handleOpen = () => {
@@ -43,7 +43,7 @@ export default function ModifySubscriptionModal({
   async function handleSubmit() {
     onClose();
     const token = await getToken();
-    const res = await updateSubscription(subscription._id as string, modalData, token!);
+    const res = await updateSubscription(subscription._id as string, userId!, modalData, token!);
     setAllSubscriptions(res);
     notify('modify');
   }
@@ -55,8 +55,7 @@ export default function ModifySubscriptionModal({
   async function handleDelete() {
     onClose();
     const token = await getToken();
-    const res = await deleteSubscription(modalData._id as string, token!);
-    console.log('res delete: ', res);
+    const res = await deleteSubscription(modalData._id as string, userId!, token!);
     setAllSubscriptions(res);
     notify('delete');
   }

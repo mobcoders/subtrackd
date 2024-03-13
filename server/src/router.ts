@@ -9,7 +9,7 @@ const config = {
 
 router.get('/subscriptions/:userid', ClerkExpressRequireAuth(), getSubs);
 router.post('/subscriptions/:userid',ClerkExpressRequireAuth(), addSub);
-router.put('/subscriptions/:id',ClerkExpressRequireAuth() ,editSub)
-router.delete('/subscriptions/:id',ClerkExpressRequireAuth(), deleteSub)
+router.put('/subscriptions/:id/:userid',ClerkExpressRequireAuth() ,editSub)
+router.delete('/subscriptions/:id/:userid',ClerkExpressRequireAuth(), deleteSub)
 router.get('/notifications/:userid',ClerkExpressRequireAuth() ,getNotification)
 

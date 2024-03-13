@@ -33,10 +33,11 @@ async function addSubscription(
 
 async function updateSubscription(
   id: string,
+  userId:string,
   subscriptionData: Subscription,
   token: string,
 ) {
-  const response = await fetch(`${BASE_URL}/subscriptions/${id}`, {
+  const response = await fetch(`${BASE_URL}/subscriptions/${id}/${userId}`, {
     method: 'PUT',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -48,8 +49,8 @@ async function updateSubscription(
   return await response.json();
 }
 
-async function deleteSubscription(id: string, token: string) {
-  const response = await fetch(`${BASE_URL}/subscriptions/${id}`, {
+async function deleteSubscription(id: string, userId: string, token: string) {
+  const response = await fetch(`${BASE_URL}/subscriptions/${id}/${userId}`, {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`,
