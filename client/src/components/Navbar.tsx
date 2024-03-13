@@ -1,6 +1,7 @@
 import { Image } from '@nextui-org/react';
 import Notifications from './notifications';
 
+// RENDER:
 export default function Navbar() {
   return (
     <div className="col-span-12 flex justify-between my-12">

@@ -10,8 +10,10 @@ import {
 } from '@nextui-org/react';
 
 export default function Notifications() {
+  // STATES:
   const [notifications, setNotifications] = useState<Notification[]>([]);
 
+  // USE EFFECTS:
   useEffect(() => {
     const loadNotifications = async () => {
       try {
@@ -25,6 +27,7 @@ export default function Notifications() {
     loadNotifications();
   }, []);
 
+  // RENDER:
   return (
     <Popover placement="bottom" showArrow={true}>
       <PopoverTrigger>
