@@ -12,7 +12,7 @@ import {
   Radio,
 } from '@nextui-org/react';
 import { PlusCircleIcon } from '@heroicons/react/24/outline';
-import { addSubscription } from '../../services/apiService';
+import { addSubscription } from '../../services/api-service';
 import { useStore } from '../../zustand/store';
 import { Subscription } from '../../utils/types';
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchNotifications } from '../services/apiService';
+import { fetchNotifications } from '../services/api-service';
 import { Notification } from '../utils/types';
 import { BellAlertIcon } from '@heroicons/react/24/outline';
 import {

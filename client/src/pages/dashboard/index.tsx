@@ -1,6 +1,6 @@
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Navbar from '../../components/navbar';
+import Navbar from '../../components/nav';
 import SubscriptionsContainer from './subscriptions-container';
 
 export default function Dashboard() {

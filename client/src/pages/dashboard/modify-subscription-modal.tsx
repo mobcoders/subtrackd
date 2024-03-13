@@ -15,7 +15,7 @@ import { PencilSquareIcon } from '@heroicons/react/24/outline';
 import {
   updateSubscription,
   deleteSubscription,
-} from '../../services/apiService';
+} from '../../services/api-service';
 import { useStore } from '../../zustand/store';
 import { Subscription } from '../../utils/types';
 

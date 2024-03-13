@@ -1,5 +1,5 @@
 import { Image } from '@nextui-org/react';
-import Notifications from './notifications';
+import Notifications from './notification';
 
 // RENDER:
 export default function Navbar() {

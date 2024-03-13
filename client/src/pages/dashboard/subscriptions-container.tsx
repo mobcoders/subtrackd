@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { fetchSubscriptions } from '../../services/apiService';
+import { fetchSubscriptions } from '../../services/api-service';
 import FilterButton from './filter-button';
 import SortButton from './sort-button';
 import SubscriptionList from './subscriptions-list';
