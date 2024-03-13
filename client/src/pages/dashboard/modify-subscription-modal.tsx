@@ -11,29 +11,29 @@ import {
   RadioGroup,
   Radio,
 } from '@nextui-org/react';
-import { PlusCircleIcon } from '@heroicons/react/24/outline';
-import { addSubscription } from '../services/apiService';
-import { useStore } from '../zustand/store';
-import { Subscription } from '../utils/types';
+import { PencilSquareIcon } from '@heroicons/react/24/outline';
+import {
+  updateSubscription,
+  deleteSubscription,
+} from '../../services/apiService';
+import { useStore } from '../../zustand/store';
+import { Subscription } from '../../utils/types';
 
-const formState = {
-  name: '',
-  cost: 0,
-  billingDate: new Date(Date.now()).toISOString().slice(0, 10),
-  active: true,
-  monthly: true,
-};
-
-export default function AddSubscriptionModal({ notify }) {
+export default function ModifySubscriptionModal({
+  subscription,
+  notify,
+}: {
+  subscription: Subscription;
+  notify: (type: string) => void;
+}) {
   // ZUSTAND:
   const setDisplaySubscriptions = useStore(
     (state) => state.setDisplaySubscriptions,
   );
   const setAllSubscriptions = useStore((state) => state.setAllSubscriptions);
-  // const allSubscriptions = useStore((state) => state.allSubscriptions);
 
   // STATES:
-  const [modalData, setModalData] = useState(formState);
+  const [modalData, setModalData] = useState(subscription);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   // FUNCTIONS:
@@ -43,34 +43,41 @@ export default function AddSubscriptionModal({ notify }) {
 
   async function handleSubmit() {
     onClose();
-    const res = await addSubscription(modalData);
+    const res = await updateSubscription(subscription._id as string, modalData);
     setAllSubscriptions(res);
     setDisplaySubscriptions(res);
-    setModalData(formState);
-    notify('add');
+    notify('modify');
   }
 
   function handleClose() {
     onClose();
-    setModalData(formState);
+  }
+
+  async function handleDelete() {
+    onClose();
+    const res = await deleteSubscription(modalData._id as string);
+    console.log('res delete: ', res);
+    setAllSubscriptions(res);
+    setDisplaySubscriptions(res);
+    notify('delete');
   }
 
   // RENDER:
   return (
     <>
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-col justify-center">
         <Button
           isIconOnly
           className="bg-transparent"
           onPress={() => handleOpen()}
         >
-          <PlusCircleIcon className="stroke-1 stroke-white" />
+          <PencilSquareIcon className="stroke-1 stroke-white" width={30} />
         </Button>
       </div>
       <Modal size={'3xl'} isOpen={isOpen} onClose={handleClose}>
         <ModalContent>
           <ModalHeader className="flex flex-col gap-1">
-            Add Subscription
+            Edit Subscription
           </ModalHeader>
           <ModalBody>
             <div className="flex w-full gap-3">
@@ -79,21 +86,19 @@ export default function AddSubscriptionModal({ notify }) {
                 type="name"
                 label="Subscription"
                 variant="bordered"
-                placeholder="Add subscription here"
                 value={modalData.name}
                 onChange={(e) =>
-                  setModalData((prevData) => ({
+                  setModalData((prevData: Subscription) => ({
                     ...prevData,
                     name: e.target.value,
                   }))
                 }
               />
               <Input
-                isRequired
                 type="cost"
                 label="Cost"
                 variant="bordered"
-                value={modalData.cost.toString()}
+                value={modalData.cost}
                 onChange={(e) =>
                   setModalData((prevData: Subscription) => ({
                     ...prevData,
@@ -106,9 +111,9 @@ export default function AddSubscriptionModal({ notify }) {
                 type="date"
                 label="First payment"
                 variant="bordered"
-                value={modalData.billingDate}
+                value={modalData.billingDate as string}
                 onChange={(e) =>
-                  setModalData((prevData) => ({
+                  setModalData((prevData: Subscription) => ({
                     ...prevData,
                     billingDate: e.target.value,
                   }))
@@ -118,7 +123,7 @@ export default function AddSubscriptionModal({ notify }) {
             <div className="flex flex-col gap-3">
               <RadioGroup
                 label="Select a billing cycle:"
-                defaultValue={modalData.monthly.toString()}
+                defaultValue={subscription.monthly.toString()}
                 onChange={(e) =>
                   setModalData((prevData: Subscription) => ({
                     ...prevData,
@@ -131,7 +136,7 @@ export default function AddSubscriptionModal({ notify }) {
               </RadioGroup>
               <RadioGroup
                 label="Active status:"
-                defaultValue={modalData.active.toString()}
+                defaultValue={subscription.active.toString()}
                 onChange={(e) =>
                   setModalData((prevData: Subscription) => ({
                     ...prevData,
@@ -145,11 +150,11 @@ export default function AddSubscriptionModal({ notify }) {
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button color="danger" variant="light" onPress={onClose}>
-              Close
+            <Button color="danger" variant="light" onPress={handleDelete}>
+              Delete
             </Button>
             <Button color="primary" onPress={handleSubmit}>
-              Add Subscription
+              Update
             </Button>
           </ModalFooter>
         </ModalContent>

@@ -1,7 +1,7 @@
-import { calculateRenewalText } from '../../utils/dateUtils';
+import { calculateRenewalText } from '../../utils/date-utils';
 import { Subscription } from '../../utils/types';
 import { Card, CardBody } from '@nextui-org/react';
-import ModifySubscriptionModal from '../../components/ModifySubscriptionModal';
+import ModifySubscriptionModal from './modify-subscription-modal';
 
 export default function SubscriptionItem({
   subscription,

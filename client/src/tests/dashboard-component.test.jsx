@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import { ChakraProvider } from '@chakra-ui/react';
-import { server } from '../../../mocks/server';
+import { server } from './mocks/server';
 import { afterAll, afterEach, beforeAll, describe, it } from 'vitest';
 import DashboardComponent from './DashboardComponent';
 import { render, screen, waitFor } from '@testing-library/react';

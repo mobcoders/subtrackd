@@ -22,7 +22,7 @@ export default {
         poppins: ['Poppins', 'sans-serif'],
       },
       backgroundImage: {
-        'main-pattern': "url('../public/subtrackd-background.svg')",
+        'main-pattern': "url('/subtrackd-background.svg')",
       },
     },
   },

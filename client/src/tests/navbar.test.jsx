@@ -2,7 +2,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { ChakraProvider } from '@chakra-ui/react';
-import Navbar from '../Navbar';
+import Navbar from '../components/Navbar';
 
 const mockSetSortCriteria = vi.fn();
 const mockSetFilterCriteria = vi.fn();

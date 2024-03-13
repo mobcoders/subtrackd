@@ -1,5 +1,5 @@
 import { Image } from '@nextui-org/react';
-import Notifications from './Notifications';
+import Notifications from './notifications';
 
 export default function Navbar() {
   return (
@@ -10,7 +10,7 @@ export default function Navbar() {
         src="/subtrackd-logo.svg"
         className="rounded-none"
       />
-      <Notifications/>
+      <Notifications />
     </div>
   );
 }
