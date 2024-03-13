@@ -27,7 +27,7 @@ function calculateRenewalText(billingDateInput: Date, monthly: boolean) {
 
     const daysLeft = differenceInDays(billingDate, today);
 
-    if (daysLeft > 1) return `... in ${daysLeft}`;
+    if (daysLeft > 1) return `${daysLeft} days`;
     if (daysLeft === 1) return 'Tomorrow';
     if (daysLeft === 0) return 'Today';
 

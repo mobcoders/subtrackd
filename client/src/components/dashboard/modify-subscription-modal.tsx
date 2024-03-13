@@ -18,6 +18,7 @@ import {
 } from '../../services/api-service';
 import { useStore } from '../../zustand/store';
 import { Subscription } from '../../utils/types';
+import { useAuth } from '@clerk/clerk-react';
 
 export default function ModifySubscriptionModal({
   subscription,
@@ -32,6 +33,7 @@ export default function ModifySubscriptionModal({
   // STATES:
   const [modalData, setModalData] = useState(subscription);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {getToken} = useAuth();
 
   // FUNCTIONS:
   const handleOpen = () => {
@@ -40,7 +42,8 @@ export default function ModifySubscriptionModal({
 
   async function handleSubmit() {
     onClose();
-    const res = await updateSubscription(subscription._id as string, modalData);
+    const token = await getToken();
+    const res = await updateSubscription(subscription._id as string, modalData, token!);
     setAllSubscriptions(res);
     notify('modify');
   }
@@ -51,7 +54,8 @@ export default function ModifySubscriptionModal({
 
   async function handleDelete() {
     onClose();
-    const res = await deleteSubscription(modalData._id as string);
+    const token = await getToken();
+    const res = await deleteSubscription(modalData._id as string, token!);
     console.log('res delete: ', res);
     setAllSubscriptions(res);
     notify('delete');

@@ -8,16 +8,19 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@nextui-org/react';
+import { useAuth } from '@clerk/clerk-react';
 
 export default function Notifications() {
   // STATES:
   const [notifications, setNotifications] = useState<Notification[]>([]);
+  const {userId, getToken} = useAuth();
 
   // USE EFFECTS:
   useEffect(() => {
     const loadNotifications = async () => {
       try {
-        const notifications = await fetchNotifications();
+        const token = await getToken();
+        const notifications = await fetchNotifications(userId!, token!);
         setNotifications(notifications);
       } catch (error) {
         console.error('Error loading notifications:', error);

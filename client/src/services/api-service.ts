@@ -2,42 +2,71 @@ import { Subscription } from '../utils/types';
 
 const BASE_URL = 'http://localhost:3000';
 
-async function fetchSubscriptions() {
-  const response = await fetch(`${BASE_URL}/subscriptions`);
+async function fetchSubscriptions(userId: string, token: string) {
+  const response = await fetch(`${BASE_URL}/subscriptions/${userId}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
   if (!response.ok) throw new Error('Failed to fetch subscriptions');
   return await response.json();
 }
 
-async function addSubscription(subscriptionData: Subscription) {
-  const response = await fetch(`${BASE_URL}/subscriptions`, {
+async function addSubscription(
+  subscriptionData: Subscription,
+  userId: string,
+  token: string,
+) {
+  const response = await fetch(`${BASE_URL}/subscriptions/${userId}`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify(subscriptionData),
   });
   if (!response.ok) throw new Error('Failed to add subscription');
   return await response.json();
 }
 
-async function updateSubscription(id: string, subscriptionData: Subscription) {
+async function updateSubscription(
+  id: string,
+  subscriptionData: Subscription,
+  token: string,
+) {
   const response = await fetch(`${BASE_URL}/subscriptions/${id}`, {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify(subscriptionData),
   });
   if (!response.ok) throw new Error('Failed to update subscription');
   return await response.json();
 }
 
-async function deleteSubscription(id: string) {
+async function deleteSubscription(id: string, token: string) {
   const response = await fetch(`${BASE_URL}/subscriptions/${id}`, {
     method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
   });
   if (!response.ok) throw new Error('Failed to delete subscription');
   return await response.json();
 }
 
-async function fetchNotifications() {
-  const response = await fetch(`${BASE_URL}/notifications`);
+async function fetchNotifications(userId: string, token: string) {
+  const response = await fetch(`${BASE_URL}/notifications/${userId}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
   if (!response.ok) throw new Error('Failed to fetch notifications');
   return await response.json();
 }

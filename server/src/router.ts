@@ -1,10 +1,15 @@
 import express from 'express';
 export const router = express.Router();
 import { getSubs, addSub, editSub, deleteSub, getNotification } from './controllers/controllers';
+import { ClerkExpressRequireAuth } from '@clerk/clerk-sdk-node'
 
-router.get('/subscriptions', getSubs);
-router.post('/subscriptions', addSub);
-router.put('/subscriptions/:id', editSub)
-router.delete('/subscriptions/:id', deleteSub)
-router.get('/notifications', getNotification)
+const config = {
+  clerkSecretKey: process.env.CLERK_SECRET_KEY,
+}
+
+router.get('/subscriptions/:userid', ClerkExpressRequireAuth(), getSubs);
+router.post('/subscriptions/:userid',ClerkExpressRequireAuth(), addSub);
+router.put('/subscriptions/:id',ClerkExpressRequireAuth() ,editSub)
+router.delete('/subscriptions/:id',ClerkExpressRequireAuth(), deleteSub)
+router.get('/notifications/:userid',ClerkExpressRequireAuth() ,getNotification)
 

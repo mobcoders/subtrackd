@@ -13,7 +13,8 @@ async function checkSubscriptionsAndNotify() {
 
     if (differenceInCalendarDays(billingDate, tomorrow) === 0) {
       const message: string = `${subscription.name}`;
-      await addNotification(message);
+      const userid: string = subscription.userid;
+      await addNotification(message,userid);
     }
   });
 }

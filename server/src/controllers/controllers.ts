@@ -4,7 +4,8 @@ import { INotification, Notification } from '../models/notification';
 
 async function getSubs(req: Request, res: Response): Promise<void> {
   try {
-    const subscriptions = await Subscription.find({});
+    const user = req.params.userid;
+    const subscriptions = await Subscription.find({userid:user});
     res.send(subscriptions);
   } catch (error) {
     console.error('Error fetching subscriptions:', error);
@@ -15,8 +16,10 @@ async function getSubs(req: Request, res: Response): Promise<void> {
 async function addSub(req: Request, res: Response): Promise<void> {
   try {
     const subscription = new Subscription(req.body);
+    const user = req.params.userid;
+    subscription.userid = user
     await subscription.save();
-    res.send(await Subscription.find({}));
+    res.send(await Subscription.find({userid:user}));
   } catch (error) {
     console.error('Error adding subscription:', error);
     res.status(500).send('An error occurred while adding the subscription.');
@@ -59,8 +62,9 @@ async function deleteSub(req: Request, res: Response): Promise<void> {
 
 async function getNotification(req: Request, res: Response): Promise<void> {
   try {
+    const user = req.params.userid;
     const notifications: INotification[] = await Notification.find({
-      read: false,
+      read: false, userid: user,
     }).sort({
       date: -1,
     });

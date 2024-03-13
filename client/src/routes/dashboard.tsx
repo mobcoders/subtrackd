@@ -10,8 +10,6 @@ export default function DashboardPage() {
   const { userId, isLoaded } = useAuth()
   const navigate = useNavigate()
 
-  console.log('test', userId)
-
   React.useEffect(() => {
     if (!userId) {
       navigate("/sign-in")

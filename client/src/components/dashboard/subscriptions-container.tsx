@@ -5,15 +5,20 @@ import SortButton from './sort-button';
 import SubscriptionList from './subscriptions-list';
 import { useStore } from '../../zustand/store';
 import AddSubscriptionModal from './add-subscription-modal';
+import { useAuth } from '@clerk/clerk-react';
 
 export default function SubscriptionsContainer({ notify }) {
+  const {userId, getToken} = useAuth();
+  
   // ZUSTAND:
   const { setAllSubscriptions} = useStore();
   const allSubscriptions = useStore((state) => state.allSubscriptions);
 
   useEffect(() => {
+    
     async function fetchAllSubscriptions() {
-      const res = await fetchSubscriptions();
+      const token = await getToken();
+      const res = await fetchSubscriptions(userId, token);
       setAllSubscriptions(res);
     }
     fetchAllSubscriptions();
