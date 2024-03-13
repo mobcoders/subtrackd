@@ -21,9 +21,6 @@ export default function Navbar() {
           <UserButton afterSignOutUrl="/sign-in" />
         </div>
       </SignedIn>
-      <SignedOut>
-        <Link to="/sign-in"><Button>Sign in</Button></Link>
-      </SignedOut>
     </div>
   );
 }
