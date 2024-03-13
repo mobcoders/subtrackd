@@ -1,14 +1,14 @@
-import { Outlet } from 'react-router-dom';
 import { ClerkProvider } from '@clerk/clerk-react';
 import Navbar from '../components/navbar';
+import { Outlet } from 'react-router-dom';
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
-
 if (!PUBLISHABLE_KEY) {
   throw new Error('Missing Publishable Key');
 }
 
 export default function RootLayout() {
+  // RENDER:
   return (
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
       <div className="flex flex-col min-h-screen bg-main-pattern bg-no-repeat bg-cover bg-center md:px-36 text-white font-poppins text-lg">

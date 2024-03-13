@@ -14,6 +14,7 @@ export default function SubscriptionsContainer({ notify }) {
   const { setAllSubscriptions } = useStore();
   const allSubscriptions = useStore((state) => state.allSubscriptions);
 
+  // USE EFFECT:
   useEffect(() => {
     async function fetchAllSubscriptions() {
       const token = await getToken();
@@ -23,9 +24,9 @@ export default function SubscriptionsContainer({ notify }) {
     fetchAllSubscriptions();
   }, []);
 
-  //RENDER
+  // RENDER:
   return (
-    <div className="col-span-8">
+    <div className="col-span-8 mt-12">
       <div className="flex flex-row gap-3 w-full">
         <div className="flex flex-row justify-between w-full px-3 mb-3 items-end">
           <div className="flex flex-row justify-start gap-3">

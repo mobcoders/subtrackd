@@ -16,8 +16,6 @@ export default function SortButton() {
     (state) => state.setDisplaySubscriptions,
   );
 
-  // const { setDisplaySubscriptions } = useStore();
-
   // FUNCTIONS:
   async function handleSort(key: string) {
     const sortSubs = await allSubscriptions;

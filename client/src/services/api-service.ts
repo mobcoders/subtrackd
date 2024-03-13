@@ -2,6 +2,8 @@ import { Subscription } from '../utils/types';
 
 const BASE_URL = 'http://localhost:3000';
 
+// Send JWT token with all requests for auth middleware
+
 async function fetchSubscriptions(userId: string, token: string) {
   const response = await fetch(`${BASE_URL}/subscriptions/${userId}`, {
     method: 'GET',
@@ -33,7 +35,7 @@ async function addSubscription(
 
 async function updateSubscription(
   id: string,
-  userId:string,
+  userId: string,
   subscriptionData: Subscription,
   token: string,
 ) {
@@ -54,7 +56,7 @@ async function deleteSubscription(id: string, userId: string, token: string) {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`,
-    }
+    },
   });
   if (!response.ok) throw new Error('Failed to delete subscription');
   return await response.json();

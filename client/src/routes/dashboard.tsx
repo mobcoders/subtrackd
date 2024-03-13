@@ -1,23 +1,23 @@
+import { useAuth } from '@clerk/clerk-react';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SubscriptionsContainer from '../components/dashboard/subscriptions-container';
 import Insights from '../components/dashboard/insights';
-import * as React from 'react'
-import { useAuth } from "@clerk/clerk-react"
-import { useNavigate } from "react-router-dom"
 
 export default function DashboardPage() {
-  const { userId, isLoaded } = useAuth()
-  const navigate = useNavigate()
+  const { userId, isLoaded } = useAuth();
+  const navigate = useNavigate();
 
-  React.useEffect(() => {
+  // USE EFFECT:
+  useEffect(() => {
     if (!userId) {
-      navigate("/sign-in")
+      navigate('/sign-in');
     }
-  }, [])
+  }, []);
 
-  if (!isLoaded) return "Loading..."
-
+  // FUNCTIONS:
   function notify(type: string) {
     switch (type) {
       case 'add':
@@ -35,10 +35,12 @@ export default function DashboardPage() {
   }
 
   // RENDER:
+  if (!isLoaded) return 'Loading...';
+
   return (
     <>
       <SubscriptionsContainer notify={notify} />
-      <Insights/>
+      <Insights />
       <ToastContainer />
     </>
   );

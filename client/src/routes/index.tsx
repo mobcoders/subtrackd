@@ -40,7 +40,6 @@ export default function IndexPage() {
           The ultimate subscription management tool.
         </p>
       </div>
-
       <div className="flex gap-10 mb-5">
         <Image
           width={600}

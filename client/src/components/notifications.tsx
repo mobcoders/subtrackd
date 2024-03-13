@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { useAuth } from '@clerk/clerk-react';
 import { fetchNotifications } from '../services/api-service';
 import { Notification } from '../utils/types';
 import { BellAlertIcon } from '@heroicons/react/24/outline';
@@ -8,12 +9,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@nextui-org/react';
-import { useAuth } from '@clerk/clerk-react';
 
 export default function Notifications() {
   // STATES:
   const [notifications, setNotifications] = useState<Notification[]>([]);
-  const {userId, getToken} = useAuth();
+  const { userId, getToken } = useAuth();
 
   // USE EFFECTS:
   useEffect(() => {
@@ -26,7 +26,6 @@ export default function Notifications() {
         console.error('Error loading notifications:', error);
       }
     };
-
     loadNotifications();
   }, []);
 

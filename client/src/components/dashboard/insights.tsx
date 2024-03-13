@@ -9,22 +9,21 @@ import {
 import { useStore } from '../../zustand/store';
 
 export default function Insights() {
-  //ZUSTAND
+  // ZUSTAND:
   const monthlyTotal = useStore((state) => state.monthlyTotal).toFixed(2);
 
-  //Calculations
+  // VARIABLES:
   const dailyTotal = (parseFloat(monthlyTotal) / 30).toFixed(2);
   const yearlyTotal = (parseFloat(monthlyTotal) * 12).toFixed(2);
-
   const insights = [
     { title: 'Daily', amount: dailyTotal },
     { title: 'Monthly', amount: monthlyTotal },
     { title: 'Yearly', amount: yearlyTotal },
   ];
 
-  //RENDER
+  // RENDER:
   return (
-    <Card shadow="none" className="col-span-4 text-white bg-transparent">
+    <Card shadow="none" className="col-span-4 text-white bg-transparent mt-12">
       <CardHeader className="flex justify-center">
         <p className="font-semibold">Insights</p>
       </CardHeader>

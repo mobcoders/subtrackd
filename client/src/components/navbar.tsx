@@ -1,10 +1,10 @@
-import { Button, Image } from '@nextui-org/react';
-import Notifications from './notifications';
-import { SignedIn, SignedOut, UserButton } from '@clerk/clerk-react';
 import { Link } from 'react-router-dom';
+import { Image } from '@nextui-org/react';
+import { SignedIn, UserButton } from '@clerk/clerk-react';
+import Notifications from './notifications';
 
-// RENDER:
 export default function Navbar() {
+  // RENDER:
   return (
     <div className="col-span-12 flex justify-between mt-12">
       <Link to="/">
