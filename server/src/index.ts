@@ -3,7 +3,10 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import { router } from './router';
-import { job,checkSubscriptionsAndNotify } from './scheduledTasks/subscriptionChecker';
+import {
+  job,
+  checkSubscriptionsAndNotify,
+} from './scheduledTasks/subscriptionChecker';
 const app = express();
 
 // Middleware set-up:
@@ -25,7 +28,7 @@ checkSubscriptionsAndNotify();
 job.start();
 
 // Server listening:
-const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
