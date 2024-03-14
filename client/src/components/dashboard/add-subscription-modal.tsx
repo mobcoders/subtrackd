@@ -15,6 +15,7 @@ import { PlusCircleIcon } from '@heroicons/react/24/outline';
 import { addSubscription } from '../../services/api-service';
 import { useStore } from '../../zustand/store';
 import { useAuth } from '@clerk/clerk-react';
+import { Subscription } from '../../utils/types';
 
 const formState = {
   name: '',
@@ -47,7 +48,7 @@ export default function AddSubscriptionModal({
     onClose();
     const token = await getToken();
     const res = await addSubscription(modalData, userId!, token!);
-    setAllSubscriptions(res);
+    setAllSubscriptions(res as Subscription[]);
     setModalData(formState);
     notify('add');
   }

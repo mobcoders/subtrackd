@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, SetStateAction } from 'react';
 import { useAuth } from '@clerk/clerk-react';
 import { fetchNotifications } from '../services/api-service';
 import { Notification } from '../utils/types';
@@ -21,7 +21,7 @@ export default function Notifications() {
       try {
         const token = await getToken();
         const notifications = await fetchNotifications(userId!, token!);
-        setNotifications(notifications);
+        setNotifications(notifications as SetStateAction<Notification[]>);
       } catch (error) {
         console.error('Error loading notifications:', error);
       }

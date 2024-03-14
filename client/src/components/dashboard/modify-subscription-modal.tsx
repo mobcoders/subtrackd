@@ -49,7 +49,7 @@ export default function ModifySubscriptionModal({
       modalData,
       token!,
     );
-    setAllSubscriptions(res);
+    setAllSubscriptions(res as Subscription[]);
     notify('modify');
   }
 
@@ -65,7 +65,7 @@ export default function ModifySubscriptionModal({
       userId!,
       token!,
     );
-    setAllSubscriptions(res);
+    setAllSubscriptions(res as Subscription[]);
     notify('delete');
   }
 

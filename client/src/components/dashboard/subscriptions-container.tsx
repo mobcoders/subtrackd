@@ -6,6 +6,7 @@ import SubscriptionList from './subscriptions-list';
 import { useStore } from '../../zustand/store';
 import AddSubscriptionModal from './add-subscription-modal';
 import { useAuth } from '@clerk/clerk-react';
+import { Subscription } from '../../utils/types';
 
 export default function SubscriptionsContainer({
   notify,
@@ -23,7 +24,7 @@ export default function SubscriptionsContainer({
     async function fetchAllSubscriptions() {
       const token = await getToken();
       const res = await fetchSubscriptions(userId!, token!);
-      setAllSubscriptions(res);
+      setAllSubscriptions(res as Subscription[]);
     }
     fetchAllSubscriptions();
   }, []);
