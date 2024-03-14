@@ -36,7 +36,7 @@ export default function AddSubscriptionModal({
   const [modalData, setModalData] = useState(formState);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const {userId, getToken } = useAuth();
+  const { userId, getToken } = useAuth();
 
   // FUNCTIONS:
   const handleOpen = () => {
@@ -124,7 +124,7 @@ export default function AddSubscriptionModal({
                 onChange={(e) =>
                   setModalData((prevData) => ({
                     ...prevData,
-                    monthly: eval(e.target.value)
+                    monthly: eval(e.target.value),
                   }))
                 }
               >

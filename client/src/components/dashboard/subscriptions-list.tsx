@@ -1,7 +1,7 @@
 import SubscriptionItem from './subscription-item';
 import { useStore } from '../../zustand/store';
 
-export default function SubscriptionList({ notify }) {
+export default function SubscriptionList({ notify }: { notify: () => void }) {
   // ZUSTAND:
   const displaySubscriptions = useStore((state) => state.displaySubscriptions);
 
