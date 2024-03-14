@@ -63,7 +63,7 @@ export default function IndexPage() {
               </Button>
             </Link>
           </div>
-          {info.map((information, index) => (
+          {info.map((information) => (
             <Card className="bg-transparent text-white border-solid border-2 border-pink">
               <CardBody className="text-center">
                 <p className="text-xl font-semibold mb-3">
