@@ -19,7 +19,7 @@
 
 ## Deployed Version
 
-**subtrackd** is deployed live at **addURLhere** where you can create an account and start using the up-to-date build.
+**subtrackd** is deployed [here](https://symphonious-starlight-f902b2.netlify.app/). Create an account to start using the up-to-date build.
 
 ## Local Version
 
