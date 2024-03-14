@@ -8,7 +8,7 @@ export default function SubscriptionItem({
   notify,
 }: {
   subscription: Subscription;
-  notify: () => void;
+  notify: (type: string) => void;
 }) {
   // FUNCTIONS:
   const renewalText = calculateRenewalText(

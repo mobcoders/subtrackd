@@ -18,7 +18,7 @@ export default function DashboardPage() {
   }, []);
 
   // FUNCTIONS:
-  function notify(type: string) {
+  function notify(type?: string): void {
     switch (type) {
       case 'add':
         toast('Subscription successfully added!');
