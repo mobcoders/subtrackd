@@ -1,11 +1,9 @@
+import 'dotenv/config.js';
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import { router } from './router';
-import dotenv from 'dotenv';
-dotenv.config();
-import { job } from './scheduledTasks/subscriptionChecker';
-
+import { job,checkSubscriptionsAndNotify } from './scheduledTasks/subscriptionChecker';
 const app = express();
 
 // Middleware set-up:
@@ -18,6 +16,10 @@ mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => console.log('MongoDB connected'))
   .catch((err: Error) => console.error('Could not connect to MongoDB...', err));
+
+console.log('Checking subscriptions and notifying...');
+//check for notification on server start
+checkSubscriptionsAndNotify();
 
 // Cron job start:
 job.start();

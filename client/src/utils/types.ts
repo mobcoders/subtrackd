@@ -1,4 +1,4 @@
-export interface Subscription {
+interface Subscription {
   _id?: string;
   cost: number;
   name: string;
@@ -7,9 +7,11 @@ export interface Subscription {
   active: boolean;
 }
 
-export interface Notification {
+interface Notification {
   _id: string;
   message: string;
   date: Date;
   read: boolean;
 }
+
+export type { Subscription, Notification };

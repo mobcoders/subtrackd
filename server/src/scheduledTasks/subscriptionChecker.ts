@@ -5,14 +5,16 @@ import { CronJob } from 'cron';
 
 async function checkSubscriptionsAndNotify() {
   const subscriptions = await Subscription.find();
-  const tomorrow = new Date(new Date().setDate(new Date().getDate() + 1));
+  let tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
 
   subscriptions.forEach(async (subscription) => {
     const billingDate = new Date(subscription.billingDate);
 
     if (differenceInCalendarDays(billingDate, tomorrow) === 0) {
-      const message: string = `Your subscription for ${subscription.name} is due tomorrow.`;
-      await addNotification(message);
+      const message: string = `${subscription.name}`;
+      const userid: string = subscription.userid;
+      await addNotification(message,userid);
     }
   });
 }
