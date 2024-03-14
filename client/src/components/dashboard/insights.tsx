@@ -28,7 +28,7 @@ export default function Insights() {
         <p className="font-semibold">Insights</p>
       </CardHeader>
       <CardBody className="flex flex-col items-center">
-        <Tabs aria-label="Options" radius="full" color="secondary">
+        <Tabs aria-label="Options" radius="full" color="primary">
           {insights.map((insight, index) => (
             <Tab key={index} title={insight.title}>
               <Card className="flex justify-center text-white border-solid border-2 border-pink bg-transparent w-80 h-80">
