@@ -20,7 +20,7 @@ export const useStore = create<State>((set) => ({
       //Calculate monthly total:
       // If monthly, add cost to accumulator, else if yearly, add cost/12
       monthlyTotal: newSubscriptions.reduce((acc, cur) => {
-        return cur.monthly ? acc + cur.cost : acc + cur.cost / 12;
+        return cur.monthly && cur.active ? acc + cur.cost : acc + cur.cost / 12;
       }, 0),
     })),
 

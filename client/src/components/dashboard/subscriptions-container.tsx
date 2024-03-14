@@ -28,15 +28,14 @@ export default function SubscriptionsContainer({ notify }) {
   return (
     <div className="col-span-8 mt-12">
       <div className="flex flex-row gap-3 w-full">
-        <div className="flex flex-row justify-between w-full px-3 mb-3 items-end">
-          <div className="flex flex-row justify-start gap-3">
+        <div className="flex flex-row justify-between w-full px-3 mb-1 items-end">
+          <div className="flex flex-row justify-start gap-3 pl-3">
             <FilterButton />
             <SortButton />
             <AddSubscriptionModal notify={notify} />
           </div>
-          <p className="font-semibold">Payment due:</p>
+          <p className="font-semibold pr-3">Payment due:</p>
         </div>
-        <div className="w-[40px]"></div>
       </div>
       {allSubscriptions && <SubscriptionList notify={notify} />}
     </div>

@@ -18,20 +18,33 @@ export default function SubscriptionItem({
   // RENDER:
   return (
     <div className="flex flex-row">
-      <Card shadow="sm" className="flex-1 py-3 border-solid border-2 border-pink text-white hover:scale-[1.015] my-1 mx-3 bg-transparent">
-        <CardBody className="flex flex-row justify-between">
+      <Card
+        shadow="sm"
+        className={
+          (subscription.active
+            ? 'bg-transparent text-white border-pink'
+            : 'bg-[rgba(21,1,49,0.5)] text-light-purple border-light-purple') +
+          ' flex-1 py-1 border-solid border-2  hover:scale-[1.015] my-1 mx-3'
+        }
+      >
+        <CardBody className="flex flex-row items-center">
           {/* Subscription name: */}
-          <div className="w-2/5">{subscription.name}</div>
+          <div className="w-64">{subscription.name}</div>
 
           {/* Subscription cost: */}
-          <div className="text-right w-1/5">{`£${subscription.cost.toFixed(2)}`}</div>
+          <div className="text-right grow">{`£${subscription.cost.toFixed(2)}`}</div>
           {/* Subscription billing date: */}
-          <div className="text-right w-2/5">{renewalText}</div>
+          <div className="text-right grow">{renewalText}</div>
+
+          {/* Edit button: */}
+          <div className="grow-0 pl-20 flex justify-end">
+            <ModifySubscriptionModal
+              subscription={subscription}
+              notify={notify}
+            />
+          </div>
         </CardBody>
       </Card>
-
-      {/* Edit button: */}
-      <ModifySubscriptionModal subscription={subscription} notify={notify} />
     </div>
   );
 }
