@@ -10,7 +10,10 @@ import {
 const app = express();
 
 // Middleware set-up:
-app.use(cors());
+app.use(cors({
+  origin: "https://symphonious-starlight-f902b2.netlify.app",
+  optionsSuccessStatus: 200
+}));
 app.use(express.json());
 app.use('/', router);
 
