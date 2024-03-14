@@ -14,7 +14,6 @@ import {
 import { PlusCircleIcon } from '@heroicons/react/24/outline';
 import { addSubscription } from '../../services/api-service';
 import { useStore } from '../../zustand/store';
-import { Subscription } from '../../utils/types';
 import { useAuth } from '@clerk/clerk-react';
 
 const formState = {
@@ -98,9 +97,9 @@ export default function AddSubscriptionModal({
                 variant="bordered"
                 value={modalData.cost.toString()}
                 onChange={(e) =>
-                  setModalData((prevData: Subscription) => ({
+                  setModalData((prevData) => ({
                     ...prevData,
-                    cost: e.target.value,
+                    cost: Number(e.target.value),
                   }))
                 }
               />
@@ -123,9 +122,9 @@ export default function AddSubscriptionModal({
                 label="Select a billing cycle:"
                 defaultValue={modalData.monthly.toString()}
                 onChange={(e) =>
-                  setModalData((prevData: Subscription) => ({
+                  setModalData((prevData) => ({
                     ...prevData,
-                    monthly: e.target.value,
+                    monthly: eval(e.target.value)
                   }))
                 }
               >
@@ -136,9 +135,9 @@ export default function AddSubscriptionModal({
                 label="Active status:"
                 defaultValue={modalData.active.toString()}
                 onChange={(e) =>
-                  setModalData((prevData: Subscription) => ({
+                  setModalData((prevData) => ({
                     ...prevData,
-                    active: e.target.value,
+                    active: eval(e.target.value),
                   }))
                 }
               >
