@@ -1,40 +1,66 @@
-# onTrial 
+# subtrackd
+
 ## Overview
-This **OnTrial Subscription Tracker** enables users to effectively manage their subscriptions. Users can view, add, update, and delete subscriptions, as well as receive timely in-app notifications for upcoming billing dates.
+
+**subtrackd** enables users to effectively manage their subscriptions. Users can view, add, update, and delete subscriptions, as well as receive timely in-app notifications for upcoming payments.
 
 ## Features
-- **View All Subscriptions**: Includes details such as name, cost, billing date, and status.
+
+- **OAuth**: Sign in or sign up through Clerk to access your **subtrackd** account.
 - **CRUD Operations**: Add, update, and delete subscriptions with ease.
-- **In-App Notifications**: Using cronJob
+- **View Subscriptions**: See all subscriptions or filter subscriptions on a more granular level.
+- **In-App Notifications**: Using cronJob.
 
 ## Prerequisites
+
 - Node.js (version 14+ recommended)
 - MongoDB (local installation or MongoDB Atlas cluster)
 - npm (included with Node.js)
 
-## Local Setup
-```bash
-# Clone the repository
-git clone https://github.com/ByteBlink/OnTrial-Subscriptions-Tracker.git
-cd ontrial/server 
+## Deployed Version
 
+**subtrackd** is deployed [here](https://symphonious-starlight-f902b2.netlify.app/). Create an account to start using the up-to-date build.
 
-# Install dependencies
+## Local Version
+
+Alternatively, you can run **subrtrackd** locally.
+
+1. Navigate to chosen location and clone the repository:
+
+```
+git clone https://github.com/mobcoders/subtrackd.git (HTTPS)
+git clone git@github.com:mobcoders/subtrackd.git (SSH)
+```
+
+2. Create a .env file in /server with the following fields:
+
+```
+PORT="Add custom port or app will default to port 3000"
+MONGODB_URI="Create a remote MongoDB database and add the URI here"
+CLERK_SECRET_KEY="Create a Clerk application, navigate to API keys and add its secret key here"
+```
+
+3. Create a .env.local file in the client/src with the following fields:
+
+```
+VITE_SERVER_URL="Add backend server URL or app will default to http://localhost:3000"
+VITE_CLERK_PUBLISHABLE_KEY="From the Clerk application's API keys, add its publishable key here"
+```
+
+4. Create new terminal, install the server dependencies and run the server:
+
+```
+$ cd server/
 npm install
+npm start
+```
 
-# Setup environment variables
-echo "MONGODB_URI=mongodb://localhost:27017/subscriptions" >> .env
-echo "PORT=3000" >> .env
-# Note: Replace the MONGODB_URI value if using a remote MongoDB database.
+5. Create another new terminal, install the client dependencies and run the client:
 
-# Start the backend server
-nodemon
-# Access the server at http://localhost:3000 (or the custom PORT you've set)
-
-# Setup frontend (if separate)
-cd ontrial/client
+```
+$ cd client/
 npm install
 npm run dev
-# Your default web browser should open the application automatically.
+```
 
-Any question?! Reach out to me. 
+**subtrackd** will be running at: http://localhost:5173/

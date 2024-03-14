@@ -1,19 +1,26 @@
-import mongoose, {Schema} from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
-export interface ISubscription {
-    name: string;
-    cost: number;
-    billingDate: Date;
-    status: string;
-    billingCycle: string;
+interface ISubscription {
+  userid: string;
+  name: string;
+  cost: number;
+  billingDate: string;
+  active: boolean;
+  monthly: boolean;
 }
 
 const subscriptionSchema = new Schema<ISubscription>({
- name: {type: String, required: true},
- cost: {type: Number, required: true},
- billingDate: {type: Date, required: true},
- status: {type: String, required: true},
- billingCycle: {type: String, required: true},
+  userid: { type: String, required: true },
+  name: { type: String, required: true },
+  cost: { type: Number, required: true },
+  billingDate: { type: String, required: true },
+  active: { type: Boolean, required: true },
+  monthly: { type: Boolean, required: true },
 });
 
-export const Subscription = mongoose.model<ISubscription>('Subscription', subscriptionSchema);
+const Subscription = mongoose.model<ISubscription>(
+  'Subscription',
+  subscriptionSchema
+);
+
+export { ISubscription, Subscription };
