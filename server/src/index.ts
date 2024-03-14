@@ -4,6 +4,9 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import { router } from './router';
 import { job,checkSubscriptionsAndNotify } from './scheduledTasks/subscriptionChecker';
+
+import SignupRequest from "./SignupRequest";
+import SigninRequest from "./SigninRequest";
 const app = express();
 
 // Middleware set-up:

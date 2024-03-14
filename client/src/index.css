@@ -4,6 +4,124 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbit1 {
+  0% {
+    transform: rotate(0deg) translateX(-80px) translateY(200px);
+  }
+  100% {
+    transform: rotate(360deg) translateX(-80px) translateY(200px);
+  }
+}
+
+@keyframes orbit2 {
+  0% {
+    transform: rotate(0deg) translateY(60px);
+  }
+  100% {
+    transform: rotate(360deg) translateY(60px);
+  }
+}
+
+@keyframes orbit3 {
+  0% {
+    transform: rotate(0deg) translateY(70px);
+  }
+  100% {
+    transform: rotate(360deg) translateY(70px);
+  }
+}
+@keyframes orbit4 {
+  0% {
+    transform: rotate(0deg) translateY(80px);
+  }
+  100% {
+    transform: rotate(360deg) translateY(80px);
+  }
+}
+@keyframes orbit5 {
+  0% {
+    transform: rotate(0deg) translateY(90px);
+  }
+  100% {
+    transform: rotate(360deg) translateY(90px);
+  }
+}
+@keyframes orbit6 {
+  0% {
+    transform: rotate(0deg) translateY(100px);
+  }
+  100% {
+    transform: rotate(360deg) translateY(100px);
+  }
+}
+@keyframes orbit7 {
+  0% {
+    transform: rotate(0deg) translateY(110px);
+  }
+  100% {
+    transform: rotate(360deg) translateY(110px);
+  }
+}
+@keyframes orbit8 {
+  0% {
+    transform: rotate(0deg) translateY(120px);
+  }
+  100% {
+    transform: rotate(360deg) translateY(120px);
+  }
+}
+@keyframes orbit9 {
+  0% {
+    transform: rotate(0deg) translateY(130px);
+  }
+  100% {
+    transform: rotate(360deg) translateY(130px);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin 10s linear infinite;
+}
+
+.animate-orbit-1 {
+  animation: orbit1 7s linear infinite;
+}
+
+.animate-orbit-2 {
+  animation: orbit2 8s linear infinite;
+}
+
+.animate-orbit-3 {
+  animation: orbit3 9s linear infinite;
+}
+.animate-orbit-4 {
+  animation: orbit3 10s linear infinite;
+}
+.animate-orbit-5 {
+  animation: orbit3 11s linear infinite;
+}
+.animate-orbit-6 {
+  animation: orbit3 12s linear infinite;
+}
+.animate-orbit-7 {
+  animation: orbit3 13s linear infinite;
+}
+.animate-orbit-8 {
+  animation: orbit3 14s linear infinite;
+}
+.animate-orbit-9 {
+  animation: orbit3 15s linear infinite;
+}
+
 :root {
   --toastify-color-progress-light: #504b9a;
   --toastify-font-family: 'Poppins', sans-serif;

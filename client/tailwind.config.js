@@ -10,6 +10,35 @@ export default {
     './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    extend: {
+      animation: {
+        'spin-slow': 'spin 3s linear infinite',
+        'orbit-1': 'orbit1 2s linear infinite',
+        'orbit-2': 'orbit2 2.5s linear infinite',
+        'orbit-3': 'orbit3 3s linear infinite',
+        // Add more orbit animations as needed
+      },
+      keyframes: {
+        orbit1: {
+          '0%': { transform: 'rotate(0deg) translate(50px) rotate(0deg)' },
+          '100%': {
+            transform: 'rotate(360deg) translate(50px) rotate(-360deg)',
+          },
+        },
+        orbit2: {
+          '0%': { transform: 'rotate(0deg) translate(75px) rotate(0deg)' },
+          '100%': {
+            transform: 'rotate(360deg) translate(75px) rotate(-360deg)',
+          },
+        },
+        orbit3: {
+          '0%': { transform: 'rotate(0deg) translate(100px) rotate(0deg)' },
+          '100%': {
+            transform: 'rotate(360deg) translate(100px) rotate(-360deg)',
+          },
+        },
+      },
+    },
     colors: {
       'dark-purple': '#252350',
       'light-purple': '#504B9A',

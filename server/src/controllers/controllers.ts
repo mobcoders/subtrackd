@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { ISubscription, Subscription } from '../models/subscription';
 import { INotification, Notification } from '../models/notification';
+import {IUser, User} from "../models/user";
 
 async function getSubs(req: Request, res: Response): Promise<void> {
   try {
