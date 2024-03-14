@@ -43,6 +43,7 @@ CLERK_SECRET_KEY="Create a Clerk application, navigate to API keys and add its s
 3. Create a .env.local file in the client/src with the following fields:
 
 ```
+VITE_SERVER_URL="Add backend server URL or app will default to http://localhost:3000"
 VITE_CLERK_PUBLISHABLE_KEY="From the Clerk application's API keys, add its publishable key here"
 ```
 

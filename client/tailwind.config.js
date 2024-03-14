@@ -32,7 +32,7 @@ export default {
       themes: {
         light: {
           colors: {
-            secondary: {
+            primary: {
               foreground: '#FFFFFF',
               DEFAULT: '#AA72AE',
             },
