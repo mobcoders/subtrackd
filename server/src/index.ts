@@ -3,7 +3,10 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import { router } from './router';
-import { job,checkSubscriptionsAndNotify } from './scheduledTasks/subscriptionChecker';
+import {
+  job,
+  checkSubscriptionsAndNotify,
+} from './scheduledTasks/subscriptionChecker';
 const app = express();
 
 // Middleware set-up:

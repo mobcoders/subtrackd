@@ -7,7 +7,11 @@ import { useStore } from '../../zustand/store';
 import AddSubscriptionModal from './add-subscription-modal';
 import { useAuth } from '@clerk/clerk-react';
 
-export default function SubscriptionsContainer({ notify }) {
+export default function SubscriptionsContainer({
+  notify,
+}: {
+  notify: () => void;
+}) {
   const { userId, getToken } = useAuth();
 
   // ZUSTAND:
@@ -18,7 +22,7 @@ export default function SubscriptionsContainer({ notify }) {
   useEffect(() => {
     async function fetchAllSubscriptions() {
       const token = await getToken();
-      const res = await fetchSubscriptions(userId, token);
+      const res = await fetchSubscriptions(userId!, token!);
       setAllSubscriptions(res);
     }
     fetchAllSubscriptions();

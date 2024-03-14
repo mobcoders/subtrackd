@@ -108,11 +108,11 @@ export default function ModifySubscriptionModal({
                 type="cost"
                 label="Cost"
                 variant="bordered"
-                value={modalData.cost}
+                value={modalData.cost.toString()}
                 onChange={(e) =>
-                  setModalData((prevData: Subscription) => ({
+                  setModalData((prevData) => ({
                     ...prevData,
-                    cost: e.target.value,
+                    cost: eval(e.target.value),
                   }))
                 }
               />
@@ -135,9 +135,9 @@ export default function ModifySubscriptionModal({
                 label="Select a billing cycle:"
                 defaultValue={subscription.monthly.toString()}
                 onChange={(e) =>
-                  setModalData((prevData: Subscription) => ({
+                  setModalData((prevData) => ({
                     ...prevData,
-                    monthly: e.target.value,
+                    monthly: eval(e.target.value),
                   }))
                 }
               >
@@ -148,9 +148,9 @@ export default function ModifySubscriptionModal({
                 label="Active status:"
                 defaultValue={subscription.active.toString()}
                 onChange={(e) =>
-                  setModalData((prevData: Subscription) => ({
+                  setModalData((prevData) => ({
                     ...prevData,
-                    active: e.target.value,
+                    active: eval(e.target.value),
                   }))
                 }
               >

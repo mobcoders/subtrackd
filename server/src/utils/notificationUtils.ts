@@ -1,6 +1,6 @@
 import { Notification } from '../models/notification';
 
-async function addNotification(message: string, userid:string) {
+async function addNotification(message: string, userid: string) {
   try {
     const notification = new Notification({ message, userid });
     await notification.save();

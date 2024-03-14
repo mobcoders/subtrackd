@@ -10,7 +10,7 @@ interface ISubscription {
 }
 
 const subscriptionSchema = new Schema<ISubscription>({
-  userid: {type: String, required: true},
+  userid: { type: String, required: true },
   name: { type: String, required: true },
   cost: { type: Number, required: true },
   billingDate: { type: String, required: true },
