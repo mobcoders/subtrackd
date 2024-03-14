@@ -11,7 +11,7 @@ import {
   RadioGroup,
   Radio,
 } from '@nextui-org/react';
-import { PencilSquareIcon } from '@heroicons/react/24/outline';
+import { PencilIcon } from '@heroicons/react/24/outline';
 import {
   updateSubscription,
   deleteSubscription,
@@ -33,7 +33,7 @@ export default function ModifySubscriptionModal({
   // STATES:
   const [modalData, setModalData] = useState(subscription);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const {getToken, userId} = useAuth();
+  const { getToken, userId } = useAuth();
 
   // FUNCTIONS:
   const handleOpen = () => {
@@ -43,7 +43,12 @@ export default function ModifySubscriptionModal({
   async function handleSubmit() {
     onClose();
     const token = await getToken();
-    const res = await updateSubscription(subscription._id as string, userId!, modalData, token!);
+    const res = await updateSubscription(
+      subscription._id as string,
+      userId!,
+      modalData,
+      token!,
+    );
     setAllSubscriptions(res);
     notify('modify');
   }
@@ -55,7 +60,11 @@ export default function ModifySubscriptionModal({
   async function handleDelete() {
     onClose();
     const token = await getToken();
-    const res = await deleteSubscription(modalData._id as string, userId!, token!);
+    const res = await deleteSubscription(
+      modalData._id as string,
+      userId!,
+      token!,
+    );
     setAllSubscriptions(res);
     notify('delete');
   }
@@ -69,7 +78,10 @@ export default function ModifySubscriptionModal({
           className="bg-transparent"
           onPress={() => handleOpen()}
         >
-          <PencilSquareIcon className="stroke-1 stroke-white" width={30} />
+          <PencilIcon
+            className="stroke-1 stroke-white hover:scale-[1.1]"
+            width={25}
+          />
         </Button>
       </div>
       <Modal size={'3xl'} isOpen={isOpen} onClose={handleClose}>

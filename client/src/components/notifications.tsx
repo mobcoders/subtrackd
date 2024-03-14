@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@clerk/clerk-react';
 import { fetchNotifications } from '../services/api-service';
 import { Notification } from '../utils/types';
-import { BellAlertIcon } from '@heroicons/react/24/outline';
+import { BellAlertIcon, BellIcon } from '@heroicons/react/24/outline';
 import {
   Button,
   Popover,
@@ -34,7 +34,12 @@ export default function Notifications() {
     <Popover placement="bottom" showArrow={true}>
       <PopoverTrigger>
         <Button isIconOnly className="bg-transparent">
-          <BellAlertIcon className="cursor-pointer stroke-1 stroke-white" />
+          {notifications.length > 0 && (
+            <BellAlertIcon className="cursor-pointer stroke-1 stroke-white" />
+          )}
+          {notifications.length === 0 && (
+            <BellIcon className="cursor-pointer stroke-1 stroke-white" />
+          )}
         </Button>
       </PopoverTrigger>
       <PopoverContent>
